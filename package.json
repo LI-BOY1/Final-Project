@@ -1,23 +1,19 @@
 {
   "name": "final-project",
   "version": "1.0.0",
-  "description": "",
+  "description": "Fitness Club Private Trainers System",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "seed": "node ./tasks/seed.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/LI-BOY1/Final-Project.git"
-  },
-  "author": "",
+  "author": "Yinghao Wang 10455443",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/LI-BOY1/Final-Project/issues"
-  },
-  "homepage": "https://github.com/LI-BOY1/Final-Project#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "express-handlebars": "^5.2.0",
+    "handlebars": "^4.7.6",
+    "mongodb": "^3.6.2"
   }
 }
