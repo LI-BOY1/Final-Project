@@ -53,6 +53,9 @@ async function main(){
 
 
     //NEED TO SOLVE: RATING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    //32333333333333333333333333
+    //32333333333333333333333333
+    //32333333333333333333333333
     console.log('Done seeding database');
 
     await db.serverConfig.close();    
