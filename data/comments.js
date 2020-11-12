@@ -6,13 +6,13 @@ const members = require('./members');
 
 
 let exportedMethods ={
-    async addComment(memberId, courseId, comment, trainerId, rating){
-        if(memberId == null || courseId == null || comment == null || trainerId == null || rating == null)
+    async addComment(comment, trainerId, rating){
+        if(comment == null || trainerId == null || rating == null)
             throw new Error("all fields should be provided!");
-        if(typeof memberId !== 'string')
-            throw new Error("the input member id is not a string!");
-        if(typeof courseId !== 'string')
-            throw new Error("the input course id is not a string!");
+        // if(typeof memberId !== 'string')
+        //     throw new Error("the input member id is not a string!");
+        // if(typeof courseId !== 'string')
+        //     throw new Error("the input course id is not a string!");
         if(typeof comment !== 'string')
             throw new Error("the input comment is not a string!");
         if(comment.trim().length === 0)
@@ -24,13 +24,13 @@ let exportedMethods ={
         if(rating < 0 || rating > 10)
             throw new Error("the rating should be in the range of [0,10].");
         
-        let x = ObjectId(memberId);
-        let y = ObjectId(courseId);
+        // let x = ObjectId(memberId);
+        // let y = ObjectId(courseId);
         let z = ObjectId(trainerId);
 
         let newComment = {
-            memberId: memberId,
-            courseId: courseId,
+            // memberId: memberId,
+            // courseId: courseId,
             comment: comment,
             trainerId: trainerId,
             rating: rating
@@ -44,7 +44,7 @@ let exportedMethods ={
         const newCommentId = insertInfo.insertedId.toString();
         
         //add comment to member
-        await members.addCommentToMember(memberId, newCommentId);
+        // await members.addCommentToMember(memberId, newCommentId);
         //add comment to trainer
         await trainers.addCommentToTrainer(trainerId, newCommentId);
 
