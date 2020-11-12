@@ -9,15 +9,16 @@ async function main(){
     const db = await dbConnection();
     await db.dropDatabase();
 
+    const img = 'https://source.unsplash.com/collection/483251';
     const member_1 = await members.addMember("Boyang", "Li", 25, "201-7837438", "ysd123@stevens.edu","123 Hoboken Ave, Jersey City, NJ", "07310", "GoodBoy", "W123456");
 
     const member_2 = await members.addMember("JiaLi", "Chen", 23, "201-7837348", "chenjl3@stevens.edu","113 Congress Ave, Hoboken, NJ", "07312", "GoodGirl", "W12sasd6");
 
     const member_3 = await members.addMember("John", "Smith", 37, "901-7837348", "smjohn@stevens.edu","512 Congress Ave, Union City, NJ", "07012", "GoWest", "23231223236");
 
-    const trainer_1 = await trainers.addTrainer("Xinyi", "Ye", 23, "201-7832388", "yexiny@stevens.edu", "666 Hoboken Ave, Jersey City, NJ", "07310", "GoodGirl", "W1sdsd23456", 7.6);
+    const trainer_1 = await trainers.addTrainer("Xinyi", "Ye", 23, "201-7832388", "yexiny@stevens.edu", "66 Hoboken Ave, Jersey City, NJ", "07310", "Goirl", "W1sdsd23456", img);
 
-    const trainer_2 = await trainers.addTrainer("Cristina", "Ye", 23, "922-7123388", "yec@outlook.com", "147 33rd Ave, Great Neck, NY", "11437", "Hello123", "W1sdsd23456", 7.6);
+    const trainer_2 = await trainers.addTrainer("Cristina", "Ye", 23, "922-7123388", "yec@outlook.com", "147 33rd Ave, Great Neck, NY", "11437", "Hello123", "W1sdsd23456", img);
 
     const course_1 = await courses.addCourse("Muscle training", "This course is good for increasing muscle!", 12, 5, trainer_1._id);
     const course_2 = await courses.addCourse("running", "You can have a good health and improve your health condition", 9, 4, trainer_1._id);
@@ -51,11 +52,18 @@ async function main(){
     const comment_3 = await comments.addComment(member_3._id, course_3._id, "This is a good way to reduce fat!", trainer_2._id, 7.5);
     console.log(comment_3);
 
+    //add extra trainers in the db in order to test
+    const trainer_3 = await trainers.addTrainer("trainer3", "Ben3", 23, "6753-7579388", "sdsdadsa@outk.acom", "148 33rd, Great Neck, NJ", "11437", "Hello123", "W1sdsd23456", img);
+    const trainer_4 = await trainers.addTrainer("John", "Ben", 23, "123-7579388", "sdsa@outloaok.acom", "148 33rd Ave, Great Neck, NY", "11437", "Hello123", "W1sdsd23456", img);
+    const trainer_5 = await trainers.addTrainer("Black", "Tim", 23, "345-7123379", "yasdsdc@outlook.com", "149 33rd Ave, Small Neck, NY", "11437", "Hello123", "W1sdsd23456",img);
+    const trainer_6 = await trainers.addTrainer("Ben", "Gold", 23, "678-71783388", "yasdac@outslook.com", "111 33rd Ave, Great Neck, NY", "11437", "Hello123", "W1sdsd23456", img);
+    const trainer_7 = await trainers.addTrainer("Yo", "Parker", 23, "468-7123981", "asdac@outlsook.com", "123 33rd St, Great Neck, NY", "11437", "Hello123", "W1sdsd23456", img);
+    const trainer_8 = await trainers.addTrainer("Jenny", "Li", 23, "784-71111388", "yasdac@outadsook.com", "124 33rd St, Great Neck, NY", "11437", "Hello123", "W1sdsd23456", img);
+    const trainer_9 = await trainers.addTrainer("Yi", "Tim", 23, "145-71234588", "asdc@outlasdok.com", "126 33rd Ave, Great Neck, NY", "11437", "Hello123", "W1sdsd23456", img);
+    const trainer_10 = await trainers.addTrainer("Trainer10", "Tim", 23, "566-71234588", "asdc@ou66tlasdok.com", "126 32rd , Great Neck, NY", "11437", "Hello123", "W1sdsd6", img);
 
-    //NEED TO SOLVE: RATING!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    //32333333333333333333333333
-    //32333333333333333333333333
-    //32333333333333333333333333
+
+
     console.log('Done seeding database');
 
     await db.serverConfig.close();    

@@ -6,8 +6,8 @@ const courses = mongoCollections.courses;
 const comments = mongoCollections.comments;
 
 let exportedMethods = {
-    async addTrainer(first_name, last_name, age, phone, email, address, zipcode, username, password){
-        if(first_name == null || last_name == null || age == null || phone == null || email == null || address == null || zipcode == null || username == null || password == null)
+    async addTrainer(first_name, last_name, age, phone, email, address, zipcode, username, password, img){
+        if(first_name == null || last_name == null || age == null || phone == null || email == null || address == null || zipcode == null || username == null || password == null || img == null)
             throw new Error("all fields need to have valid values!");
         if(typeof first_name !== 'string')
             throw new Error("the input first name is not a string!");
@@ -45,6 +45,10 @@ let exportedMethods = {
             throw new Error("the input password is not a string!");
         if(password.trim().length === 0)
             throw new Error("the input password is not a valid string!");
+        if(typeof img !== 'string')
+            throw new Error("the input img address is not a string!");
+        if(img.trim().length === 0)
+            throw new Error("the input img address is not a valid string!");
 
         const newTariner = {
             first_name: first_name.trim(),
@@ -57,6 +61,7 @@ let exportedMethods = {
             username:username.trim(),
             password:password.trim(),
             rating:0,
+            img: img,
             comment:[],
             members:[]
         };

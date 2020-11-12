@@ -1,11 +1,14 @@
 const trainerRoutes = require('./trainers');
 const commentRoutes = require('./comments');
+const courseRoutes = require('./courses');
 const path = require('path');
 const constructorMethod = (app) => {
-    app.use('/trainer/profile', trainerRoutes);
-    app.use('/trainer/profile', trainerRoutes);
-    app.use('/trainer/profile', trainerRoutes);
-
+    app.use('/fitclub/trainers', trainerRoutes);
+    // app.use('/comments/', commentRoutes);
+    // app.use('/courses/', courseRoutes);
+    app.get('/', (req, res) => {
+        res.render('home');
+    });
     app.use('*', (req, res) => {
         res.status(404).json({ error: 'Information not found' });
     });
