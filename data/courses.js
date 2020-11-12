@@ -7,8 +7,8 @@ const courses = mongoCollections.courses;
 const comments = mongoCollections.comments;
 
 let exportedMethods ={
-    async addCourse(coursename, courseInfo, start_time, day, trainerId){
-        if(coursename == null || courseInfo == null || start_time == null || day == null || trainerId == null)
+    async addCourse(coursename, courseInfo, img, price, start_time, day, trainerId){
+        if(coursename == null || courseInfo == null || img== null || price == null || start_time == null || day == null || trainerId == null)
             throw new Error("all fields should be provided!");
         if(typeof coursename !== 'string')
             throw new Error("the input coursename is not a string!");
@@ -18,6 +18,14 @@ let exportedMethods ={
             throw new Error("the input courseInfo is not a string!");
         if(courseInfo.trim().length === 0)
             throw new Error("the input courseInfo is not a valid string!");
+        if(typeof img !== 'string')
+            throw new Error("the input img is not a string!");
+        if(img.trim().length === 0)
+            throw new Error("the input img is not a valid string!");
+        if(typeof price !== 'number')
+            throw new Error("the input price is not a number!");
+        if(price < 0)
+            throw new Error("the price should greater than zero!");
         if(typeof start_time !== 'number')
             throw new Error("the input start_time is not a number!");
         if(start_time < 0 || start_time >= 24)
@@ -36,6 +44,8 @@ let exportedMethods ={
         let newCourse = {
             coursename: coursename.trim(),
             courseInfo: courseInfo.trim(),
+            img:img.trim(),
+            price: price,
             start_time: start_time,
             day: day,
             trainerId: trainerId,

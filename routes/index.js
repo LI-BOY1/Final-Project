@@ -5,7 +5,7 @@ const path = require('path');
 const constructorMethod = (app) => {
     app.use('/fitclub/trainers', trainerRoutes);
     // app.use('/comments/', commentRoutes);
-    // app.use('/courses/', courseRoutes);
+    app.use('/fitclub/courses', courseRoutes);
     app.get('/', (req, res) => {
         res.render('home');
     });

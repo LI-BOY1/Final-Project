@@ -6,7 +6,7 @@ const courses = mongoCollections.courses;
 const comments = mongoCollections.comments;
 
 let exportedMethods = {
-    async addTrainer(first_name, last_name, age, phone, email, address, zipcode, username, password, img){
+    async addTrainer(first_name, last_name, age, info, phone, email, address, zipcode, username, password, img){
         if(first_name == null || last_name == null || age == null || phone == null || email == null || address == null || zipcode == null || username == null || password == null || img == null)
             throw new Error("all fields need to have valid values!");
         if(typeof first_name !== 'string')
@@ -21,6 +21,10 @@ let exportedMethods = {
             throw new Error("the input age is not a number!");
         if(age < 18 || age > 100)
             throw new Error("the input age should be in the range of 18-100");
+        if(typeof info !== 'string')
+            throw new Error("the input info is not a string!");
+        if(info.trim().length === 0)
+            throw new Error("the input info is not a valid string!");
         if(typeof phone !== 'string')
             throw new Error("the input phone number is not a string!");
         if(phone.trim().length === 0)
@@ -55,6 +59,7 @@ let exportedMethods = {
             last_name: last_name.trim(),
             age:age,
             phone:phone.trim(),
+            info:info.trim(),
             email:email.trim(),
             address:address.trim(),
             zipcode:zipcode.trim(),
@@ -62,6 +67,7 @@ let exportedMethods = {
             password:password.trim(),
             rating:0,
             img: img,
+            course:[],
             comment:[],
             members:[]
         };
@@ -193,33 +199,34 @@ let exportedMethods = {
             throw new Error('Add member to trainer failed!');
         return await this.getTrainerById(trainerId);
     },
-    // async addCourseToTrainer(trainerId, courseId){
-    //     if(trainerId == null || courseId == null)
-    //         throw new Error("you should provide both trainerId and courseId to search for!")
-    //     if(typeof trainerId !== 'string' || typeof courseId !== 'string')
-    //         throw new Error("the input id is not a string!");
+    async addCourseToTrainer(trainerId, courseId){
+        if(trainerId == null || courseId == null)
+            throw new Error("you should provide both trainerId and courseId to search for!")
+        if(typeof trainerId !== 'string' || typeof courseId !== 'string')
+            throw new Error("the input id is not a string!");
         
-    //     let leftId = ObjectId(trainerId);
-    //     let rightId = ObjectId(courseId);
+        let leftId = ObjectId(trainerId);
+        let rightId = ObjectId(courseId);
         
 
-    //     let curTrainer = await this.getTrainerById(trainerId);
-    //     //这里添加验证course的操作
-    //     await courses.getCourseById(courseId);
+        let curTrainer = await this.getTrainerById(trainerId);
+        //add verification to course
+        const courseCollection = await courses();
+        await courseCollection.findOne({_id: rightId});
         
-    //     if(curTrainer == null)
-    //         throw new Error("no trainerId with that id!");
+        if(curTrainer == null)
+            throw new Error("no trainerId with that id!");
 
-    //     const trainerCollection = await trainers();
-    //     const updateInfo = await trainerCollection.updateOne(
-    //         {_id: leftId},
-    //         {$addToSet: {members : courseId}}
-    //     );
+        const trainerCollection = await trainers();
+        const updateInfo = await trainerCollection.updateOne(
+            {_id: leftId},
+            {$addToSet: {course : courseId}}
+        );
         
-    //     if (!updateInfo.matchedCount && !updateInfo.modifiedCount)
-    //         throw new Error('Add course to trainer failed!');
-    //     return await this.getTrainerById(trainerId);
-    // },
+        if (!updateInfo.matchedCount && !updateInfo.modifiedCount)
+            throw new Error('Add course to trainer failed!');
+        return await this.getTrainerById(trainerId);
+    },
     async removeMemberFromTrainer(trainerId, memberId){
         if(trainerId == null || memberId == null)
             throw new Error("you should provide both trainerId and memberId to search for!")
@@ -233,7 +240,7 @@ let exportedMethods = {
         let curTrainer = await this.getTrainerById(trainerId);
         if(curTrainer == null)
             throw new Error("no trainerId with that id!");
-        //yan zheng member
+        //add verification to member
         const memberCollection = await members();
         await memberCollection.findOne({_id: rightId});      
 
@@ -259,7 +266,7 @@ let exportedMethods = {
         let curTrainer = await this.getTrainerById(trainerId);
         if(curTrainer == null)
             throw new Error("no trainerId with that id!");
-       //验证comment是否存在
+       //add verification to comment
        const commentCollection = await comments();
        await commentCollection.findOne({_id: rightId});
 
