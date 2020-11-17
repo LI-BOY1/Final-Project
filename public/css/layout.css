@@ -1,0 +1,501 @@
+.card{
+    border: 1.5px solid rgba(0, 0, 0, .125);
+}
+body {
+    font-family: "Lucida Console", Courier, monospace;
+    background-color:#fcfafa;
+    color: #000000;
+    margin:0px;
+    padding:0px;
+}
+
+.teal {
+    color: teal;
+}
+
+.black {
+    color: black;
+}
+
+.login h1
+{
+    text-align: left;
+    padding:15px 15px;
+}
+.verification h1 {
+    color: #20b2aa;
+    text-align: left;
+    padding:15px 15px;
+
+}
+.verification p {
+    text-align: center;
+}
+
+
+.signup {
+    position: relative;
+    left: 571px;
+    top: 101px;
+    width: 20%;
+    border-radius: 5px;
+    background-color: white;
+    padding:15px 0px;
+
+}
+#form_login{
+    position: absolute;
+    top: 15%;
+    left: 27%;
+    border: 3px solid #f1f1f1;
+    box-shadow: 10px 10px 0px 0px #ede9e9;
+    width:40%
+}
+.con{
+    border: 3px solid #f1f1f1;
+    margin:1px 50px;
+    padding:1px 10px;
+    margin-bottom:50px;
+    display: block;
+
+}
+.con h1{
+    text-align:center;
+}
+.con input[type=submit]{
+    background-color:gray;
+    color: white;
+    padding: 14px 25px;
+    margin: 11px 0;
+    border: none;
+    cursor: pointer;
+    width:25%;
+    border-radius: 15px;
+    text-align: center;
+}
+
+.form form{
+    padding:55px 121px;
+    margin:20px;
+}
+.form1 form{
+    padding:55px 111px;
+    margin:15px;
+}
+input[type=text], input[type=password] {
+
+    width: 100%;
+    padding: 17px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+label{
+    text-align:left;
+}
+input[type=submit] {
+    background-color:gray;
+    color: white;
+    padding: 14px 25px;
+    margin: 11px 0;
+    border: none;
+    cursor: pointer;
+    width: 40%;
+    border-radius: 15px;
+    text-align: center;
+}
+.form1 input[type=submit]{
+    width:100%;
+}
+.form1 ul li input[type=text]{
+    padding: 14px 25px;
+    margin: 11px 5px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    text-align: center;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    text-align:center;
+}
+.navbar {
+    overflow: hidden;
+    background-color: #333;
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+.navbar a {
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+.box {
+    position: relative;
+    width: 250px;
+    height: 128.68px;
+    background: #CD5C5C;
+    margin: 14px auto;
+}
+.right{
+
+    float:left;
+    margin-top:75px;
+    position: relative;
+
+}
+#form_login1{
+    position: absolute;
+    top: 21%;
+    left: 9%;
+    border: 3px solid #f1f1f1;
+    box-shadow: 10px 10px 0px 0px #ede9e9;
+    width:81%;
+    display:inline-block;
+
+}
+#form_login1 form{
+    float:left;
+    width:45%;
+}
+.right ul {
+    margin-top:71px;
+}
+.navbar a:hover {
+    background: #ddd;
+    color: black;
+}
+
+.main {
+    padding: 16px;
+    margin-top: 30px;
+    height: 1500px;
+}
+
+ul li {
+    text-align: center;
+    border-radius: 5px;
+    display: inline;
+    padding:0px 3px;
+}
+.form1 ul li{
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    display: inline-block;
+    margin:0px 0px;
+    padding:0px 4px;
+    width:29%;
+    display:inline-block;
+}
+.right ul li{
+    width:45%;
+}
+.result{
+    width:75%;
+    border: 3px solid #f1f1f1;
+    box-shadow: 10px 10px 0px 0px #ede9e9;
+    padding:31px 111px;
+    position: relative;
+    left:5%;
+    line-height: 25px;
+}
+.result h1{
+    text-align: center;
+}
+.result input[type=submit]{
+    width:25%;
+    position: relative;
+    left:41%;
+}
+a:link, a:visited {
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin:11px;
+}
+a {
+    color:grey;
+}
+
+a:hover {
+    color: teal;
+    border-bottom: 3px solid teal;
+}
+
+a.active{
+    color: teal;
+    border-bottom: 3px solid teal;
+}
+
+.email{
+    border-bottom: #0000002b 1px solid;
+}
+.email ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+
+}
+
+.email ul li {
+    float: left;
+}
+
+.email ul li a {
+    display: block;
+    color:black;
+    text-align: center;
+    padding: 14px 65px;
+    text-decoration: none;
+    font-size:20px;
+
+
+}
+
+.email ul li a:hover:not(.active) {
+    color: teal;
+}
+
+.email ul li a.active {
+    color: teal;
+}
+.search {
+    width: 50%;
+    position: relative;
+    display: flex;
+    margin:20px 0px;
+}
+
+.searchTerm {
+    width: 100%;
+    border: 3px solid #00B4CC;
+    border-right: none;
+    padding: 15px;
+    height: 20px;
+    outline: none;
+    color: #9DBFAF;
+}
+
+.searchTerm:focus{
+    color: #00B4CC;
+}
+
+.searchButton {
+    width: 40px;
+    height: 36px;
+    text-align: center;
+    color: #fff;
+    cursor: pointer;
+    position: absolute;
+    top: 15%;
+    left: 101%;
+}
+.square {
+    height: 50px;
+    width: 50px;
+    background-color: #555;
+}
+
+.employee {
+    width:100%;
+
+}
+.emp ul li input[type=text]{
+    padding: 14px 15px;
+    margin: 1px 5px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    text-align: center;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+.emp ul{
+    padding:10px 0px;
+}
+.prf{
+    display: inline-block;
+    width:100%;
+    margin-top: 11px;
+}
+.prf img{
+    margin:21px 101px;
+}
+.profile{
+    background-color: #000000;
+    color:white;
+    width:25%;
+    border:1px solid;
+    margin: 41px 21px;
+    float:left;
+    text-align: center;
+}
+.profile1{
+    width:61%;
+    float:left;
+    padding:31px 11px;
+    margin:35px;
+}
+.square1{
+    width:71px;
+    height:25px;
+    background-color: #4CAF50;
+}
+.que{
+    margin:101px 20px;
+}
+.que p{
+    font-size: 21px;
+}
+.result1{
+    width:75%;
+    border: 3px solid #f1f1f1;
+    box-shadow: 10px 10px 0px 0px #ede9e9;
+    padding:31px 111px;
+    position: absolute;
+    left:5%;
+    line-height: 25px;
+}
+.result1 input[type=submit] {
+    background-color:gray;
+    color: white;
+    padding: 14px 35px;
+    margin: 51px 0;
+    border: none;
+    cursor: pointer;
+    border-radius: 15px;
+    text-align: center;
+    height: auto;
+    width: auto;
+    position: relative;
+}
+.left1{
+    float:left;
+    position: relative;
+
+}
+.right1{
+    float:right;
+    position: relative;
+}
+.account{
+    width:19%;
+    margin: 41px 5px;
+    float:left;
+    padding:21px 0px;
+    color: black;
+
+}
+.account1{
+    width:67%;
+    float: left;
+    padding:31px 0px;
+    padding-left:71px;
+    margin:15px;
+    border-left: 1px solid ;
+}
+.account li{
+    list-style: none;
+    padding-left:21px;
+}
+.account1 input[type=submit]{
+    width:40%;
+    background-color:gray;
+    color: white;
+    padding: 14px 25px;
+    margin: 11px 0;
+    border: none;
+    cursor: pointer;
+    border-radius: 15px;
+    text-align: center;
+    position: relative;
+    left:0%;
+}
+.bargraph{
+    list-style: none;
+    padding-top: 20px;
+    text-align: left;
+}
+ul.bargraph li{
+    height:35px;
+    color:white;
+    text-align: left;
+    line-height: 35px;
+    padding: 0px 20px;
+    margin: 5px 21px;
+}
+ul.bargraph li.purple{
+    background-color: purple;
+    width:29%;
+}
+ul.bargraph li.teal{
+    background-color: teal;
+    width:45%;
+}
+ul.bargraph li.pink{
+    background-color:palevioletred;
+    width:35%;
+}
+ul.bargraph li.gray{
+    background-color:grey;
+    width:61%;
+}
+ul.bargraph li.blue{
+    background-color: blue;
+    width:71%;
+}
+.bar{
+    float:left;
+    width:31%;
+}
+.center{
+    float: left;
+    width:31%;
+    margin-top:31px;
+    padding:0px 21px;
+}
+.center ul li{
+    list-style: square;
+    text-align: left;
+    text-decoration: none;
+    display: block;
+    font-size:18px;
+    padding:21px 0px;
+}
+.chart{
+    width:31%;
+    float:left;
+}
+.piechart {
+    display: block;
+    position: absolute;
+    width: 301px;
+    height: 301px;
+    border-radius: 50%;
+    background-image: conic-gradient(
+            pink 70deg,
+            lightblue 0 235deg,
+            orange 0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.prf1{
+    display: inline-block;
+    width:100%;
+    margin-top: 51px;
+}

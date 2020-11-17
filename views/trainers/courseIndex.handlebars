@@ -1,0 +1,18 @@
+<h1>All Course for {{trainer.first_name}} {{trainer.last_name}}</h1>
+{{#each course }}
+    <div class="card mb-3">
+        <div class="row">
+            <div class="col-md-4">
+                <img src="{{img}} " alt="" class="img-fluid">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h2 class="card-title">{{coursename}} </h5>
+                    <p class="card-text">{{courseInfo}}</p>
+                    <a href="/fitclub/trainers/{{../trainer._id}} " class="btn btn-primary">Back to {{../trainer.first_name}} {{../trainer.last_name}}'s Page</a>
+                    <a href="/fitclub/courses/{{../trainer._id}}/{{_id}}" class="btn btn-info">View</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{{/each}}

@@ -1,0 +1,72 @@
+<link rel="stylesheet" href="/public/css/stars.css">
+<div class="row">
+    <div class="col-6">
+        <div class="card mb-3">
+            <img src=" {{trainer.img}}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">{{trainer.first_name}} {{trainer.last_name}}</h5>
+                <p class="card-text">{{trainer.info}}</p>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item text-muted">{{trainer.address}}</li>
+                <li class="list-group-item">{{trainer.email}}</li>
+                <li class="list-group-item">{{trainer.phone}}</li>
+                <li class="list-group-item">{{trainer.age}} years old</li>
+            </ul>
+            <div class="card-body">
+                <a class="card-link btn btn-info" href="/fitclub/trainers">All Trainers</a>
+                <a class="card-link btn btn-info" href="/fitclub/courses/trainers/{{trainer._id}}">All Courses</a>
+            </div>
+            <div class="card-footer text-muted">
+                2 days ago
+              </div>
+        </div>
+    </div>
+    <div class="col-6">
+        <h2>Leave a Comment</h2>
+        <form action="/fitclub/trainers/{{trainer._id}}/comments" class="mb-3 validated-form" method="POST" novalidate >
+            {{!-- <div class="mb-3">
+                <label class="form-label" for="rating">Rating</label>
+                <input class="form-range" type="range" min="1" max="10" name="rating" id="rating">
+            </div> --}}
+            <div class="mb-3">
+                <fieldset class="starability-basic">
+                    <input type="radio" id="no-rate" class="input-no-rate" name="rating" value="1" checked aria-label="No rating." />
+                    <input type="radio" id="first-rate1" name="rating" value="1" />
+                    <label for="first-rate1" title="Terrible">1 star</label>
+                    <input type="radio" id="first-rate2" name="rating" value="2" />
+                    <label for="first-rate2" title="Not good">2 stars</label>
+                    <input type="radio" id="first-rate3" name="rating" value="3" />
+                    <label for="first-rate3" title="Average">3 stars</label>
+                    <input type="radio" id="first-rate4" name="rating" value="4" />
+                    <label for="first-rate4" title="Very good">4 stars</label>
+                    <input type="radio" id="first-rate5" name="rating" value="5" />
+                    <label for="first-rate5" title="Amazing">5 stars</label>
+                </fieldset>
+            </div>
+            <div class="mb-3">
+            <div class="mb-3">
+                <label class="form-label" for="commentbody">Comment: </label>
+                <textarea class="form-control" name="comment" id="commentbody" cols="30" rows="3" required></textarea>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+            </div>
+            <button class="btn btn-success">Submit</button>
+        </form> 
+        {{#each comment}}
+            <div class="card mb-3">
+                <div class="card-body">
+                    {{!-- <h5 class="card-title">Rating: {{rating}}</h5>
+                    <p class="starability-result" data-rating="4.4">
+                        Rated: 4 stars
+                    </p> --}}
+                    <p class="card-text">Review: {{comment}}</p>
+                    <form action="/fitclub/trainers/{{../trainer._id}}/comments/{{_id}}?_method=DELETE" method="POST">
+                        <button class="btn btn-sm btn-danger">Delete</button>
+                    </form>
+                </div>
+            </div>            
+        {{/each}}       
+    </div>
+</div>

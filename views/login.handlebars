@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="index.js"></script>
+
+    <title>Fitness Club Login</title>
+    <link rel="stylesheet" href="././public/css/layout.css">
+
+</head>
+
+<body>
+
+<div class="login"  >
+
+    <div class="form">
+        <form  id="form_login" autocomplete="off" method="POST" action="/login">
+
+            <label ><strong>EMAIL</strong></label><br>
+            <input type="text" name="username" placeholder="" required/><br><br>
+
+            <label><strong>PASSWORD</strong></label><br>
+            <input type="password" name="password" placeholder="" required/><br><br><br><br>
+
+            <ul>
+                <li> <input type="submit" onclick="location.href='Profile.html';"value="Log In"  /></li>
+                <li>  <input type="submit" onclick="location.href='/signup'; "value="Sign Up"/></li>
+
+            </ul>
+
+        </form>
+    </div>
+
+    <div class="footer">
+    </div>
+</div>
+</body>
+</html>
