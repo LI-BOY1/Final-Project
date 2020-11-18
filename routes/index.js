@@ -102,8 +102,8 @@ router.get("/logout", (req,res) => {
 router.get("/profile", async(req,res) => {
     if(xss(req.session.authent)){
         try {
-            const u = await memberData.getMemberById(req.session.user.toString());
-            res.render("profile",{verified: true, user: u});
+            const members = await memberData.getMemberById(req.session.user.toString());
+            res.render("profile",{verified: true, user: members});
 
         } catch(e){
             console.log(e);
@@ -113,6 +113,17 @@ router.get("/profile", async(req,res) => {
         req.session.login_fail = true;
         res.redirect("/login");
     }
+});
+
+
+router.post("/search", async (req, res) => {
+    try{
+        const all = await trainerData.getAllTrainers();
+        res.render("result", { verified: false,trainers:all});
+    } catch(e) {
+        res.status(400);
+    }
+
 });
 
   module.exports = constructorMethod;

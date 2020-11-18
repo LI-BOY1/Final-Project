@@ -17,14 +17,17 @@
 <div class="login"  >
 
     <div class="form">
+
         <form action="/search" class="form-inlin justify-content-center" id="searchBar" method="post" enctype="application/x-www-form-urlencoded">
             <div class="form-group" id="searchDiv">
                 <label for = "searchInput"></label>
-                <input id = "searchInput" type="text" class="form-control" placeholder="Enter Search Info" name="searchInput" required>
-                <input type="submit" onclick="location.href='/';"value="Search"  />
+                <input id = "searchInput" type="text" class="form-control" placeholder="Search by any words" name="searchInput" required>
+
+                <br>
+                <button type="submit" >Search</button>
             </div>
         </form>
-        {{#if errors2}}
+            {{#if errors2}}
             <p id="searchError">Error: Search did not return any results.</p>
         {{/if}}
 

@@ -124,11 +124,22 @@ ul {
     text-decoration: none;
     font-size: 17px;
 }
+button{
+    background-color:gray;
+    color: white;
+    padding: 14px 25px;
+    margin: 11px 0;
+    border: none;
+    cursor: pointer;
+    width: 40%;
+    border-radius: 15px;
+    text-align: center;
+}
 .box {
     position: relative;
     width: 250px;
     height: 128.68px;
-    background: #CD5C5C;
+    background: gray;
     margin: 14px auto;
 }
 .right{
@@ -278,14 +289,15 @@ a.active{
 }
 
 .searchButton {
-    width: 40px;
-    height: 36px;
-    text-align: center;
-    color: #fff;
+    background-color:gray;
+    color: white;
+    padding: 14px 25px;
+    margin: 11px 0;
+    border: none;
     cursor: pointer;
-    position: absolute;
-    top: 15%;
-    left: 101%;
+    width: 40%;
+    border-radius: 15px;
+    text-align: center;
 }
 
 
