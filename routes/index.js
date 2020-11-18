@@ -16,6 +16,10 @@ const constructorMethod = (app) => {
     app.get('/signin', (req, res) => {
         res.render('login');
     });
+    app.get('/profile', (req, res) => {
+        res.render('profile');
+    });
+
 
 
     app.all('*', (req, res, next) => {
