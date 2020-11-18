@@ -45,7 +45,6 @@
                 </fieldset>
             </div>
             <div class="mb-3">
-            <div class="mb-3">
                 <label class="form-label" for="commentbody">Comment: </label>
                 <textarea class="form-control" name="comment" id="commentbody" cols="30" rows="3" required></textarea>
                 <div class="valid-feedback">
@@ -57,11 +56,11 @@
         {{#each comment}}
             <div class="card mb-3">
                 <div class="card-body">
-                    {{!-- <h5 class="card-title">Rating: {{rating}}</h5>
-                    <p class="starability-result" data-rating="4.4">
-                        Rated: 4 stars
-                    </p> --}}
-                    <p class="card-text">Review: {{comment}}</p>
+                    <h5 class="card-title">Rating: {{rating}}</h5>
+                    <p class="starability-result" data-rating="{{rating}}">
+                        Rated: {{rating}} stars
+                    </p>
+                    <p class="card-text">Comment: {{comment}}</p>
                     <form action="/fitclub/trainers/{{../trainer._id}}/comments/{{_id}}?_method=DELETE" method="POST">
                         <button class="btn btn-sm btn-danger">Delete</button>
                     </form>

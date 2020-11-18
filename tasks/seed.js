@@ -43,7 +43,7 @@ async function main(){
     // await trainers.addMemberToTrainer(trainer_1._id, member_1._id);
     // await members.addTrainerToMember(member_1._id, trainer_1._id);
     
-    const comment_1 = await comments.addComment("This trainer is so good!", trainer_1._id, 7.7);
+    const comment_1 = await comments.addComment("This trainer is so good!", trainer_1._id, 4);
     console.log(comment_1);
 
     console.log("member_2 select course_2 with trainer_1");
@@ -52,7 +52,7 @@ async function main(){
     // await trainers.addMemberToTrainer(trainer_1._id, member_2._id);
     // await members.addTrainerToMember(member_2._id, trainer_1._id);
 
-    const comment_2 = await comments.addComment("I love the trainers' teaching stytle in this class!", trainer_1._id, 8);
+    const comment_2 = await comments.addComment("I love the trainers' teaching stytle in this class!", trainer_1._id, 5);
     console.log(comment_2);
 
     // console.log("member_3 select course_3 with trainer_2");
@@ -62,10 +62,10 @@ async function main(){
     // await members.addTrainerToMember(member_3._id, trainer_2._id);
 
 
-    const comment_3 = await comments.addComment("This is a good way to reduce fat!", trainer_2._id, 7.5);
+    const comment_3 = await comments.addComment("This is a good way to reduce fat!", trainer_2._id, 3);
     console.log(comment_3);
 
-    const comment_4 = await comments.addComment(info, trainer_2._id, 7.7);
+    const comment_4 = await comments.addComment(info, trainer_2._id, 2);
 
     //add extra trainers and courses in the db in order to test
     const trainer_3 = await trainers.addTrainer("trainer3", "Ben3", 23, info,"6753-7579388", "sdsdadsa@outk.acom", "148 33rd, Great Neck, NJ", "11437", "Hello123", "W1sdsd23456", img);

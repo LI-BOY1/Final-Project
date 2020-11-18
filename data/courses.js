@@ -136,7 +136,7 @@ let exportedMethods ={
         let curCourse = await this.getCourseById(courseId);
         if(curCourse == null)
             throw new Error("no memberId with that id!");
-        //验证memberId是否存在
+        //verify if the member is exist
         const memberCollection = await courses();
         await memberCollection.findOne({_id: rightId});
 

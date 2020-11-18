@@ -19,9 +19,10 @@ router.get('/trainers/:id', catchAsync (async (req, res) => {
     } 
     res.render('trainers/courseIndex', {course: courseInfo, trainer: trainer});
 }));
-router.get('/:id/:courseId', catchAsync (async (req, res) => {
+router.get('/trainers/:id/:courseId', catchAsync (async (req, res) => {
     const singleCourse = await courseData.getCourseById(req.params.courseId);
     const targetTrainer = await trainerData.getTrainerById(req.params.id);
     res.render('trainers/courseShow', {course: singleCourse, trainer: targetTrainer});
 }));
+
 module.exports = router;

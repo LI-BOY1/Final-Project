@@ -18,9 +18,17 @@ router.post('/', catchAsync (async(req, res) => {
     if(!newComment.rating)
         throw new ExpressError("Not provide a rating!", 400);
     let ratNumber = parseInt(newComment.rating);
+    
+    //verify rating 
+    if(!ratNumber)
+    throw new Error("the input rating is not valid!");
+    if(ratNumber !== Number(newComment.rating))
+        throw new Error("rating should be postive whole number!");
+
     const trainer = await trainerData.getTrainerById(req.params.id);
     const trainerId = trainer._id;
     const comment = await commentData.addComment(newComment.comment, trainerId, ratNumber);
+    //still need add member to comment, need complete it after completing login system
     res.redirect(`/fitclub/trainers/${trainerId}`);
 }));
 module.exports = router;

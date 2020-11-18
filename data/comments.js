@@ -21,8 +21,8 @@ let exportedMethods ={
             throw new Error("the input trainer id is not a string!");
         if(typeof rating !== 'number')
             throw new Error("the inpur rating is not a number!");
-        if(rating < 0 || rating > 10)
-            throw new Error("the rating should be in the range of [0,10].");
+        if(rating < 0 || rating > 5)
+            throw new Error("the rating should be in the range of [1,5].");
         
         // let x = ObjectId(memberId);
         // let y = ObjectId(courseId);
@@ -43,7 +43,8 @@ let exportedMethods ={
         
         const newCommentId = insertInfo.insertedId.toString();
         
-        //add comment to member
+        //add comment to member, for now, I think it is no need for us to add comment to member,
+        //cz we do not have to find comment in member db!!!!
         // await members.addCommentToMember(memberId, newCommentId);
         //add comment to trainer
         await trainers.addCommentToTrainer(trainerId, newCommentId);
