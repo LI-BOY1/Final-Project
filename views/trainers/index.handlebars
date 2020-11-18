@@ -1,7 +1,39 @@
-<h1>All Trainers</h1>
+<!DOCTYPE html>
 
-<ul>
-    {{#each trainer}}
-        <a href="/fitclub/trainers/{{_id}}"><li>{{first_name }} {{last_name}}</li></a>
-    {{/each}}
-</ul>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="index.js"></script>
+
+    <title>Fitness Club Login</title>
+    <link rel="stylesheet" href="././public/css/layout.css">
+
+</head>
+
+<body>
+
+<div class="prf">
+
+    <div class="profile1">
+
+            {{#each trainers}}
+            <ul>
+                <li>
+                    {{this.first_name }} {{this.last_name}}
+                </li>
+            </ul>
+            {{/each}}
+
+
+
+    </div>
+</div>
+</div>
+
+<div class="footer">
+</div>
+</div>
+</body>
+</html>

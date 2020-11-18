@@ -9,7 +9,8 @@ const loginRoutes = require("./login");
 const xss = require("xss");
 const router = express.Router();
 const saltRounds = 16;
-const userData = require("../data/members.js");
+const memberData = require("../data/members.js");
+const trainerData = require("../data/trainers.js");
 
 const constructorMethod = (app) => {
 
@@ -38,18 +39,28 @@ const constructorMethod = (app) => {
     app.use("/", router);
 
     router.get("/", async(req, res) => {
-        if(xss(req.session.authent)) {
-            try{
 
-                res.render("home", {verified: true});
+            try{
+                const topTrainer = await trainerData.getTopTrainer();
+                res.render("home", { verified: false,trainer:topTrainer});
+
+
+
             } catch(e) {
                 res.status(400);
             }
-        }
-        else{
 
-            res.render("home", { verified: false});
+    });
+
+    router.get("/alltrainers", async(req, res) => {
+
+        try{
+            const all = await trainerData.getAllTrainers();
+            res.render("trainers/index", { verified: false,trainers:all});
+        } catch(e) {
+            res.status(400);
         }
+
     });
 
 
@@ -91,7 +102,7 @@ router.get("/logout", (req,res) => {
 router.get("/profile", async(req,res) => {
     if(xss(req.session.authent)){
         try {
-            const u = await userData.getMemberById(req.session.user.toString());
+            const u = await memberData.getMemberById(req.session.user.toString());
             res.render("profile",{verified: true, user: u});
 
         } catch(e){

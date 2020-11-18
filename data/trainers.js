@@ -279,7 +279,25 @@ let exportedMethods = {
         if (!updateInfo.matchedCount && !updateInfo.modifiedCount)
             throw new Error('Add member to trainer failed!');
         return await this.getTrainerById(trainerId);
+    },
+    async getTopTrainer(){
+        const trainerCollection = await trainers();
+        const trainerList = await trainerCollection.find({}).toArray();
+        if(trainerList.length === 0)
+            throw new Error('error! No trainer in system!');
+        var maxRating = parseFloat(trainerList[0].rating)
+        var topTrainer = trainerList[0]
+        for(let i = 0; i < trainerList.length; i ++){
+            if(parseFloat(trainerList[i].rating)>maxRating){
+                topTrainer = trainerList[i]
+            }
+        }
+
+        topTrainer._id = topTrainer._id.toString();
+        return topTrainer;
     }
-    
+
 };
+
+
 module.exports = exportedMethods;

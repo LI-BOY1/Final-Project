@@ -53,29 +53,6 @@ body {
 }
 
 
-.con{
-    border: 3px solid #f1f1f1;
-    margin:1px 50px;
-    padding:1px 10px;
-    margin-bottom:50px;
-    display: block;
-
-}
-.con h1{
-    text-align:center;
-}
-.con input[type=submit]{
-    background-color:gray;
-    color: white;
-    padding: 14px 25px;
-    margin: 11px 0;
-    border: none;
-    cursor: pointer;
-    width:25%;
-    border-radius: 15px;
-    text-align: center;
-}
-
 .form form{
     padding:55px 121px;
     margin:20px;
@@ -310,17 +287,9 @@ a.active{
     top: 15%;
     left: 101%;
 }
-.square {
-    height: 50px;
-    width: 50px;
-    background-color: #555;
-}
 
-.employee {
-    width:100%;
 
-}
-.emp ul li input[type=text]{
+.trainer ul li input[type=text]{
     padding: 14px 15px;
     margin: 1px 5px;
     border: none;
@@ -330,17 +299,10 @@ a.active{
     border: 1px solid #ccc;
     box-sizing: border-box;
 }
-.emp ul{
+.trainer ul{
     padding:10px 0px;
 }
-.prf{
-    display: inline-block;
-    width:100%;
-    margin-top: 11px;
-}
-.prf img{
-    margin:21px 101px;
-}
+
 .profile{
     background-color: #000000;
     color:white;
@@ -356,48 +318,6 @@ a.active{
     padding:31px 11px;
     margin:35px;
 }
-.square1{
-    width:71px;
-    height:25px;
-    background-color: #4CAF50;
-}
-.que{
-    margin:101px 20px;
-}
-.que p{
-    font-size: 21px;
-}
-.result1{
-    width:75%;
-    border: 3px solid #f1f1f1;
-    box-shadow: 10px 10px 0px 0px #ede9e9;
-    padding:31px 111px;
-    position: absolute;
-    left:5%;
-    line-height: 25px;
-}
-.result1 input[type=submit] {
-    background-color:gray;
-    color: white;
-    padding: 14px 35px;
-    margin: 51px 0;
-    border: none;
-    cursor: pointer;
-    border-radius: 15px;
-    text-align: center;
-    height: auto;
-    width: auto;
-    position: relative;
-}
-.left1{
-    float:left;
-    position: relative;
-
-}
-.right1{
-    float:right;
-    position: relative;
-}
 
 
 #account {
@@ -410,78 +330,4 @@ a.active{
 }
 h4{
     text-align: center;
-}
-.bargraph{
-    list-style: none;
-    padding-top: 20px;
-    text-align: left;
-}
-ul.bargraph li{
-    height:35px;
-    color:white;
-    text-align: left;
-    line-height: 35px;
-    padding: 0px 20px;
-    margin: 5px 21px;
-}
-ul.bargraph li.purple{
-    background-color: purple;
-    width:29%;
-}
-ul.bargraph li.teal{
-    background-color: teal;
-    width:45%;
-}
-ul.bargraph li.pink{
-    background-color:palevioletred;
-    width:35%;
-}
-ul.bargraph li.gray{
-    background-color:grey;
-    width:61%;
-}
-ul.bargraph li.blue{
-    background-color: blue;
-    width:71%;
-}
-.bar{
-    float:left;
-    width:31%;
-}
-.center{
-    float: left;
-    width:31%;
-    margin-top:31px;
-    padding:0px 21px;
-}
-.center ul li{
-    list-style: square;
-    text-align: left;
-    text-decoration: none;
-    display: block;
-    font-size:18px;
-    padding:21px 0px;
-}
-.chart{
-    width:31%;
-    float:left;
-}
-.piechart {
-    display: block;
-    position: absolute;
-    width: 301px;
-    height: 301px;
-    border-radius: 50%;
-    background-image: conic-gradient(
-            pink 70deg,
-            lightblue 0 235deg,
-            orange 0);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.prf1{
-    display: inline-block;
-    width:100%;
-    margin-top: 51px;
 }
