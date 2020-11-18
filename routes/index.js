@@ -8,10 +8,13 @@ const constructorMethod = (app) => {
     app.use('/fitclub/courses', courseRoutes);
     app.use('/fitclub/trainers/:id/comments', commentRoutes);
     app.get('/', (req, res) => {
-        res.render('login');
+        res.render('home');
     });
     app.get('/signup', (req, res) => {
         res.render('signup');
+    });
+    app.get('/signin', (req, res) => {
+        res.render('login');
     });
 
 

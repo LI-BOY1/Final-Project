@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="index.js"></script>
+
+    <title>Fitness Club Login</title>
+    <link rel="stylesheet" href="././public/css/layout.css">
+
+</head>
+
+<body>
+
+<div class="login"  >
+
+    <div class="form">
+        <form action="/search" class="form-inlin justify-content-center" id="searchBar" method="post" enctype="application/x-www-form-urlencoded">
+            <div class="form-group" id="searchDiv">
+                <label for = "searchInput"></label>
+                <input id = "searchInput" type="text" class="form-control" placeholder="Enter Search Info" name="searchInput" required>
+                <input type="submit" onclick="location.href='/';"value="Search"  />
+            </div>
+        </form>
+        {{#if errors2}}
+            <p id="searchError">Error: Search did not return any results.</p>
+        {{/if}}
+
+
+    </div>
+
+
+    <form action="/review" method="GET" name = "topRated2" enctype="application/x-www-form-urlencoded">
+        <h4>Top Rated Trainer</h4>
+
+        <div class="emp">
+            <ul >
+                <li><a>trainer info</a></li></ul>
+            </li>
+            <ul> <li><a>trainer info</a></li></ul>
+            </li>
+
+            <ul><li><a>trainer info</a></li></ul>
+            </li>
+
+            </ul>
+        </div>
+    </form>
+</div>
+</div>
+</div>
+    </div>
+
+    <div class="footer">
+    </div>
+</div>
+</body>
+</html>
