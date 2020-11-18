@@ -10,6 +10,10 @@ const constructorMethod = (app) => {
     app.get('/', (req, res) => {
         res.render('login');
     });
+    app.get('/signup', (req, res) => {
+        res.render('signup');
+    });
+
 
     app.all('*', (req, res, next) => {
         next(new ExpressError('Page Not Found', 404));
