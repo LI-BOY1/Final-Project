@@ -17,10 +17,10 @@ let exportedMethods = {
             throw new Error("the input last name is not a string!");
         if(last_name.trim().length === 0)
             throw new Error("the input last name is not a valid string!");
-        if(typeof age !== 'number')
-            throw new Error("the input age is not a number!");
-        if(age < 18 || age > 100)
-            throw new Error("the input age should be in the range of 18-100");
+        // if(typeof age !== 'number')
+        //     throw new Error("the input age is not a number!");
+        // if(age < 18 || age > 100)
+        //     throw new Error("the input age should be in the range of 18-100");
         if(typeof info !== 'string')
             throw new Error("the input info is not a string!");
         if(info.trim().length === 0)

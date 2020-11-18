@@ -9,6 +9,7 @@ const loginRoutes = require("./login");
 const xss = require("xss");
 const router = express.Router();
 const saltRounds = 16;
+const userData = require("../data/members.js");
 
 const constructorMethod = (app) => {
 
@@ -64,9 +65,6 @@ const constructorMethod = (app) => {
     app.get('/signin', (req, res) => {
         res.render('login');
     });
-    app.get('/profile', (req, res) => {
-        res.render('profile');
-    });
 
 
 
@@ -90,6 +88,20 @@ router.get("/logout", (req,res) => {
         res.redirect("/");
     }
 });
+router.get("/profile", async(req,res) => {
+    if(xss(req.session.authent)){
+        try {
+            const u = await userData.getMemberById(req.session.user.toString());
+            res.render("profile",{verified: true, user: u});
 
+        } catch(e){
+            console.log(e);
+            res.render("error",{verified: true});
+        }
+    } else {
+        req.session.login_fail = true;
+        res.redirect("/login");
+    }
+});
 
   module.exports = constructorMethod;
