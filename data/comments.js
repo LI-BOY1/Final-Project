@@ -1,4 +1,4 @@
-const mongoCollections = require("../config/mongoCollections");
+const mongoCollections = require("./mongoCollections");
 const comments = mongoCollections.comments;
 let { ObjectId } = require('mongodb');
 const trainers = require('./trainers');

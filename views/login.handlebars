@@ -17,13 +17,12 @@
 <div class="login"  >
 
     <div class="form">
-        <form  id="form_login" autocomplete="off" method="POST" action="/login">
-
+            <form method = "POST" id = "form_login" enctype="application/x-www-form-urlencoded" action = "/login">
             <label ><strong>EMAIL</strong></label><br>
-            <input type="text" name="username" placeholder="" required/><br><br>
+            <input type="email" name="emailValue" placeholder="" required/><br><br>
 
             <label><strong>PASSWORD</strong></label><br>
-            <input type="password" name="password" placeholder="" required/><br><br><br><br>
+            <input type="password" name="psword" placeholder="" required/><br><br><br><br>
 
             <ul>
                 <li> <input type="submit" onclick="location.href='/profile';"value="Log In"  /></li>

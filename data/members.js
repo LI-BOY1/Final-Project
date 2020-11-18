@@ -1,10 +1,11 @@
-const mongoCollections = require("../config/mongoCollections");
+const mongoCollections = require("./mongoCollections");
 let { ObjectId } = require('mongodb');
 
 const trainers = mongoCollections.trainers;
 const members = mongoCollections.members;
 const courses = mongoCollections.courses;
 const comments = mongoCollections.comments;
+const bcrypt = require("bcrypt");
 
 
 let exportedMethods ={
@@ -19,10 +20,10 @@ let exportedMethods ={
             throw new Error("the input last name is not a string!");
         if(last_name.trim().length === 0)
             throw new Error("the input last name is not a valid string!");
-        if(typeof age !== 'number')
-            throw new Error("the input age is not a number!");
-        if(age < 18 || age > 100)
-            throw new Error("the input age should be in the range of 18-100");
+        // if(typeof age !== 'number')
+        //     throw new Error("the input age is not a number!");
+        // if(age < 18 || age > 100)
+        //     throw new Error("the input age should be in the range of 18-100");
         if(typeof phone !== 'string')
             throw new Error("the input phone number is not a string!");
         if(phone.trim().length === 0)
@@ -47,6 +48,7 @@ let exportedMethods ={
             throw new Error("the input password is not a string!");
         if(password.trim().length === 0)
             throw new Error("the input password is not a valid string!");
+        const hash = await bcrypt.hash(password, 16);
 
         const newMember = {
             first_name: first_name.trim(),
@@ -57,7 +59,7 @@ let exportedMethods ={
             address:address.trim(),
             zipcode:zipcode.trim(),
             username:username.trim(),
-            password:password.trim(),
+            password:hash,
             comment:[],
             coursesEnrolled:[],
             trainers:[]
@@ -67,15 +69,14 @@ let exportedMethods ={
         const insertInfo = await memberCollection.insertOne(newMember);
         if(insertInfo.insertedCount === 0)
             throw new Error('error! could not add member!');
-        const newCourseId = insertInfo.insertedId.toString();
-        const createMember = await this.getMemberById(newCourseId);
-        return createMember;
+        const newId = insertInfo.insertedId.toString();
+        const createdMember = await this.getMemberById(newId);
+        return createdMember;
     },
     async getAllMembers(){
         const memberCollection = await members();
         const memberList = await memberCollection.find({}).toArray();
-        if(memberList.length === 0)
-            throw new Error('error! No member in system!');
+
         for(let i = 0; i < memberList.length; i ++){
             memberList[i]._id = memberList[i]._id.toString();
         }
