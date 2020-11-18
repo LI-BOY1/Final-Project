@@ -149,27 +149,27 @@ let exportedMethods ={
         if (!updateInfo.matchedCount && !updateInfo.modifiedCount)
             throw new Error('Add member to course failed!');
         return await this.getCourseById(courseId);
+    },
+    async removeCourse(id){
+        if(id == null)
+            throw new Error("You must provide an id to search for!")
+        if(typeof id !== 'string')
+            throw new Error("the input id is not a string!");
+        if(id.trim().length === 0)
+            throw new Error("the input value is not a valid string!");
+
+        let x = ObjectId(id);
+        
+        const courseCollection = await courses();
+
+        await this.getCourseById(id);
+
+        const deleteInfo = await courseCollection.removeOne({_id: x});
+        if(deleteInfo.deleteCount === 0)
+            throw new Error(`Could not delete course with id of ${id}`);
+        
+        return true;
     }
-    // async removeCourse(id){
-    //     if(id == null)
-    //         throw new Error("You must provide an id to search for!")
-    //     if(typeof id !== 'string')
-    //         throw new Error("the input id is not a string!");
-    //     if(id.trim().length === 0)
-    //         throw new Error("the input value is not a valid string!");
-
-    //     let x = ObjectId(id);
-        
-    //     const courseCollection = await courses();
-
-    //     await this.getCourseById(id);
-
-    //     const deleteInfo = await courseCollection.removeOne({_id: x});
-    //     if(deleteInfo.deleteCount === 0)
-    //         throw new Error(`Could not delete course with id of ${id}`);
-        
-    //     return true;
-    // }
     
 };
 module.exports = exportedMethods;

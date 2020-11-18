@@ -227,6 +227,33 @@ let exportedMethods = {
             throw new Error('Add course to trainer failed!');
         return await this.getTrainerById(trainerId);
     },
+    async removeCourseFromTrainer(trainerId, courseId){
+        if(trainerId == null || courseId == null)
+            throw new Error("you should provide both trainerId and courseId to search for!")
+        if(typeof trainerId !== 'string' || typeof courseId !== 'string')
+            throw new Error("the input id is not a string!");
+        
+        let leftId = ObjectId(trainerId);
+        let rightId = ObjectId(courseId);
+
+        let curTrainer = await this.getTrainerById(trainerId);
+        //add verification to course
+        const courseCollection = await courses();
+        await courseCollection.findOne({_id: rightId});
+        
+        if(curTrainer == null)
+            throw new Error("no trainerId with that id!");
+
+        const trainerCollection = await trainers();
+        const updateInfo = await trainerCollection.updateOne(
+            {_id: leftId},
+            {$pull: {course: courseId}}
+        );
+        if (!updateInfo.matchedCount && !updateInfo.modifiedCount)
+            throw new Error('remove member from trainer failed');
+        return await this.getTrainerById(trainerId);
+
+    },
     async removeMemberFromTrainer(trainerId, memberId){
         if(trainerId == null || memberId == null)
             throw new Error("you should provide both trainerId and memberId to search for!")

@@ -259,7 +259,7 @@ let exportedMethods ={
         if(curMember == null)
             throw new Error("no memberId with that id!");
 
-        //这里添加验证trainer的操作
+        //verify  trainerId
         const trainerCollection = await trainers();
         await trainerCollection.findOne({_id: rightId});
 
@@ -286,7 +286,7 @@ let exportedMethods ={
         if(curMember == null)
             throw new Error("no memberId with that id!");
 
-        //这里添加验证course的操作
+        //verify courseId
         const courseCollection = await courses();
         await courseCollection.findOne({_id: rightId});
 

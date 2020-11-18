@@ -13,8 +13,8 @@
                 <li class="list-group-item">Trainer-Name: {{trainer.first_name}} {{trainer.last_name}}</li>
             </ul>
             <div class="card-body">
-                <a class="card-link btn btn-info" href="/fitclub/courses/trainers/{{trainer._id}}">All Trainers</a>
-                <form class="d-inline" action="/campgrounds/<%= campground._id%>?_method=DELETE" method="POST">
+                <a class="card-link btn btn-info" href="/fitclub/courses/trainers/{{trainer._id}}">All Course</a>
+                <form class="d-inline" action="/fitclub/courses/{{course._id}}?_method=DELETE" method="POST">
                     <button class="btn btn-danger">Delete</button>
                 </form>
             </div>

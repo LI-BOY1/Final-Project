@@ -25,4 +25,15 @@ router.get('/trainers/:id/:courseId', catchAsync (async (req, res) => {
     res.render('trainers/courseShow', {course: singleCourse, trainer: targetTrainer});
 }));
 
+router.delete('/:courseId', catchAsync (async(req, res) => {
+    const { courseId } = req.params;
+    const deleteCourse = await courseData.getCourseById(courseId);
+    const courseTrainerId = deleteCourse.trainerId;
+    await trainerData.removeCourseFromTrainer(courseTrainerId, courseId);
+    // const courseMemberId = deleteCourse.memberId;
+    // await memberData.removeCourseFromMember(courseMemberId, courseId);
+    await courseData.removeCourse(courseId);
+    res.redirect(`/fitclub/courses/trainers/${courseTrainerId}`);
+}));
+
 module.exports = router;
