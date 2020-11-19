@@ -18,7 +18,7 @@ router.post('/', catchAsync (async(req, res) => {
     if(!newComment.rating)
         throw new ExpressError("Not provide a rating!", 400);
     let ratNumber = parseInt(newComment.rating);
-    
+
     //verify rating 
     if(!ratNumber)
     throw new Error("the input rating is not valid!");
@@ -31,4 +31,16 @@ router.post('/', catchAsync (async(req, res) => {
     //still need add member to comment, need complete it after completing login system
     res.redirect(`/fitclub/trainers/${trainerId}`);
 }));
+
+router.delete('/:commentId', async(req, res) => {
+    const { id, commentId } = req.params;
+    await trainerData.getTrainerById(id);
+    trainerData.removeCommentFromTrainer(id, commentId);
+    await commentData.getCommentById(commentId);
+    //it seems that we do not need to add comment to member????????
+    // const commentMemberId = comment.memberId;
+    // await memberData.removeCommentFromMember(commentMemberId, commentId);
+    commentData.deleteComment(commentId);
+    res.redirect(`/fitclub/trainers/${id}`);
+});
 module.exports = router;

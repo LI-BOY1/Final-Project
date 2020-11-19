@@ -218,33 +218,60 @@ let exportedMethods ={
             throw new Error('Add course to trainer failed!');
         return await this.getMemberById(memberId);
     },
-    async addCommentToMember(memberId, commentId){
-        if(memberId == null || commentId == null)
-            throw new Error("you should provide both memberId and commentId to search for!")
-        if(typeof memberId !== 'string' || typeof commentId !== 'string')
-            throw new Error("the input id is not a string!");
+    // async addCommentToMember(memberId, commentId){
+    //     if(memberId == null || commentId == null)
+    //         throw new Error("you should provide both memberId and commentId to search for!")
+    //     if(typeof memberId !== 'string' || typeof commentId !== 'string')
+    //         throw new Error("the input id is not a string!");
         
-        let leftId = ObjectId(memberId);
-        let rightId = ObjectId(commentId);
+    //     let leftId = ObjectId(memberId);
+    //     let rightId = ObjectId(commentId);
         
 
-        let curMember = await this.getMemberById(memberId);
-        if(curMember == null)
-            throw new Error("no memberId with that id!");
-        //验证comment是否存在
-        const commentCollection = await comments();
-        await commentCollection.findOne({_id: rightId});
+    //     let curMember = await this.getMemberById(memberId);
+    //     if(curMember == null)
+    //         throw new Error("no memberId with that id!");
+    //     //verify comment 
+    //     const commentCollection = await comments();
+    //     await commentCollection.findOne({_id: rightId});
 
-        const memberCollection = await members();
-        const updateInfo = await memberCollection.updateOne(
-            {_id: leftId},
-            {$addToSet: {comment : commentId}}
-        );
+    //     const memberCollection = await members();
+    //     const updateInfo = await memberCollection.updateOne(
+    //         {_id: leftId},
+    //         {$addToSet: {comment : commentId}}
+    //     );
         
-        if (!updateInfo.matchedCount && !updateInfo.modifiedCount)
-            throw new Error('Add comment to member failed!');
-        return await this.getMemberById(memberId);
-    },
+    //     if (!updateInfo.matchedCount && !updateInfo.modifiedCount)
+    //         throw new Error('Add comment to member failed!');
+    //     return await this.getMemberById(memberId);
+    // },
+    // async removeCommentFromMember(memberId, commentId){
+    //     if(memberId == null || commentId == null)
+    //         throw new Error("you should provide both memberId and commentId to search for!")
+    //     if(typeof memberId !== 'string' || typeof commentId !== 'string')
+    //         throw new Error("the input id is not a string!");
+        
+    //     let leftId = ObjectId(memberId);
+    //     let rightId = ObjectId(commentId);
+
+    //     let curMember = await this.getMemberById(memberId);
+    //     if(curMember == null)
+    //         throw new Error("no memberId with that id!");
+    //     //verify comment 
+    //     const commentCollection = await comments();
+    //     await commentCollection.findOne({_id: rightId});
+
+    //     const memberCollection = await members();
+    //     const updateInfo = await memberCollection.updateOne(
+    //         {_id: leftId},
+    //         {$pull: {comment : commentId}}
+    //     );
+        
+    //     if (!updateInfo.matchedCount && !updateInfo.modifiedCount)
+    //         throw new Error('remove comment from member failed!');
+    //     return await this.getMemberById(memberId);
+
+    // },
     async removeTrainerFromMember(memberId, trainerId){
         if(trainerId == null || memberId == null)
             throw new Error("you should provide both trainerId and memberId to search for!")

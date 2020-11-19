@@ -293,9 +293,9 @@ let exportedMethods = {
         let curTrainer = await this.getTrainerById(trainerId);
         if(curTrainer == null)
             throw new Error("no trainerId with that id!");
-       //add verification to comment
-       const commentCollection = await comments();
-       await commentCollection.findOne({_id: rightId});
+        //add verification to comment
+        const commentCollection = await comments();
+        await commentCollection.findOne({_id: rightId});
 
         const trainerCollection = await trainers();
         const updateInfo = await trainerCollection.updateOne(
@@ -306,7 +306,32 @@ let exportedMethods = {
         if (!updateInfo.matchedCount && !updateInfo.modifiedCount)
             throw new Error('Add member to trainer failed!');
         return await this.getTrainerById(trainerId);
-    }
-    
+    },
+    async removeCommentFromTrainer(trainerId, commentId){
+        if(trainerId == null || commentId == null)
+            throw new Error("you should provide both trainerId and commentId to search for!")
+        if(typeof trainerId !== 'string' || typeof commentId !== 'string')
+            throw new Error("the input id is not a string!");
+        
+        let leftId = ObjectId(trainerId);
+        let rightId = ObjectId(commentId);
+        
+        let curTrainer = await this.getTrainerById(trainerId);
+        if(curTrainer == null)
+            throw new Error("no trainerId with that id!");
+        //add verification for comment
+        const commentCollection = await comments();
+        await commentCollection.findOne({_id: rightId});
+
+        const trainerCollection = await trainers();
+        const updateInfo = await trainerCollection.updateOne(
+            {_id: leftId},
+            {$pull: {comment : commentId}}
+        );
+        
+        if (!updateInfo.matchedCount && !updateInfo.modifiedCount)
+            throw new Error('remove comment from trainer failed!');
+        return await this.getTrainerById(trainerId);
+    } 
 };
 module.exports = exportedMethods;

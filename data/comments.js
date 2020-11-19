@@ -78,8 +78,30 @@ let exportedMethods ={
             throw new Error('No comment with that id!');
         comment._id = comment._id.toString();
         return comment;
+    },
+    async deleteComment(id){
+        if(id == null)
+            throw new Error("You must provide an comment id to search for!")
+        if(typeof id !== 'string')
+            throw new Error("the input comment id is not a string!");
+        if(id.trim().length === 0)
+            throw new Error("the input comment id is not a valid string!");
+
+        let x = ObjectId(id);
+        
+        const commentCollection = await comments();
+
+        await this.getCommentById(id);
+
+        const deleteInfo = await commentCollection.removeOne({_id: x});
+        if(deleteInfo.deleteCount === 0)
+            throw new Error(`Could not delete comment with id of ${id}`);
+        
+        return true;
+    },
+    async addMemberToComment(commentId, membeerId){
+
     }
-    
-    
+  
 };
 module.exports = exportedMethods;
