@@ -21,13 +21,17 @@ router.get('/:id', catchAsync (async (req, res)=>{
     for(let i = 0; i < trainerComList.length; i ++){
         commentForThatTrainer[i] = await commentData.getCommentById(trainerComList[i]);
     }
+    // if(!oneTrainer){
+    //     req.flash('error', 'Cannot find that trainer!');
+    //     return res.redirect('/fitclub/trainers');
+    // }
     res.render('trainers/show', {trainer: oneTrainer, comment: commentForThatTrainer});
 }));
 
-router.get('/:id/edit', catchAsync (async (req, res) => {
-    const oneTrainer = await trainerData.getTrainerById(req.params.id);
-    res.render('trainers/edit', {trainer: oneTrainer});
-}));
+// router.get('/:id/edit', catchAsync (async (req, res) => {
+//     const oneTrainer = await trainerData.getTrainerById(req.params.id);
+//     res.render('trainers/edit', {trainer: oneTrainer});
+// }));
 
 
 module.exports = router;

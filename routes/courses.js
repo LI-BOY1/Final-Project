@@ -33,6 +33,9 @@ router.delete('/:courseId', catchAsync (async(req, res) => {
     // const courseMemberId = deleteCourse.memberId;
     // await memberData.removeCourseFromMember(courseMemberId, courseId);
     await courseData.removeCourse(courseId);
+
+    //add flash
+    req.flash('success', 'Successfully deleted course!');
     res.redirect(`/fitclub/courses/trainers/${courseTrainerId}`);
 }));
 

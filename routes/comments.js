@@ -21,7 +21,7 @@ router.post('/', catchAsync (async(req, res) => {
 
     //verify rating 
     if(!ratNumber)
-    throw new Error("the input rating is not valid!");
+        throw new Error("the input rating is not valid!");
     if(ratNumber !== Number(newComment.rating))
         throw new Error("rating should be postive whole number!");
 
@@ -29,6 +29,9 @@ router.post('/', catchAsync (async(req, res) => {
     const trainerId = trainer._id;
     const comment = await commentData.addComment(newComment.comment, trainerId, ratNumber);
     //still need add member to comment, need complete it after completing login system
+
+    //add flash
+    req.flash('success', 'Successfully made a new comment!');
     res.redirect(`/fitclub/trainers/${trainerId}`);
 }));
 
@@ -41,6 +44,8 @@ router.delete('/:commentId', async(req, res) => {
     // const commentMemberId = comment.memberId;
     // await memberData.removeCommentFromMember(commentMemberId, commentId);
     commentData.deleteComment(commentId);
+    //add flash
+    req.flash('success', 'Successfully deleted comment!');
     res.redirect(`/fitclub/trainers/${id}`);
 });
 module.exports = router;
