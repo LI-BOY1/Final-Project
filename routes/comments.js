@@ -10,6 +10,7 @@ const courseData = data.courses;
 const commentData = data.comments;
 
 router.post('/', catchAsync (async(req, res) => {
+
     let newComment = req.body;
     if(!newComment) 
         throw new ExpressError('Invalid comment!', 400);
