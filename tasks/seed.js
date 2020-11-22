@@ -21,18 +21,48 @@ async function main(){
 
     const trainer_2 = await trainers.addTrainer("Cristina", "Ye", 23, info,"922-7123388", "yec@outlook.com", "147 33rd Ave, Great Neck, NY", "11437", "Hello123", "W1sdsd23456", img);
 
-    const course_1 = await courses.addCourse("Muscle training", "This course is good for increasing muscle!", img, 200, 12, 1, trainer_1._id);
-    const course_2 = await courses.addCourse("running", "You can have a good health and improve your health condition", img, 200, 9, 3, trainer_1._id);
-    const course_3 = await courses.addCourse("running", "You can have a good health and improve your health condition", img, 200, 12, 4, trainer_1._id);
+    const course_1 = await courses.addCourse("Muscle training_1", "This course is good for increasing muscle!", img, 290, 9, 1, trainer_1._id);
+    const course_2 = await courses.addCourse("running_1", "You can have a good health and improve your health condition", img, 200, 10, 1, trainer_1._id);
+    const course_3 = await courses.addCourse("running_2", "You can have a good health and improve your health condition", img, 270, 9, 2, trainer_1._id);
+
+    //for schedule use--> trainer_1
+    const makeUpC_1 = await courses.addCourse("training_2", info, img, 270, 9, 3, trainer_1._id);
+    const makeUpC_2 = await courses.addCourse("training_3", info, img, 100, 12, 3, trainer_1._id);
+    const makeUpC_3 = await courses.addCourse("training_4", info, img, 200, 14, 3, trainer_1._id);
+    const makeUpC_4 = await courses.addCourse("training_5", info, img, 340, 16, 4, trainer_1._id);
+    const makeUpC_5 = await courses.addCourse("training_6", info, img, 370, 12, 5, trainer_1._id);
+    const makeUpC_6 = await courses.addCourse("training_7", info, img, 390, 16, 5, trainer_1._id);
+
 
     await trainers.addCourseToTrainer(trainer_1._id, course_1._id);
     await trainers.addCourseToTrainer(trainer_1._id, course_2._id);
     await trainers.addCourseToTrainer(trainer_1._id, course_3._id);
+    await trainers.addCourseToTrainer(trainer_1._id, makeUpC_1._id);
+    await trainers.addCourseToTrainer(trainer_1._id, makeUpC_2._id);
+    await trainers.addCourseToTrainer(trainer_1._id, makeUpC_3._id);
+    await trainers.addCourseToTrainer(trainer_1._id, makeUpC_4._id);
+    await trainers.addCourseToTrainer(trainer_1._id, makeUpC_5._id);
+    await trainers.addCourseToTrainer(trainer_1._id, makeUpC_6._id);
 
-    const course_4 = await courses.addCourse("swimming", info , img, 200, 14, 2, trainer_2._id);
-    const course_5 = await courses.addCourse("swimming", info , img, 200, 16, 4, trainer_2._id);
+    const course_4 = await courses.addCourse("swimming", info , img, 200, 14, 1, trainer_2._id);
+    const course_5 = await courses.addCourse("Running_1", info , img, 200, 9, 2, trainer_2._id);
+
+    //for schedule use--> trainer_2
+    const makeUpC_7 = await courses.addCourse("Climbing", info, img, 270, 12, 2, trainer_2._id);
+    const makeUpC_8 = await courses.addCourse("Muscle", info, img, 100, 12, 3, trainer_2._id);
+    const makeUpC_9 = await courses.addCourse("training_8", info, img, 200, 10, 4, trainer_2._id);
+    const makeUpC_10 = await courses.addCourse("training_9", info, img, 340, 12, 4, trainer_2._id);
+    const makeUpC_11 = await courses.addCourse("training_10", info, img, 370, 16, 4, trainer_2._id);
+    const makeUpC_12 = await courses.addCourse("training_11", info, img, 390, 16, 5, trainer_2._id);
+
     await trainers.addCourseToTrainer(trainer_2._id, course_4._id);
     await trainers.addCourseToTrainer(trainer_2._id, course_5._id);
+    await trainers.addCourseToTrainer(trainer_2._id, makeUpC_7._id);
+    await trainers.addCourseToTrainer(trainer_2._id, makeUpC_8._id);
+    await trainers.addCourseToTrainer(trainer_2._id, makeUpC_9._id);
+    await trainers.addCourseToTrainer(trainer_2._id, makeUpC_10._id);
+    await trainers.addCourseToTrainer(trainer_2._id, makeUpC_11._id);
+    await trainers.addCourseToTrainer(trainer_2._id, makeUpC_12._id);
 
 
     

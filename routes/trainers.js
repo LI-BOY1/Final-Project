@@ -28,6 +28,37 @@ router.get('/:id', catchAsync (async (req, res)=>{
     res.render('trainers/show', {trainer: oneTrainer, comment: commentForThatTrainer});
 }));
 
+router.get('/courseschedule/:id', async (req, res) => {
+    const trainer = await trainerData.getTrainerById(req.params.id);
+    const courseIdList = trainer.course;
+    const courseInfo = {};
+    for(let i = 0; i < courseIdList.length; i ++){
+        courseInfo[i] = await courseData.getCourseById(courseIdList[i]);
+    }
+    let monC = [], tueC = [], wenC = [], thuC = [], friC = [];
+    for(let i in courseInfo){
+        if(courseInfo[i].day === 1){
+            monC.push(courseInfo[i]);
+        }else if(courseInfo[i].day === 2){
+            tueC.push(courseInfo[i]);
+        }else if(courseInfo[i].day === 3){
+            wenC.push(courseInfo[i]);
+        }else if(courseInfo[i].day === 4){
+            thuC.push(courseInfo[i]);
+        }else{
+            friC.push(courseInfo[i]);
+        }
+    }
+    res.render('trainers/schedule', {
+        title: `${trainer.first_name} ${trainer.last_name}'s Course Schedule`,
+        MondayCourse: monC,
+        TuesdayCourse: tueC,
+        WednesdayCourse: wenC,
+        ThursdayCourse: thuC,
+        FridayCourse: friC,
+        trainer: trainer
+    });
+});
 // router.get('/:id/edit', catchAsync (async (req, res) => {
 //     const oneTrainer = await trainerData.getTrainerById(req.params.id);
 //     res.render('trainers/edit', {trainer: oneTrainer});
