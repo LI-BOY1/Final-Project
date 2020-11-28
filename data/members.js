@@ -81,7 +81,7 @@ let exportedMethods ={
         }
         return memberList;
     },
-    
+
     async getMemberById(id){
         if(id == null) 
             throw new Error("you must provide an id to search for!");
@@ -99,15 +99,16 @@ let exportedMethods ={
         member._id = member._id.toString();
         return member;
     },
-    
+
     async update(id, updateMember){
-        if(id == null || updateMember == null)
+        if(id == null || updateTrainer == null)
             throw new Error("You must provid all fields!");
         if(typeof id !== 'string')
             throw new Error("the input id is not a string!");
         if(id.trim().length === 0)
             throw new Error("the input id is not a valid string!")
-        if(typeof updateMember !== 'object' || Array.isArray(updateMember))
+
+        if(typeof updateTrainer !== 'object' || Array.isArray(updateTrainer))
             throw new Error("the input updateMember is not a basic object!");
         
         let x = ObjectId(id);

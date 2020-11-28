@@ -1,20 +1,22 @@
 {
   "name": "final-project",
   "version": "1.0.0",
-  "description": "",
+  "description": "Fitness Club Private Trainers System",
   "main": "app.js",
   "scripts": {
     "seed": "node ./tasks/seed.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js"
   },
-  "author": "Xinyi Ye",
+  "author": "Group 1",
   "license": "ISC",
   "dependencies": {
+    "connect-flash": "^0.1.1",
     "express": "^4.17.1",
     "express-handlebars": "^5.2.0",
     "express-session": "^1.17.1",
     "handlebars": "^4.7.6",
+    "method-override": "^3.0.0",
     "mongodb": "^3.6.3"
   }
 }
