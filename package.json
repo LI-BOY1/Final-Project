@@ -1,23 +1,21 @@
 {
-  "name": "final-project",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "start": "node app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/LI-BOY1/Final-Project.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/LI-BOY1/Final-Project/issues"
-  },
-  "homepage": "https://github.com/LI-BOY1/Final-Project#readme",
-  "dependencies": {
-    "express": "^4.17.1"
-  }
+    "name": "final-project",
+    "version": "1.0.0",
+    "description": "",
+    "main": "app.js",
+    "scripts": {
+      "seed": "node ./tasks/seed.js",
+      "test": "echo \"Error: no test specified\" && exit 1",
+      "start": "node app.js"
+    },
+    "author": "Xinyi Ye",
+    "license": "ISC",
+    "dependencies": {
+      "express": "^4.17.1",
+      "express-handlebars": "^5.2.0",
+      "express-session": "^1.17.1",
+      "handlebars": "^4.7.6",
+      "mongodb": "^3.6.3"
+    }
 }
+  

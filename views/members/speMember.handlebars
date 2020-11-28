@@ -1,0 +1,28 @@
+<div class="row">
+    <div class="col-6">
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">{{member.first_name}} {{member.last_name}}</h5>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">UserName: {{member.username}} </li>
+                <li class="list-group-item">FirstName: {{member.first_name}} </li>
+                <li class="list-group-item">LastName: {{member.last_name}} </li>
+                <li class="list-group-item text-muted">Age: {{member.age}}</li>
+                <li class="list-group-item">Phone: {{member.phone}}</li>
+                <li class="list-group-item">Email: {{member.email}}</li>
+                <li class="list-group-item">Address: {{member.address}} </li>
+                <li class="list-group-item">Zipcode: {{member.zipcode}} </li>
+                <li class="list-group-item">Course: {{member.coursesEnrolled}} </li>
+
+            </ul>
+
+            <div class="card-body">
+                <a href="/edit/memberInfo/{{member._id}}" class="card-link">Edit</a>
+                <a href="#" class="card-link">Course</a>
+            </div>
+        </div>
+    </div>
+
+
+</div>
