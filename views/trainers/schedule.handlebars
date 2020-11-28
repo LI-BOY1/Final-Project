@@ -1,0 +1,100 @@
+<link rel="stylesheet" href="/public/css/schedule.css">
+<div class="Content">
+    <div class="Title">
+        <h1>{{title}}</h1>
+    </div>
+    <div class="TopLine"></div>
+    <div class="Week">
+        <ul>
+            <li class="fl">Sun</li>
+            <li class="fl">Mon</li>
+            <li class="fl">Tue</li>
+            <li class="fl">Wed</li>
+            <li class="fl">Thu</li>
+            <li class="fl">Fri</li>
+            <li class="fl">Sat</li>
+            <li class="fl">
+                <a href="/fitclub/trainers/{{trainer._id}}" class="card-link btn btn-success">Back</a>
+            </li>
+        </ul>
+    </div>
+    <div class="Source">
+        <!-- course amount -->
+        <div class="Num fl">
+            <ul>
+                <li>1</li>
+                <li>2</li>
+                <li>3</li>
+                <li>4</li>
+                <li>5</li>
+                <li>6</li>
+                <li>7</li>
+                <li>8</li>
+            </ul>
+        </div>
+        <!--  Sunday course Info-->
+        <div class="Sun fl">
+            <ul class="course-ul">
+                <li class="Empty"></li>
+                <li class="flex-list sundaySchedule"><p>Game Time</p></li>
+            </ul>
+        </div>
+        <!--  Monday course Info-->
+        <div class="Mon fl">
+            <ul class="course-ul">
+               {{#each MondayCourse}}
+               <li class="flex-list mondayCourse"><p>{{coursename}} {{start_time}}:00</p></li>
+               {{/each}}
+               <li class="Empty"></li>
+            </ul>
+        </div>
+        <!-- Tuesday course Info-->
+        <div class="Tue fl">
+            <ul class="course-ul">
+                {{#each TuesdayCourse}}
+               <li class="flex-list tuesdayCourse">
+                   <p>{{coursename}} {{start_time}}:00</p>
+                </li>
+               {{/each}}
+               <li class="Empty"></li>
+            </ul>
+        </div>
+        <!--Wednesday course Info-->
+        <div class="Wed fl">
+            <ul class="course-ul">
+               {{#each WednesdayCourse}}
+               <li class="flex-list wednesdayCourse"><p>{{coursename}} {{start_time}}:00</p></li>
+               {{/each}}
+               <li class="Empty"></li>
+            </ul>
+        </div>
+        <!-- Thursday course Info-->
+        <div class="Thu fl">
+            <ul class="course-ul">
+                {{#each ThursdayCourse}}
+               <li class="flex-list thursdayCourse"><p>{{coursename}} {{start_time}}:00</p></li>
+               {{/each}}
+                <li class="Empty"></li>
+            </ul>
+        </div>
+        <!--Friday course Info-->
+        <div class="Fri fl">
+            <ul class="course-ul">
+                {{#each FridayCourse}}
+               <li class="flex-list fridayCourse"><p>{{coursename}} {{start_time}}:00</p></li>
+               {{/each}}
+               <li class="Empty"></li>
+            </ul>
+        </div>
+        <!-- Saturday course Info-->
+        <div class="Sat fl">
+            <ul class="course-ul">
+                <li class="flex-list Huodong"><p>Consulting Course1</p></li>
+                <li class="Empty"></li>
+                <li class="Empty"></li>
+                <li class="flex-list Huodong"><p>Consulting Course2</p></li>
+            </ul>
+        </div>
+    </div>
+    <div class="BotomLine"></div>
+</div>
