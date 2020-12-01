@@ -65,7 +65,7 @@ let exportedMethods = {
             zipcode:zipcode.trim(),
             username:username.trim(),
             password:password.trim(),
-            rating:0,
+            rating:4,
             img: img,
             course:[],
             comment:[],
@@ -332,6 +332,19 @@ let exportedMethods = {
         if (!updateInfo.matchedCount && !updateInfo.modifiedCount)
             throw new Error('remove comment from trainer failed!');
         return await this.getTrainerById(trainerId);
-    } 
+    },
+    async getTopThreeTrainers(){
+        const allTrainers = await this.getAllTrainers();
+        if(allTrainers.length === 0)
+            throw new Error("No Trainers!");
+        const sortedTrainers = allTrainers.sort((a, b) =>{return b.rating - a.rating});
+        let topThreeTrainers = [];
+        for(let i = 0; i < 3; i ++){
+            topThreeTrainers[i] = sortedTrainers[i];
+        }
+        if(topThreeTrainers === null || topThreeTrainers.length < 3)
+            throw new Error("No 3 trainers ");
+        return topThreeTrainers;
+    }
 };
 module.exports = exportedMethods;

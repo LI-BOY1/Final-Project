@@ -11,13 +11,13 @@ async function main(){
 
     const img = 'https://source.unsplash.com/collection/483251';
     const info = 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam dolores vero perferendis laudantium, consequuntur voluptatibus nulla architecto, sit soluta esse iure sed labore ipsam a cum nihil atque molestiae deserunt!';
-    const member_1 = await members.addMember("Boyang", "Li", 25, "201-7837438", "ysd123@stevens.edu","123 Hoboken Ave, Jersey City, NJ", "07310", "GoodBoy", "W123456");
+    const member_1 = await members.addMember("Boyang", "Li", "201-7837438", "ysd123@stevens.edu","123 Hoboken Ave, Jersey City, NJ",  "GoodBoy", "W123456");
 
-    const member_2 = await members.addMember("JiaLi", "Chen", 23, "201-7837348", "chenjl3@stevens.edu","113 Congress Ave, Hoboken, NJ", "07312", "GoodGirl", "W12sasd6");
+    const member_2 = await members.addMember("JiaLi", "Chen", "201-7837348", "chenjl3@stevens.edu","113 Congress Ave, Hoboken, NJ",  "GoodGirl", "W12sasd6");
 
-    const member_3 = await members.addMember("John", "Smith", 37, "901-7837348", "smjohn@stevens.edu","512 Congress Ave, Union City, NJ", "07012", "GoWest", "23231223236");
+    const member_3 = await members.addMember("John", "Smith", "901-7837348", "smjohn@stevens.edu","512 Congress Ave, Union City, NJ",  "GoWest", "23231223236");
 
-    const trainer_1 = await trainers.addTrainer("Xinyi", "Ye", 23, info,"201-7832388", "yexiny@stevens.edu", "66 Hoboken Ave, Jersey City, NJ", "07310", "Goirl", "W1sdsd23456", img);
+    const trainer_1 = await trainers.addTrainer("Xiy", "Ye", 23, info,"201-7832388", "yexiny@stevens.edu", "66 Hoboken Ave, Jersey City, NJ", "07310", "Goirl", "W1sdsd23456", img);
 
     const trainer_2 = await trainers.addTrainer("Cristina", "Ye", 23, info,"922-7123388", "yec@outlook.com", "147 33rd Ave, Great Neck, NY", "11437", "Hello123", "W1sdsd23456", img);
 

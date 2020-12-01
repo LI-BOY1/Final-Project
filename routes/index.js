@@ -1,15 +1,18 @@
 const trainerRoutes = require('./trainers');
 const commentRoutes = require('./comments');
 const courseRoutes = require('./courses');
+const memberRoutes = require('./members');
 const ExpressError = require('../utils/ExpressError');
 const path = require('path');
+
 const constructorMethod = (app) => {
+    app.use('/', memberRoutes);
     app.use('/fitclub/trainers', trainerRoutes);
     app.use('/fitclub/courses', courseRoutes);
     app.use('/fitclub/trainers/:id/comments', commentRoutes);
-    app.get('/', (req, res) => {
-        res.render('home');
-    });
+    // app.get('/', (req, res) => {
+    //     res.render('home');
+    // });
 
     app.all('*', (req, res, next) => {
         next(new ExpressError('Page Not Found', 404));

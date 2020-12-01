@@ -8,8 +8,8 @@ const comments = mongoCollections.comments;
 
 
 let exportedMethods ={
-    async addMember(first_name, last_name, age, phone, email, address, zipcode,username, password){
-        if(first_name == null || last_name == null || age == null || phone == null || email == null || address == null || zipcode == null || username == null || password == null)
+    async addMember(first_name, last_name, phone, email, address, username, password){
+        if(first_name == null || last_name == null || phone == null || email == null || address == null || username == null || password == null)
             throw new Error("all fields need to have valid values!");
         if(typeof first_name !== 'string')
             throw new Error("the input first name is not a string!");
@@ -19,10 +19,6 @@ let exportedMethods ={
             throw new Error("the input last name is not a string!");
         if(last_name.trim().length === 0)
             throw new Error("the input last name is not a valid string!");
-        if(typeof age !== 'number')
-            throw new Error("the input age is not a number!");
-        if(age < 18 || age > 100)
-            throw new Error("the input age should be in the range of 18-100");
         if(typeof phone !== 'string')
             throw new Error("the input phone number is not a string!");
         if(phone.trim().length === 0)
@@ -35,10 +31,6 @@ let exportedMethods ={
             throw new Error("the input address is not a string!");
         if(address.trim().length === 0)
             throw new Error("the input address is not a valid string!");
-        if(typeof zipcode !== 'string')
-            throw new Error("the input zipcode is not a string!");
-        if(zipcode.trim().length === 0)
-            throw new Error("the input zipcode is not a valid string!");
         if(typeof username !== 'string')
             throw new Error("the input username is not a string!");
         if(username.trim().length === 0)
@@ -51,11 +43,9 @@ let exportedMethods ={
         const newMember = {
             first_name: first_name.trim(),
             last_name: last_name.trim(),
-            age:age,
             phone:phone.trim(),
             email:email.trim(),
             address:address.trim(),
-            zipcode:zipcode.trim(),
             username:username.trim(),
             password:password.trim(),
             comment:[],
@@ -118,16 +108,12 @@ let exportedMethods ={
             updateMemberInfo.first_name = updateMember.first_name;
         if(updateMember.last_name)
             updateMemberInfo.last_name = updateMember.last_name;
-        if(updateMember.age)
-            updateMemberInfo.age = updateMember.age;
         if(updateMember.phone)
             updateMemberInfo.phone = updateMember.phone;
         if(updateMember.email)
             updateMemberInfo.email = updateMember.email;
         if(updateMember.address)
             updateMemberInfo.address = updateMember.address;
-        if(updateMember.zipcode)
-            updateMemberInfo.zipcode = updateMember.zipcode;
         if(updateMember.username)
             updateMemberInfo.username = updateMember.username;             
         if(updateMember.password)
