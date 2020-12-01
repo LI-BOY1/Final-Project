@@ -22,9 +22,13 @@
           <a class="nav-link" href="/fitclub/trainers">All Trainers</a>
         </div>
         <div class="navbar-nav ml-auto">
+          {{#unless currentUser}}
           <a href="/login" class="nav-link">Login</a>
           <a href="/register" class="nav-link">Register</a>
+          {{/unless}}
+          {{#if currentUser}}
           <a href="/logout" class="nav-link">Logout</a>
+          {{/if}}
         </div>
       </div>
     </div>

@@ -4,6 +4,7 @@ const router = express.Router();
 const data = require('../data');
 const ExpressError = require('../utils/ExpressError');
 const catchAsync = require('../utils/catchAsync');
+const { isLoggedIn } = require('../authentication');
 const trainerData = data.trainers;
 const memberData = data.members;
 const courseData = data.courses;
@@ -25,7 +26,7 @@ router.get('/trainers/:id/:courseId', catchAsync (async (req, res) => {
     res.render('trainers/courseShow', {course: singleCourse, trainer: targetTrainer});
 }));
 
-router.delete('/:courseId', catchAsync (async(req, res) => {
+router.delete('/:courseId', isLoggedIn, catchAsync (async(req, res) => {
     const { courseId } = req.params;
     const deleteCourse = await courseData.getCourseById(courseId);
     const courseTrainerId = deleteCourse.trainerId;

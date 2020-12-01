@@ -4,12 +4,13 @@ const router = express.Router({mergeParams: true});
 const data = require('../data');
 const catchAsync = require('../utils/catchAsync');
 const ExpressError = require('../utils/ExpressError');
+const { isLoggedIn } = require('../authentication');
 const trainerData = data.trainers;
 const memberData = data.members;
 const courseData = data.courses;
 const commentData = data.comments;
 
-router.post('/', catchAsync (async(req, res) => {
+router.post('/', isLoggedIn, catchAsync (async(req, res) => {
 
     let newComment = req.body;
     if(!newComment) 
@@ -36,7 +37,7 @@ router.post('/', catchAsync (async(req, res) => {
     res.redirect(`/fitclub/trainers/${trainerId}`);
 }));
 
-router.delete('/:commentId', async(req, res) => {
+router.delete('/:commentId', isLoggedIn, async(req, res) => {
     const { id, commentId } = req.params;
     await trainerData.getTrainerById(id);
     trainerData.removeCommentFromTrainer(id, commentId);

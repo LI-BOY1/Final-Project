@@ -17,6 +17,7 @@ app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');
 
 const sessionConfig = {
+  name:'FitClub',
   secret: 'thisshouldbeabettersecret!',
   resave: false,
   saveUninitialized: true,
@@ -31,6 +32,8 @@ app.use(flash());
 
 //flash middleware
 app.use((req, res, next) => {
+  // console.log(req.session.user);
+  res.locals.currentUser = req.session.user;
   res.locals.success = req.flash('success');
   res.locals.error = req.flash('error');
   next();
