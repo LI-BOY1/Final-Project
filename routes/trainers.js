@@ -21,6 +21,7 @@ router.get('/:id', catchAsync (async (req, res)=>{
     for(let i = 0; i < trainerComList.length; i ++){
         commentForThatTrainer[i] = await commentData.getCommentById(trainerComList[i]);
     }
+    // const commentMember = await memberData.getMemberById(commentForThatTrainer.memberId);
     // if(!oneTrainer){
     //     req.flash('error', 'Cannot find that trainer!');
     //     return res.redirect('/fitclub/trainers');

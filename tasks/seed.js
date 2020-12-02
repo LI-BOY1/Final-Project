@@ -17,9 +17,9 @@ async function main(){
 
     const member_3 = await members.addMember("John", "Smith", "901-7837348", "smjohn@stevens.edu","512 Congress Ave, Union City, NJ",  "GoWest", "23231223236");
 
-    const trainer_1 = await trainers.addTrainer("Xiy", "Ye", 23, info,"201-7832388", "yexiny@stevens.edu", "66 Hoboken Ave, Jersey City, NJ", "07310", "Goirl", "W1sdsd23456", img);
+    const trainer_1 = await trainers.addTrainer("Xiy", "Ye", info,"201-7832388", "yexiny@stevens.edu", "66 Hoboken Ave, Jersey City, NJ",  "Goirl", "W1sdsd23456", img);
 
-    const trainer_2 = await trainers.addTrainer("Cristina", "Ye", 23, info,"922-7123388", "yec@outlook.com", "147 33rd Ave, Great Neck, NY", "11437", "Hello123", "W1sdsd23456", img);
+    const trainer_2 = await trainers.addTrainer("Cristina", "Ye", info,"922-7123388", "yec@outlook.com", "147 33rd Ave, Great Neck, NY",  "Hello123", "W1sdsd23456", img);
 
     const course_1 = await courses.addCourse("Muscle training_1", "This course is good for increasing muscle!", img, 290, 9, 1, trainer_1._id);
     const course_2 = await courses.addCourse("running_1", "You can have a good health and improve your health condition", img, 200, 10, 1, trainer_1._id);
@@ -73,7 +73,7 @@ async function main(){
     // await trainers.addMemberToTrainer(trainer_1._id, member_1._id);
     // await members.addTrainerToMember(member_1._id, trainer_1._id);
     
-    const comment_1 = await comments.addComment("This trainer is so good!", trainer_1._id, 4);
+    const comment_1 = await comments.addComment(member_1._id, member_1.username, "This trainer is so good!", trainer_1._id, 4);
     console.log(comment_1);
 
     console.log("member_2 select course_2 with trainer_1");
@@ -82,7 +82,7 @@ async function main(){
     // await trainers.addMemberToTrainer(trainer_1._id, member_2._id);
     // await members.addTrainerToMember(member_2._id, trainer_1._id);
 
-    const comment_2 = await comments.addComment("I love the trainers' teaching stytle in this class!", trainer_1._id, 5);
+    const comment_2 = await comments.addComment(member_2._id, member_2.username, "I love the trainers' teaching stytle in this class!", trainer_1._id, 5);
     console.log(comment_2);
 
     // console.log("member_3 select course_3 with trainer_2");
@@ -92,20 +92,20 @@ async function main(){
     // await members.addTrainerToMember(member_3._id, trainer_2._id);
 
 
-    const comment_3 = await comments.addComment("This is a good way to reduce fat!", trainer_2._id, 3);
+    const comment_3 = await comments.addComment(member_3._id, member_3.username, "This is a good way to reduce fat!", trainer_2._id, 3);
     console.log(comment_3);
 
-    const comment_4 = await comments.addComment(info, trainer_2._id, 2);
+    const comment_4 = await comments.addComment(member_3._id, member_3.username, info, trainer_2._id, 2);
 
     //add extra trainers and courses in the db in order to test
-    const trainer_3 = await trainers.addTrainer("trainer3", "Ben3", 23, info,"6753-7579388", "sdsdadsa@outk.acom", "148 33rd, Great Neck, NJ", "11437", "Hello123", "W1sdsd23456", img);
-    const trainer_4 = await trainers.addTrainer("John", "Ben", 23, info,"123-7579388", "sdsa@outloaok.acom", "148 33rd Ave, Great Neck, NY", "11437", "Hello123", "W1sdsd23456", img);
-    const trainer_5 = await trainers.addTrainer("Black", "Tim", 23, info,"345-7123379", "yasdsdc@outlook.com", "149 33rd Ave, Small Neck, NY", "11437", "Hello123", "W1sdsd23456",img);
-    const trainer_6 = await trainers.addTrainer("Ben", "Gold", 23, info,"678-71783388", "yasdac@outslook.com", "111 33rd Ave, Great Neck, NY", "11437", "Hello123", "W1sdsd23456", img);
-    const trainer_7 = await trainers.addTrainer("Yo", "Parker", 23, info,"468-7123981", "asdac@outlsook.com", "123 33rd St, Great Neck, NY", "11437", "Hello123", "W1sdsd23456", img);
-    const trainer_8 = await trainers.addTrainer("Jenny", "Li", 23, info,"784-71111388", "yasdac@outadsook.com", "124 33rd St, Great Neck, NY", "11437", "Hello123", "W1sdsd23456", img);
-    const trainer_9 = await trainers.addTrainer("Yi", "Tim", 23, info,"145-71234588", "asdc@outlasdok.com", "126 33rd Ave, Great Neck, NY", "11437", "Hello123", "W1sdsd23456", img);
-    const trainer_10 = await trainers.addTrainer("Trainer10", "Tim", 23, info,"566-71234588", "asdc@ou66tlasdok.com", "126 32rd , Great Neck, NY", "11437", "Hello123", "W1sdsd6", img);
+    const trainer_3 = await trainers.addTrainer("trainer3", "Ben3", info,"6753-7579388", "sdsdadsa@outk.acom", "148 33rd, Great Neck, NJ",  "Hello123", "W1sdsd23456", img);
+    const trainer_4 = await trainers.addTrainer("John", "Ben", info,"123-7579388", "sdsa@outloaok.acom", "148 33rd Ave, Great Neck, NY",  "Hello123", "W1sdsd23456", img);
+    const trainer_5 = await trainers.addTrainer("Black", "Tim", info,"345-7123379", "yasdsdc@outlook.com", "149 33rd Ave, Small Neck, NY",  "Hello123", "W1sdsd23456",img);
+    const trainer_6 = await trainers.addTrainer("Ben", "Gold", info,"678-71783388", "yasdac@outslook.com", "111 33rd Ave, Great Neck, NY",  "Hello123", "W1sdsd23456", img);
+    const trainer_7 = await trainers.addTrainer("Yo", "Parker", info,"468-7123981", "asdac@outlsook.com", "123 33rd St, Great Neck, NY",  "Hello123", "W1sdsd23456", img);
+    const trainer_8 = await trainers.addTrainer("Jenny", "Li", info,"784-71111388", "yasdac@outadsook.com", "124 33rd St, Great Neck, NY",  "Hello123", "W1sdsd23456", img);
+    const trainer_9 = await trainers.addTrainer("Yi", "Tim", info,"145-71234588", "asdc@outlasdok.com", "126 33rd Ave, Great Neck, NY",  "Hello123", "W1sdsd23456", img);
+    const trainer_10 = await trainers.addTrainer("Trainer10", "Tim", info,"566-71234588", "asdc@ou66tlasdok.com", "126 32rd , Great Neck, NY", "Hello123", "W1sdsd6", img);
     const course_6 = await courses.addCourse("swimming", info, img, 200, 12, 3, trainer_3._id);
     const course_7 = await courses.addCourse("swimming", info, img, 200, 11, 3, trainer_4._id);
     const course_8 = await courses.addCourse("swimming", info, img, 200, 10, 3, trainer_5._id);

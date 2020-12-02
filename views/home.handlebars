@@ -2,10 +2,26 @@
 <link rel="stylesheet" href="/public/css/stars.css">
 <div class="row mb-5">
     <div class="col-6 offset-3">
-        <form action="/search" method="POST" class="validated-form" novalidate>
+        <form action="/search_1" method="POST" class="validated-form" novalidate>
             <div class="mt-5 mb-3">
-                <label class="form-label home-search" for="search">Search for trainer(s)</label>
-                <input class="form-control" type="text" id="search" name="search" placeholder="Leave Trainer Name" autofocus required>
+                <label class="form-label home-search" for="searchTrainer">Search for trainer(s)</label>
+                <input class="form-control" type="text" id="searchTrainer" name="searchTrainer" placeholder="Leave Trainer Name" autofocus required>
+                <div class="valid-feedback">
+                    Looks good!
+                </div>
+            </div>
+            <div class="mb-3">
+                <button type="submit" class="btn btn-success">Search</button>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="row mb-5">
+    <div class="col-6 offset-3">
+        <form action="/search_2" method="POST" class="validated-form" novalidate>
+            <div class="mt-5 mb-3">
+                <label class="form-label home-search" for="searchCourse">Search for course(s)</label>
+                <input class="form-control" type="text" id="searchCourse" name="searchCourse" placeholder="Leave Course Name" required>
                 <div class="valid-feedback">
                     Looks good!
                 </div>

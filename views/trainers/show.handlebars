@@ -8,10 +8,8 @@
                 <p class="card-text">{{trainer.info}}</p>
             </div>
             <ul class="list-group list-group-flush">
-                <li class="list-group-item text-muted">{{trainer.address}}</li>
-                <li class="list-group-item">{{trainer.email}}</li>
+                <li class="list-group-item text-muted">{{trainer.email}}</li>
                 <li class="list-group-item">{{trainer.phone}}</li>
-                <li class="list-group-item">{{trainer.age}} years old</li>
             </ul>
             <div class="card-body">
                 <a class="card-link btn btn-info" href="/fitclub/trainers">All Trainers</a>
@@ -56,17 +54,31 @@
         </form> 
         {{#each comment}}
             <div class="card mb-3">
-                <div class="card-body">
-                    <h5 class="card-title">Rating: {{rating}}</h5>
+                <div class="card-body entry">
+                    <h5 class="card-title">By {{username}}</h5>
                     <p class="starability-result" data-rating="{{rating}}">
                         Rated: {{rating}} stars
                     </p>
                     <p class="card-text">Comment: {{comment}}</p>
+                    {{#if ../currentUser}}
+                    {{!-- {{#equal ../currentUser.id comment.memberId}} --}}
                     <form action="/fitclub/trainers/{{../trainer._id}}/comments/{{_id}}?_method=DELETE" method="POST">
                         <button class="btn btn-sm btn-danger">Delete</button>
                     </form>
+                    {{!-- {{/equal}} --}}
+                    {{/if}}
                 </div>
             </div>            
         {{/each}}       
     </div>
 </div>
+<script>
+    
+Handlebars.registerHelper("equal",function(v1,v2,options){
+    if(v1 == v2){
+      return options.fn(this);
+    }else{
+      return options.inverse(this);
+   }
+ });
+</script>

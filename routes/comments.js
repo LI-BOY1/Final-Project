@@ -11,7 +11,7 @@ const courseData = data.courses;
 const commentData = data.comments;
 
 router.post('/', isLoggedIn, catchAsync (async(req, res) => {
-
+    const { id, username } = req.session.user;
     let newComment = req.body;
     if(!newComment) 
         throw new ExpressError('Invalid comment!', 400);
@@ -29,7 +29,7 @@ router.post('/', isLoggedIn, catchAsync (async(req, res) => {
 
     const trainer = await trainerData.getTrainerById(req.params.id);
     const trainerId = trainer._id;
-    const comment = await commentData.addComment(newComment.comment, trainerId, ratNumber);
+    const comment = await commentData.addComment(id, username, newComment.comment, trainerId, ratNumber);
     //still need add member to comment, need complete it after completing login system
 
     //add flash

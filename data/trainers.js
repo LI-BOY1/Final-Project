@@ -6,8 +6,8 @@ const courses = mongoCollections.courses;
 const comments = mongoCollections.comments;
 
 let exportedMethods = {
-    async addTrainer(first_name, last_name, age, info, phone, email, address, zipcode, username, password, img){
-        if(first_name == null || last_name == null || age == null || phone == null || email == null || address == null || zipcode == null || username == null || password == null || img == null)
+    async addTrainer(first_name, last_name, info, phone, email, address, username, password, img){
+        if(first_name == null || last_name == null || phone == null || email == null || address == null || username == null || password == null || img == null)
             throw new Error("all fields need to have valid values!");
         if(typeof first_name !== 'string')
             throw new Error("the input first name is not a string!");
@@ -17,10 +17,10 @@ let exportedMethods = {
             throw new Error("the input last name is not a string!");
         if(last_name.trim().length === 0)
             throw new Error("the input last name is not a valid string!");
-        if(typeof age !== 'number')
-            throw new Error("the input age is not a number!");
-        if(age < 18 || age > 100)
-            throw new Error("the input age should be in the range of 18-100");
+        // if(typeof age !== 'number')
+        //     throw new Error("the input age is not a number!");
+        // if(age < 18 || age > 100)
+        //     throw new Error("the input age should be in the range of 18-100");
         if(typeof info !== 'string')
             throw new Error("the input info is not a string!");
         if(info.trim().length === 0)
@@ -37,10 +37,10 @@ let exportedMethods = {
             throw new Error("the input address is not a string!");
         if(address.trim().length === 0)
             throw new Error("the input address is not a valid string!");
-        if(typeof zipcode !== 'string')
-            throw new Error("the input zipcode is not a string!");
-        if(zipcode.trim().length === 0)
-            throw new Error("the input zipcode is not a valid string!");
+        // if(typeof zipcode !== 'string')
+        //     throw new Error("the input zipcode is not a string!");
+        // if(zipcode.trim().length === 0)
+        //     throw new Error("the input zipcode is not a valid string!");
         if(typeof username !== 'string')
             throw new Error("the input username is not a string!");
         if(username.trim().length === 0)
@@ -57,12 +57,11 @@ let exportedMethods = {
         const newTariner = {
             first_name: first_name.trim(),
             last_name: last_name.trim(),
-            age:age,
             phone:phone.trim(),
             info:info.trim(),
             email:email.trim(),
             address:address.trim(),
-            zipcode:zipcode.trim(),
+            // zipcode:zipcode.trim(),
             username:username.trim(),
             password:password.trim(),
             rating:4,
@@ -127,16 +126,16 @@ let exportedMethods = {
             updateTrainerInfo.first_name = updateTrainer.first_name;
         if(updateTrainer.last_name)
             updateTrainerInfo.last_name = updateTrainer.last_name;
-        if(updateTrainer.age)
-            updateTrainerInfo.age = updateTrainer.age;
+        // if(updateTrainer.age)
+        //     updateTrainerInfo.age = updateTrainer.age;
         if(updateTrainer.phone)
             updateTrainerInfo.phone = updateTrainer.phone;
         if(updateTrainer.email)
             updateTrainerInfo.email = updateTrainer.email;
         if(updateTrainer.address)
             updateTrainerInfo.address = updateTrainer.address;
-        if(updateTrainer.zipcode)
-            updateTrainerInfo.zipcode = updateTrainer.zipcode;
+        // if(updateTrainer.zipcode)
+        //     updateTrainerInfo.zipcode = updateTrainer.zipcode;
         if(updateTrainer.username)
             updateTrainerInfo.username = updateTrainer.username;
         if(updateTrainer.password)
