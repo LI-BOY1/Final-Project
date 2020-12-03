@@ -7,11 +7,19 @@ const static = express.static(__dirname + '/public');
 
 const configRoutes = require('./routes');
 const exphbs = require('express-handlebars');
-
+const hbs = require('handlebars');
 app.use('/public', static);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
+
+hbs.registerHelper("equal",function(v1,v2,options){
+  if(v1 == v2){
+    return options.fn(this);
+  }else{
+    return options.inverse(this);
+ }
+});
 
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');

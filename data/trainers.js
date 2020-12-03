@@ -68,7 +68,8 @@ let exportedMethods = {
             img: img,
             course:[],
             comment:[],
-            members:[]
+            members:[],
+            trainerAcId: ''
         };
 
         const trainerCollection = await trainers();

@@ -61,11 +61,11 @@
                     </p>
                     <p class="card-text">Comment: {{comment}}</p>
                     {{#if ../currentUser}}
-                    {{!-- {{#equal ../currentUser.id comment.memberId}} --}}
+                    {{#equal ../currentUser.id memberId}}
                     <form action="/fitclub/trainers/{{../trainer._id}}/comments/{{_id}}?_method=DELETE" method="POST">
                         <button class="btn btn-sm btn-danger">Delete</button>
                     </form>
-                    {{!-- {{/equal}} --}}
+                    {{/equal}}
                     {{/if}}
                 </div>
             </div>            

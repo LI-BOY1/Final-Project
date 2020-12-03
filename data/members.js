@@ -50,7 +50,8 @@ let exportedMethods ={
             password:password.trim(),
             comment:[],
             coursesEnrolled:[],
-            trainers:[]
+            trainers:[],
+            isTrainer: false
         };
 
         const memberCollection = await members();
@@ -310,6 +311,50 @@ let exportedMethods ={
         );
         if (!updateInfo.matchedCount && !updateInfo.modifiedCount)
             throw new Error('remove trainer from member failed');
+        return await this.getMemberById(memberId);
+    },
+    async markMemberAsTrainer(memberId){
+        if(memberId == null)
+            throw new Error("You must provide memebrId tosearch for!");
+        if(typeof memberId !== 'string')
+            throw new Error("the input member id is not a string!");
+        
+        let x = ObjectId(memberId);
+        await this.getMemberById(memberId);
+
+        const memberCollection = await members();
+        const updateInfo = await memberCollection.updateOne(
+            {_id: x },
+            {$set: { isTrainer: true}}
+        );
+        if (!updateInfo.matchedCount && !updateInfo.modifiedCount)
+            throw new Error('remove trainer from member failed');
+        return await this.getMemberById(memberId);
+    },
+    async addTRegisterIdToTrianer(memberId, trainerId){
+        if(trainerId == null || memberId == null)
+            throw new Error("you should provide both trainerId and memberId to search for!")
+        if(typeof trainerId !== 'string' || typeof memberId !== 'string')
+            throw new Error("the input id is not a string!");
+        
+        // let leftId = ObjectId(memberId);
+        let rightId = ObjectId(trainerId);
+        
+
+        let curMember = await this.getMemberById(memberId);
+        if(curMember == null)
+            throw new Error("no memberId with that id!");
+
+        //verify  trainerId
+        const trainerCollection = await trainers();
+        await trainerCollection.findOne({_id: rightId});
+
+        const updateInfo = await trainerCollection.updateOne(
+            {_id: rightId},
+            {$set: {trainerAcId: memberId}}
+        );
+        if (!updateInfo.matchedCount && !updateInfo.modifiedCount)
+            throw new Error('add traienr account to trainer failed');
         return await this.getMemberById(memberId);
     }
 };
