@@ -55,17 +55,17 @@
         {{#each comment}}
             <div class="card mb-3">
                 <div class="card-body entry">
-                    <h5 class="card-title">By {{username}}</h5>
+                    <h5 class="card-title">Comment by: {{username}}</h5>
                     <p class="starability-result" data-rating="{{rating}}">
                         Rated: {{rating}} stars
                     </p>
                     <p class="card-text">Comment: {{comment}}</p>
                     {{#if ../currentUser}}
-                    {{#equal ../currentUser.id memberId}}
-                    <form action="/fitclub/trainers/{{../trainer._id}}/comments/{{_id}}?_method=DELETE" method="POST">
-                        <button class="btn btn-sm btn-danger">Delete</button>
-                    </form>
-                    {{/equal}}
+                        {{#equal ../currentUser.id memberId}}
+                            <form action="/fitclub/trainers/{{../trainer._id}}/comments/{{_id}}?_method=DELETE" method="POST">
+                                <button class="btn btn-sm btn-danger">Delete</button>
+                            </form>
+                        {{/equal}}
                     {{/if}}
                 </div>
             </div>            

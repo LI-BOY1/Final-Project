@@ -79,7 +79,8 @@ router.post('/register', catchAsync(async(req, res) => {
         const member = await memberData.addMember(first_name, last_name, phone, email, address, username, hashedPassword);
         req.session.user = {
             id: member._id,
-            username: username
+            username: username,
+            isTrainer: false
         };
         req.flash('success','Welcome to Fitness Club');
         res.redirect('/');
@@ -119,7 +120,8 @@ router.post('/login', catchAsync(async(req, res) => {
     if(targetUser && match){
         req.session.user = {
             id: targetUser._id,
-            username: targetUser.username
+            username: targetUser.username,
+            isTrainer: targetUser.isTrainer
         }
         req.flash('success', 'Welcome back!');
         // const redirectUrl = req.session.returnTo || '/';

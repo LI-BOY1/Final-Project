@@ -19,7 +19,8 @@ router.get('/:id', catchAsync (async (req, res)=>{
     const trainerComList = oneTrainer.comment;
     let commentForThatTrainer = [];
     for(let i = 0; i < trainerComList.length; i ++){
-        commentForThatTrainer[i] = await commentData.getCommentById(trainerComList[i]);
+        const temp =  await commentData.getCommentById(trainerComList[i]);
+        commentForThatTrainer[i] = temp;
     }
     // const commentMember = await memberData.getMemberById(commentForThatTrainer.memberId);
     // if(!oneTrainer){
