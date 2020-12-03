@@ -6,7 +6,7 @@ const commentRoutes = require('./comments');
 const courseRoutes = require('./courses');
 const ExpressError = require('../utils/ExpressError');
 const path = require('path');
-
+const enrollRoutes = require('./enroll');
 
 
 const constructorMethod = (app) => {
@@ -15,6 +15,7 @@ const constructorMethod = (app) => {
     app.use('/fitclub/trainers', trainerRoutes);
     app.use('/fitclub/courses', courseRoutes);
     app.use('/fitclub/trainers/:id/comments', commentRoutes);
+    app.use('/enroll', enrollRoutes);
     app.get('/', (req, res) => {
         res.render('home');
     });
