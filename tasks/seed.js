@@ -125,6 +125,20 @@ async function main(){
     await trainers.addCourseToTrainer(trainer_9._id, course_12._id);
     await trainers.addCourseToTrainer(trainer_10._id, course_13._id);
 
+    // member 2 course enrolled test (Xinyi_Ye) add course to member
+    await members.addCourseToMember(member_2._id, course_6._id);
+    await members.addCourseToMember(member_2._id, course_1._id);
+    await members.addCourseToMember(member_2._id, course_2._id);
+
+    //add trainer to member
+    await members.addTrainerToMember(member_2._id, trainer_3._id)
+    await members.addTrainerToMember(member_2._id, trainer_1._id)
+    await members.addTrainerToMember(member_2._id, trainer_1._id)
+
+
+
+
+
 
     console.log('Done seeding database');
 

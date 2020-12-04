@@ -194,6 +194,7 @@ let exportedMethods ={
             throw new Error('Add trainer to member failed!');
         return await this.getMemberById(memberId);
     },
+
     async addCourseToMember(memberId, courseId){
         if(memberId == null || courseId == null)
             throw new Error("you should provide both memberId and courseId to search for!")
@@ -221,6 +222,7 @@ let exportedMethods ={
             throw new Error('Add course to trainer failed!');
         return await this.getMemberById(memberId);
     },
+    
     // async addCommentToMember(memberId, commentId){
     //     if(memberId == null || commentId == null)
     //         throw new Error("you should provide both memberId and commentId to search for!")

@@ -16,8 +16,6 @@ router.post('/memberInfo/:id', async (req, res) => {
         first_name: req.body.FirstName
     }
     const member = await memberData.update(req.params.id, updateMember)
-    
-    
 })
 
 module.exports = router;

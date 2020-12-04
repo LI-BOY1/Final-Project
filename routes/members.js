@@ -21,7 +21,21 @@ router.get('/:id', async (req, res) => {
     }
 })
 
+router.get('/courses/:id', async (req, res) => {
+    try {
+        const member = await memberData.getMemberById(req.params.id)
+        let courseInfo = []
+        for(let n in member.coursesEnrolled ){
+            course = await courseData.getCourseById(member.coursesEnrolled[n])
+            console.log(course)
+            courseInfo.push(course)
+        }
+        res.render('members/courses', {memberCourse: courseInfo})
+    }catch(e){
 
+    }
+
+})
 
 
 module.exports = router;
