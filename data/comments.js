@@ -5,7 +5,7 @@ const trainers = require('./trainers');
 const members = require('./members');
 
 
-let exportedMethods ={
+let exportedMethods = {
     async addComment(memberId, username, comment, trainerId, rating){
         if(memberId == null || comment == null || username == null || trainerId == null || rating == null)
             throw new Error("all fields should be provided!");

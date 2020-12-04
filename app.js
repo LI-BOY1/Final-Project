@@ -42,6 +42,10 @@ app.use(flash());
 app.use((req, res, next) => {
   // console.log(req.session.user);
   res.locals.currentUser = req.session.user;
+  // if(res.locals.currentUser){
+  //   console.log(res.locals.currentUser);
+  //   console.log(res.locals.currentUser.id);
+  // }
   res.locals.success = req.flash('success');
   res.locals.error = req.flash('error');
   next();
