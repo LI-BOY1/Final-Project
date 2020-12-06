@@ -14,13 +14,18 @@
             </ul>
             <div class="card-body">
                 <a class="card-link btn btn-info" href="/fitclub/courses/trainers/{{trainer._id}}">All Course</a>
-                <form class="d-inline" action="/fitclub/courses/{{course._id}}?_method=DELETE" method="POST">
+                {{#if currentUser}}
+                {{#equal currentUser.id  course.trainerActId }}
+                <form class="d-inline" action="/fitclub/courses/{{trainer._id}}/{{course._id}}?_method=DELETE"
+                    method="POST">
                     <button class="btn btn-danger">Delete</button>
                 </form>
+                {{/equal}}
+                {{/if}}
             </div>
             <div class="card-footer text-muted">
                 2 days ago
-              </div>
+            </div>
         </div>
     </div>
 </div>

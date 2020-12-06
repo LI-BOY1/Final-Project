@@ -19,8 +19,10 @@ router.get('/:id', catchAsync (async (req, res)=>{
     const trainerComList = oneTrainer.comment;
     let commentForThatTrainer = [];
     for(let i = 0; i < trainerComList.length; i ++){
-        commentForThatTrainer[i] = await commentData.getCommentById(trainerComList[i]);
+        const temp =  await commentData.getCommentById(trainerComList[i]);
+        commentForThatTrainer[i] = temp;
     }
+    // const commentMember = await memberData.getMemberById(commentForThatTrainer.memberId);
     // if(!oneTrainer){
     //     req.flash('error', 'Cannot find that trainer!');
     //     return res.redirect('/fitclub/trainers');
@@ -28,7 +30,7 @@ router.get('/:id', catchAsync (async (req, res)=>{
     res.render('trainers/show', {trainer: oneTrainer, comment: commentForThatTrainer});
 }));
 
-router.get('/courseschedule/:id', async (req, res) => {
+router.get('/courseschedule/:id', catchAsync (async (req, res) => {
     const trainer = await trainerData.getTrainerById(req.params.id);
     const courseIdList = trainer.course;
     const courseInfo = {};
@@ -58,7 +60,7 @@ router.get('/courseschedule/:id', async (req, res) => {
         FridayCourse: friC,
         trainer: trainer
     });
-});
+}));
 // router.get('/:id/edit', catchAsync (async (req, res) => {
 //     const oneTrainer = await trainerData.getTrainerById(req.params.id);
 //     res.render('trainers/edit', {trainer: oneTrainer});

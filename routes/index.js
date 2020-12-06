@@ -1,24 +1,38 @@
 
 const trainerRoutes = require('./trainers');
-const memberRoutes = require('./members');
+//const memberRoutes = require('./members');
 const editMemberRoutes = require('./editMember');
 const commentRoutes = require('./comments');
 const courseRoutes = require('./courses');
+const memberRoutes = require('./members');
 const ExpressError = require('../utils/ExpressError');
 const path = require('path');
 const enrollRoutes = require('./enroll');
 
 
+// const constructorMethod = (app) => {
+//     app.use('/members', memberRoutes);
+//     app.use('/edit', editMemberRoutes)
+//     app.use('/fitclub/trainers', trainerRoutes);
+//     app.use('/fitclub/courses', courseRoutes);
+//     app.use('/fitclub/trainers/:id/comments', commentRoutes);
+//     app.use('/enroll', enrollRoutes);
+//     app.get('/', (req, res) => {
+//         res.render('home');
+//     });
+// =======
+
 const constructorMethod = (app) => {
-    app.use('/members', memberRoutes);
-    app.use('/edit', editMemberRoutes)
+    app.use('/', memberRoutes);
     app.use('/fitclub/trainers', trainerRoutes);
     app.use('/fitclub/courses', courseRoutes);
-    app.use('/fitclub/trainers/:id/comments', commentRoutes);
+    app.use('/members', memberRoutes);
+    app.use('/edit', editMemberRoutes);
     app.use('/enroll', enrollRoutes);
-    app.get('/', (req, res) => {
-        res.render('home');
-    });
+    app.use('/fitclub/trainers/:id/comments', commentRoutes);
+    // app.get('/', (req, res) => {
+    //     res.render('home');
+    // });
 
     app.all('*', (req, res, next) => {
         next(new ExpressError('Page Not Found', 404));

@@ -4,6 +4,7 @@ const router = express.Router();
 const data = require('../data');
 const ExpressError = require('../utils/ExpressError');
 const catchAsync = require('../utils/catchAsync');
+const { isLoggedIn, isCourseTrianer} = require('../authentication');
 const trainerData = data.trainers;
 const memberData = data.members;
 const courseData = data.courses;
@@ -22,21 +23,22 @@ router.get('/trainers/:id', catchAsync (async (req, res) => {
 router.get('/trainers/:id/:courseId', catchAsync (async (req, res) => {
     const singleCourse = await courseData.getCourseById(req.params.courseId);
     const targetTrainer = await trainerData.getTrainerById(req.params.id);
+    // console.log(singleCourse.trainerActId);
     res.render('trainers/courseShow', {course: singleCourse, trainer: targetTrainer});
 }));
 
-router.delete('/:courseId', catchAsync (async(req, res) => {
-    const { courseId } = req.params;
+router.delete('/:id/:courseId', isLoggedIn, isCourseTrianer,catchAsync (async(req, res) => {
+    const { id, courseId } = req.params;
     const deleteCourse = await courseData.getCourseById(courseId);
-    const courseTrainerId = deleteCourse.trainerId;
-    await trainerData.removeCourseFromTrainer(courseTrainerId, courseId);
+    // const courseTrainerId = deleteCourse.trainerId;
+    await trainerData.removeCourseFromTrainer(id, courseId);
     // const courseMemberId = deleteCourse.memberId;
     // await memberData.removeCourseFromMember(courseMemberId, courseId);
     await courseData.removeCourse(courseId);
 
     //add flash
     req.flash('success', 'Successfully deleted course!');
-    res.redirect(`/fitclub/courses/trainers/${courseTrainerId}`);
+    res.redirect(`/fitclub/courses/trainers/${id}`);
 }));
 
 module.exports = router;
