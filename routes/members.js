@@ -9,6 +9,9 @@ const courseData = data.courses;
 const commentData = data.comments;
 
 
+
+// login and register should be case sensitive
+
 router.get('/', catchAsync(async(req, res) => {
     const starTrainers = await trainerData.getTopThreeTrainers();
     res.render('home', {trainer: starTrainers});

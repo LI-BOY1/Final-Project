@@ -8,6 +8,7 @@ const memberRoutes = require('./members');
 const ExpressError = require('../utils/ExpressError');
 const path = require('path');
 const enrollRoutes = require('./enroll');
+const searchRoutes = require('./searchs');
 
 
 // const constructorMethod = (app) => {
@@ -28,6 +29,7 @@ const constructorMethod = (app) => {
     app.use('/fitclub/courses', courseRoutes);
     app.use('/members', memberRoutes);
     app.use('/edit', editMemberRoutes);
+    app.use('/search', searchRoutes);
     app.use('/enroll', enrollRoutes);
     app.use('/fitclub/trainers/:id/comments', commentRoutes);
     // app.get('/', (req, res) => {
