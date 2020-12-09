@@ -79,12 +79,31 @@ router.post('/register', catchAsync(async(req, res) => {
             }
         }
         const hashedPassword = await bcrypt.hash(password, 12);
-        const member = await memberData.addMember(first_name, last_name, phone, email, address, username, hashedPassword);
-        req.session.user = {
-            id: member._id,
-            username: username,
-            isTrainer: false
-        };
+
+        if(req.body.role == 'member'){
+
+            const member = await memberData.addMember(first_name, last_name, phone, email, address, username, hashedPassword);
+            req.session.user = {
+                id: member._id,
+                username: username,
+                isTrainer: false
+            };
+
+        }else{
+
+            // this is a trainer register
+            const trainer = await trainerData.addTrainer(first_name, last_name, "am trainer", phone, email, address, username, password, 'image link');
+            const trainerAcc_1 = await memberData.addMember(first_name, last_name, phone, email, address, username, hashedPassword);
+            await memberData.markMemberAsTrainer(trainerAcc_1._id);
+            await memberData.addTRegisterIdToTrianer(trainerAcc_1._id, trainer._id);
+
+            req.session.user = {
+                id: trainerAcc_1._id,
+                username: username,
+                isTrainer: true
+            };
+        }
+
         req.flash('success','Welcome to Fitness Club');
         res.redirect('/');
     }catch(e){
@@ -114,9 +133,13 @@ router.post('/login', catchAsync(async(req, res) => {
     let match = false;
     for(let i = 0; i < members.length; i ++){
         if(members[i].username === username){
-            targetUser = members[i];
-            match = await bcrypt.compare(password, targetUser.password);
-            break;
+
+            if( (req.body.role === 'member' && members[i].isTrainer === false) || ( req.body.role === 'trainer' && members[i].isTrainer === true ) ){
+
+                targetUser = members[i];
+                match = await bcrypt.compare(password, targetUser.password);
+                break;
+            }
         }
     }
 
@@ -125,7 +148,7 @@ router.post('/login', catchAsync(async(req, res) => {
             id: targetUser._id,
             username: targetUser.username,
             isTrainer: targetUser.isTrainer
-        }
+        };
         req.flash('success', 'Welcome back!');
         // const redirectUrl = req.session.returnTo || '/';
         // console.log(`redirectUrl in login: ${redirectUrl}`);
