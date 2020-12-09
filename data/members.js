@@ -82,6 +82,15 @@ let exportedMethods ={
         }
         return memberList;
     },
+    async getMemberByEmail(e){
+        const memberCollection = await members();
+        const member = await memberCollection.findOne({ email: e });
+        if (!member)
+            return null
+        member._id = member._id.toString();
+
+        return member;
+    },
     async getMemberById(id){
         if(id == null) 
             throw new Error("you must provide an id to search for!");
@@ -95,7 +104,7 @@ let exportedMethods ={
         const memberCollection = await members();
         const member = await memberCollection.findOne({ _id: parsedId });
         if (!member) 
-            throw new Error('No member with that id!');
+            return null
         member._id = member._id.toString();
         return member;
     },

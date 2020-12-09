@@ -14,40 +14,133 @@
 
 <body>
 
-<div class="login"  >
+<!--<div class="login"  >-->
 
-    <form method = "POST" id = "account" action="/login/newAccount">
+<!--    <form method = "POST" id = "account" action="/login/newAccount">-->
 
-            <label ><strong>FIRST NAME</strong></label><br>
-            <input type="text" name="fname" placeholder="" required/><br><br>
-            <label ><strong>LAST NAME</strong></label><br>
-            <input type="text" name="lname" placeholder="" required/><br><br>
-            <label ><strong>AGE</strong></label><br>
-            <input type="number" name="ageValue" placeholder="" required/><br><br>
-            <label ><strong>PHONE</strong></label><br>
-            <input type="text" name="phoneValue" placeholder="" required/><br><br>
-            <label ><strong>E-MAIL</strong></label><br>
-            <input type="email" name="emailValue"  placeholder="name@example.com"  required/><br><br>
-            <label ><strong>ADDRESS</strong></label><br>
-            <input type="text" name="addressValue" placeholder="" required/><br><br>
-            <label ><strong>ZIPCODE</strong></label><br>
-            <input type="text" name="zipcodeValue" placeholder="" required/><br><br>
-        <label ><strong>USER NAME</strong></label><br>
-        <input type="text" name="user_name" placeholder="" required/><br><br>
-            <label><strong>PASSWORD</strong></label><br>
-            <input type="password" name="psword" placeholder="" required/><br><br>
-            <label><strong>CONFIRM PASSWORD</strong></label><br>
-            <input type="password" name="password" placeholder="" required/><br><br>
-            <ul>
-                <li> <input type="submit" onclick="location.href='/';"value="Back"  /></li>
-                <li>  <input type="submit" onclick="location.href='/signup';" value="Contiue"/></li>
+<!--            <label ><strong>FIRST NAME</strong></label><br>-->
+<!--            <input type="text" name="fname" placeholder="" required/><br><br>-->
+<!--            <label ><strong>LAST NAME</strong></label><br>-->
+<!--            <input type="text" name="lname" placeholder="" required/><br><br>-->
+<!--            <label ><strong>AGE</strong></label><br>-->
+<!--            <input type="number" name="ageValue" placeholder="" required/><br><br>-->
+<!--            <label ><strong>PHONE</strong></label><br>-->
+<!--            <input type="text" name="phoneValue" placeholder="" required/><br><br>-->
+<!--            <label ><strong>E-MAIL</strong></label><br>-->
+<!--            <input type="email" name="emailValue"  placeholder="name@example.com"  required/><br><br>-->
+<!--            <label ><strong>ADDRESS</strong></label><br>-->
+<!--            <input type="text" name="addressValue" placeholder="" required/><br><br>-->
+<!--            <label ><strong>ZIPCODE</strong></label><br>-->
+<!--            <input type="text" name="zipcodeValue" placeholder="" required/><br><br>-->
+<!--        <label ><strong>USER NAME</strong></label><br>-->
+<!--        <input type="text" name="user_name" placeholder="" required/><br><br>-->
+<!--            <label><strong>PASSWORD</strong></label><br>-->
+<!--            <input type="password" name="psword" placeholder="" required/><br><br>-->
+<!--            <label><strong>CONFIRM PASSWORD</strong></label><br>-->
+<!--            <input type="password" name="password" placeholder="" required/><br><br>-->
+<!--            <ul>-->
+<!--                <li> <input type="submit" onclick="location.href='/login';"value="Back"  /></li>-->
+<!--                <li>  <input type="submit" onclick="location.href='/signup';" value="Contiue"/></li>-->
 
-            </ul>
+<!--            </ul>-->
 
-        </form>
+<!--        </form>-->
+<!--    </div>-->
+
+
+
+<!--</body>-->
+<!--</html>-->
+
+
+<div class="container d-flex justify-content-center align-items-center mt-5 mb-3">
+    <div class="row">
+        <div class="col-md-6 offset-md-3 col-xl-4 offset-xl-4">
+            <div class="card shadow">
+                <img src="/public/img/registerpicture.jpg"
+                     alt="" class="card-img-top" />
+                <div class="card-body">
+                    <h5 class="card-title">Register</h5>
+                    <form id = "account" action="/login/newAccount" method="POST" class="validated-form" novalidate>
+
+                        <div class="mb-3">
+                            <label class="form-label" for="user_name">Username</label>
+                            <input class="form-control" type="text" id="user_name" name="user_name" required autofocus>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="emailValue">Email</label>
+                            <input class="form-control" type="email" id="emailValue" name="emailValue" placeholder="name@example.com"  required>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="fname">FirstName</label>
+                            <input class="form-control" type="text" id="fname" name="fname" required>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="lname">LastName</label>
+                            <input class="form-control" type="text" id="lname" name="lname" required>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="ageValue">Age</label>
+                            <input class="form-control" type="number" id="ageValue" name="ageValue"  required>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label" for="zipcodeValue">ZIP CODE</label>
+                            <input class="form-control" type="number" id="zipcodeValue" name="zipcodeValue"  required>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="addressValue">Address</label>
+                            <input class="form-control" type="text" id="addressValue" name="addressValue" required>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="phoneValue">Phone Number</label>
+                            <input class="form-control" type="text" id="phoneValue" name="phoneValue" required>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="psword">Password</label>
+                            <input class="form-control" type="password" id="psword" name="psword" required>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="comfirmpsword">CONFIRM PASSWORD</label>
+                            <input class="form-control" type="password" id="comfirmpsword" name="comfirmpsword" required>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                        </div>
+                        <button type="submit" href ="/profile" class="btn btn-success btn-block">Register</button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
     </div>
-
-
-
+</div>
 </body>
 </html>

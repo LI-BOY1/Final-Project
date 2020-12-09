@@ -80,6 +80,14 @@ let exportedMethods = {
         const createTrainer = await this.getTrainerById(newTrainerId);
         return createTrainer;
     },
+    async getTrainerByEmail(e){
+        const trainerCollection = await trainers();
+        const trainer = await trainerCollection.findOne({ email: e });
+        if (!trainer)
+            throw new Error('No member with that id!');
+        trainer._id = trainer._id.toString();
+        return trainer;
+    },
     async getAllTrainers(){
         const trainerCollection = await trainers();
         const trainerList = await trainerCollection.find({}).toArray();

@@ -22,7 +22,10 @@
             <div class="form-group" id="searchDiv">
                 <label for = "searchInput"></label>
                 <input id = "searchInput" type="text" class="form-control" placeholder="Search by any words" name="searchInput" required>
-
+                <select class="form-control" id="searchtype" name="searchtype">
+                    <option value="any" selected>Any</option>
+                    <option value="name">Course Name</option>
+                </select>
                 <br>
                 <button type="submit" >Search</button>
             </div>
@@ -43,10 +46,11 @@
                 <li><a>{{trainer.first_name}} </a></li>
 
 
-           <li><a>{{trainer.last_name}}</a></li>
+                <li><a>{{trainer.last_name}}</a></li>
 
 
             </ul>
+            <a href="/alltrainers">See all trainers</a>
         </div>
     </form>
 </div>

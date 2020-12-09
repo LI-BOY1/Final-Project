@@ -11,6 +11,8 @@ const router = express.Router();
 const saltRounds = 16;
 const memberData = require("../data/members.js");
 const trainerData = require("../data/trainers.js");
+const courseData = require("../data/courses.js");
+
 
 const constructorMethod = (app) => {
 
@@ -42,7 +44,7 @@ const constructorMethod = (app) => {
 
             try{
                 const topTrainer = await trainerData.getTopTrainer();
-                res.render("home", { verified: false,trainer:topTrainer});
+                res.render("home", { verified: false,trainer:topTrainer,currentUser:xss(req.session.authent)});
 
 
 
@@ -52,11 +54,34 @@ const constructorMethod = (app) => {
 
     });
 
+
+    router.get("/admin", async(req, res) => {
+
+        try{
+            res.render("admin", { verified: false,currentUser:xss(req.session.authent)});
+
+        } catch(e) {
+            res.status(400);
+        }
+
+    });
+
+    router.get("/memberAdmin", async(req, res) => {
+
+        try{
+            res.render("memberAdmin", { verified: false,currentUser:xss(req.session.authent)});
+
+        } catch(e) {
+            res.status(400);
+        }
+
+    });
+
     router.get("/alltrainers", async(req, res) => {
 
         try{
             const all = await trainerData.getAllTrainers();
-            res.render("trainers/index", { verified: false,trainers:all});
+            res.render("trainers/index", { verified: false,trainers:all,currentUser:xss(req.session.authent)});
         } catch(e) {
             res.status(400);
         }
@@ -67,14 +92,14 @@ const constructorMethod = (app) => {
 
     router.get("/signup", (req,res) => {
         if(xss(!req.session.authent)) {
-            res.render("./signup",{verified: false, title: "RMC | Account Creation"});
+            res.render("./signup",{verified: false, title: "RMC | Account Creation",currentUser:xss(req.session.authent)});
         } else {
             res.redirect("/profile");
         }
     });
 
     app.get('/signin', (req, res) => {
-        res.render('login');
+        res.render('login',{currentUser:xss(req.session.authent)});
     });
 
 
@@ -102,12 +127,14 @@ router.get("/logout", (req,res) => {
 router.get("/profile", async(req,res) => {
     if(xss(req.session.authent)){
         try {
-            const members = await memberData.getMemberById(req.session.user.toString());
-            res.render("profile",{verified: true, user: members});
+            let info = await memberData.getMemberById(req.session.user.toString());
+            if(!info) info = await trainerData.getTrainerById(req.session.user.toString());
+
+            res.render("profile",{verified: true, user: info,currentUser:xss(req.session.authent)});
 
         } catch(e){
             console.log(e);
-            res.render("error",{verified: true});
+            res.render("error",{verified: true,currentUser:xss(req.session.authent)});
         }
     } else {
         req.session.login_fail = true;
@@ -117,10 +144,48 @@ router.get("/profile", async(req,res) => {
 
 
 router.post("/search", async (req, res) => {
+
+    // try{
+    //     const all = await trainerData.getAllTrainers();
+    //     res.render("result", { verified: false,trainers:all,currentUser:xss(req.session.authent)});
+    // } catch(e) {
+    //     res.status(400);
+    // }
+
+
     try{
-        const all = await trainerData.getAllTrainers();
-        res.render("result", { verified: false,trainers:all});
-    } catch(e) {
+        const courseCollection = await courseData.getAllCourses();
+        let body = xss(req.body.searchInput);
+        body = body.toLowerCase();
+        const courses = [];
+        for(let i = 0; i < courseCollection.length; i++){
+            let cn = courseCollection[i].coursename.toLowerCase();
+            let desc = courseCollection[i].courseInfo.toLowerCase();
+            let foundCourse = false;
+            let stype = xss(req.body.searchtype);
+            if(stype=="name"){
+                foundCourse = cn.includes(body);
+            } else if(stype=="desc"){
+                foundCourse = desc.includes(body);
+            } else {
+                foundCourse = cn.includes(body) || desc.includes(body) ;
+            }
+            if(foundCourse){
+                courses.push(courseCollection[i]);
+            }
+        }
+        if(courses.length == 0){
+            res.status(404).render("home", {
+                errors2: true
+            });
+        }
+        else{
+            res.status(200).render("result", {
+                trainers: courses,currentUser:xss(req.session.authent)
+            });
+        }
+    }
+    catch(e){
         res.status(400);
     }
 
