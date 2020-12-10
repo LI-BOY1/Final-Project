@@ -4,15 +4,11 @@ let { ObjectId } = require('mongodb');
 const trainers = require('./trainers');
 const members = require('./members');
 
-
 let exportedMethods ={
+
     async addComment(comment, trainerId, rating){
         if(comment == null || trainerId == null || rating == null)
             throw new Error("all fields should be provided!");
-        // if(typeof memberId !== 'string')
-        //     throw new Error("the input member id is not a string!");
-        // if(typeof courseId !== 'string')
-        //     throw new Error("the input course id is not a string!");
         if(typeof comment !== 'string')
             throw new Error("the input comment is not a string!");
         if(comment.trim().length === 0)
@@ -49,6 +45,16 @@ let exportedMethods ={
         await trainers.addCommentToTrainer(trainerId, newCommentId);
 
         const createComment = await this.getCommentById(newCommentId);
+
+        if (latestCom.length>=3){
+            latestCom.shift()
+            latestCom.push(createComment)
+
+        }
+        else{
+            latestCom.push(createComment)
+
+        }
         return createComment;
     },
     async getAllComments(){
@@ -77,8 +83,9 @@ let exportedMethods ={
             throw new Error('No comment with that id!');
         comment._id = comment._id.toString();
         return comment;
-    }
-    
+    },
+
     
 };
+
 module.exports = exportedMethods;

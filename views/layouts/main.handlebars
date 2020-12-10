@@ -31,9 +31,10 @@
     <link rel="stylesheet" href="../public/css/style.css">
 </head>
 <body >
-<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
+    <h5 class="navbar-brand" href="/">FitnessClub</h5>
+
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">FitnessClub</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -41,7 +42,11 @@
             <div class="navbar-nav">
                 <a class="nav-link" href="/">Home</a>
                 <a class="nav-link" href="/alltrainers">All Trainers</a>
+                <a class="nav-link" href="/allcourses">All Courses</a>
+
             </div>
+
+
             <div class="navbar-nav ml-auto">
                 {{#unless currentUser}}
                     <a href="/signin" class="nav-link">Login</a>
@@ -53,6 +58,7 @@
             </div>
         </div>
     </div>
+
 </nav>
 <main >
     {{#if success}}

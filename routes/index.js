@@ -12,7 +12,7 @@ const saltRounds = 16;
 const memberData = require("../data/members.js");
 const trainerData = require("../data/trainers.js");
 const courseData = require("../data/courses.js");
-
+const commentData = require("../data/comments.js");
 
 const constructorMethod = (app) => {
 
@@ -44,8 +44,10 @@ const constructorMethod = (app) => {
 
             try{
                 const topTrainer = await trainerData.getTopTrainer();
-                res.render("home", { verified: false,trainer:topTrainer,currentUser:xss(req.session.authent)});
+                const latestReview = await commentData.getAllComments();
+                console.log(latestReview)
 
+                res.render("home", { verified: false,trainer:topTrainer,com1:latestReview[0],com2:latestReview[1],com3:latestReview[2],currentUser:xss(req.session.authent)});
 
 
             } catch(e) {
@@ -81,7 +83,19 @@ const constructorMethod = (app) => {
 
         try{
             const all = await trainerData.getAllTrainers();
-            res.render("trainers/index", { verified: false,trainers:all,currentUser:xss(req.session.authent)});
+            res.render("trainers/index", { verified: false,trainer:all,currentUser:xss(req.session.authent)});
+        } catch(e) {
+            res.status(400);
+        }
+
+    });
+
+
+    router.get("/allcourses", async(req, res) => {
+
+        try{
+            const all = await courseData.getAllCourses();
+            res.render("result", { verified: false,course:all,currentUser:xss(req.session.authent)});
         } catch(e) {
             res.status(400);
         }
@@ -145,45 +159,58 @@ router.get("/profile", async(req,res) => {
 
 router.post("/search", async (req, res) => {
 
-    // try{
-    //     const all = await trainerData.getAllTrainers();
-    //     res.render("result", { verified: false,trainers:all,currentUser:xss(req.session.authent)});
-    // } catch(e) {
-    //     res.status(400);
-    // }
-
 
     try{
-        const courseCollection = await courseData.getAllCourses();
         let body = xss(req.body.searchInput);
         body = body.toLowerCase();
+
+        if(req.body.searchtype=="name"){
+        const courseCollection = await courseData.getAllCourses();
+
         const courses = [];
         for(let i = 0; i < courseCollection.length; i++){
             let cn = courseCollection[i].coursename.toLowerCase();
-            let desc = courseCollection[i].courseInfo.toLowerCase();
             let foundCourse = false;
-            let stype = xss(req.body.searchtype);
-            if(stype=="name"){
-                foundCourse = cn.includes(body);
-            } else if(stype=="desc"){
-                foundCourse = desc.includes(body);
-            } else {
-                foundCourse = cn.includes(body) || desc.includes(body) ;
-            }
+
+            foundCourse = cn.includes(body) ;
+
             if(foundCourse){
                 courses.push(courseCollection[i]);
             }
         }
         if(courses.length == 0){
-            res.status(404).render("home", {
-                errors2: true
+            res.status(404).render("result", {
+                trainers: "No course with that name",currentUser:xss(req.session.authent)
             });
         }
         else{
             res.status(200).render("result", {
-                trainers: courses,currentUser:xss(req.session.authent)
+                course: courses,currentUser:xss(req.session.authent)
             });
-        }
+        }}
+        else{
+            const trainerCollection = await trainerData.getAllTrainers();
+            const trainers = [];
+            for(let i = 0; i < trainerCollection.length; i++){
+                let fn = trainerCollection[i].first_name.toLowerCase();
+                let ln = trainerCollection[i].last_name.toLowerCase();
+
+                let found = false;
+                found = fn.includes(body) || ln.includes(body) ;
+                if(found){
+                    trainers.push(trainerCollection[i]);
+                }
+            }
+            if(trainers.length == 0){
+                res.status(404).render("error", {
+                    error: "No trainer with that name",currentUser:xss(req.session.authent)
+                });
+            }
+            else{
+
+                res.status(200).render("trainers/index", { trainer:trainers,currentUser:xss(req.session.authent)});
+
+            }}
     }
     catch(e){
         res.status(400);

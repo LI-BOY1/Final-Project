@@ -2,30 +2,50 @@
 
 <html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
     <script src="index.js"></script>
 
+
+
+
+
     <title>Fitness Club Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="icon" type="image/x-icon" href="/public/img/header.png">
     <link rel="stylesheet" href="././public/css/layout.css">
+    <link rel="stylesheet" href="././public/css/home.css">
+    <link rel="stylesheet" href="././public/css/stars.css">
 
 </head>
 
 <body>
 
-<div class="prf">
 
-    <div class="profile1">
-<a>show the search results</a>
+    <div class="row">
+        {{#each course}}
+        <div class="col-md-6">
+            <div class="card mdb-color lighten-2 text-center z-depth-2">
+                <div class="card-body">
+                    <img src=" {{this.img}}" class="card-img-top" alt="...">
+
+                    <h5 class="card-title">{{this.coursename}}</h5>
+                    <p class="card-text">{{this.courseInfo}}</p>
+                    <h5>PRICE</h5>{{this.price}}
+                    <h5>START TIME</h5>{{this.start_time}}
+                    <h5>DAY</h5>{{this.day}}
+                    <br>
+                    <br>
+                    <a class="card-link btn btn-info" href="/fitclub/courses/trainers/{{this._id}}">Take Course</a>
+
+                </div>
+            </div>
+
+        </div>
+{{/each}}
 
 
-    </div>
-</div>
-</div>
-
-<div class="footer">
-</div>
 </div>
 </body>
 </html>

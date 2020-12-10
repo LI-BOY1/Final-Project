@@ -14,26 +14,45 @@
 
 <body>
 
-<div class="prf">
 
-    <div class="profile1">
 
-            {{#each trainers}}
-            <ul>
-                <li>
-                    {{this.first_name }} {{this.last_name}}
-                </li>
-            </ul>
+            {{#each trainer}}
+<!--            <ul>-->
+<!--                <li>-->
+<!--                    {{this.first_name }} {{this.last_name}}-->
+<!--                </li>-->
+<!--            </ul>-->
+
+            <div class="row">
+                <div class="col-6">
+                    <div class="card mb-3">
+                        <img src=" {{this.img}}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">{{this.first_name}} {{this.last_name}}</h5>
+                            <p class="card-text">{{this.info}}</p>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item text-muted">{{this.address}}</li>
+                            <li class="list-group-item">{{this.email}}</li>
+                            <li class="list-group-item">{{this.phone}}</li>
+                            <li class="list-group-item">{{this.age}} years old</li>
+                        </ul>
+                        <div class="card-body">
+                            <a class="card-link btn btn-info" href="/fitclub/trainers">All Trainers</a>
+                            <a class="card-link btn btn-info" href="/fitclub/courses/trainers/{{this._id}}">All Courses</a>
+                        </div>
+                        <div class="card-footer text-muted">
+                            2 days ago
+                        </div>
+                    </div>
+                </div>
             {{/each}}
 
 
 
-    </div>
-</div>
-</div>
 
-<div class="footer">
-</div>
+
+
 </div>
 </body>
 </html>

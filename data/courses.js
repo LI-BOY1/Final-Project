@@ -48,15 +48,16 @@ let exportedMethods ={
             price: price,
             start_time: start_time,
             day: day,
-            trainerId: trainerId,
-            memberId: ""
+            trainerId: ObjectId(trainerId),
+            memberId: "",
+            trainerActId: ""
         };
         const courseCollection = await courses();
         const insertInfo = await courseCollection.insertOne(newCourse);
         if(insertInfo.insertedCount === 0)
             throw new Error('error! could not add book!');
         const newCourseId = insertInfo.insertedId.toString();
-        
+
 
         const createCourse = await this.getCourseById(newCourseId);
         return createCourse;
@@ -72,22 +73,39 @@ let exportedMethods ={
         return courseList;
     },
     async getCourseById(id){
-        if(id == null) 
+        if(id == null)
             throw new Error("you must provide an id to search for!");
-        if(typeof id !== 'string') 
+        if(typeof id !== 'string')
             throw new Error("the input value is not a string.");
-        if(id.trim().length === 0) 
+        if(id.trim().length === 0)
             throw new Error("the input string is not a valid string!");
 
         let parsedId = ObjectId(id);
 
         const courseCollection = await courses();
         const course = await courseCollection.findOne({ _id: parsedId });
-        if (!course) 
+        if (!course)
             throw new Error('No Course with that id!');
         course._id = course._id.toString();
         return course;
     },
+    async getCourseByName(name){
+        if(name == null)
+            throw new Error("you must provide an name to search for!");
+        if(typeof name !== 'string')
+            throw new Error("the input value is not a string.");
+        if(name.trim().length === 0)
+            throw new Error("the input string is not a valid string!");
+
+
+        const courseCollection = await courses();
+        const course = await courseCollection.findOne({ coursename: name });
+        if (!course)
+            throw new Error('No Course with that id!');
+        course._id = course._id.toString();
+        return course;
+    },
+
     async update(courseId, updateCourse){
         if(courseId == null || updateCourse == null)
             throw new Error("you must provide all fields!");
@@ -96,7 +114,7 @@ let exportedMethods ={
         if(courseId.trim().length === 0)
             throw new Error("the input id is not a valid string!");
         if(typeof updateCourse !== 'object' || Array.isArray(updateCourse))
-        throw new Error("the input updateCourse is not a basic object!");
+            throw new Error("the input updateCourse is not a basic object!");
 
         let x = ObjectId(courseId);
         await this.getCourseById(courseId);
@@ -112,31 +130,31 @@ let exportedMethods ={
             updateCourseInfo.day  = updateCourse.day;
         if(updateCourse.trainerId)
             updateCourseInfo.trainerId = updateCourse.trainerId;
-        
+
         const courseCollection = await courses();
         const updateInfo = await courseCollection.updateOne(
             {_id: x},
             {$set: updateCourseInfo}
         );
-        if (!updateInfo.matchedCount && !updateInfo.modifiedCount) 
+        if (!updateInfo.matchedCount && !updateInfo.modifiedCount)
             throw new Error('Course update failed');
         let res = await this.getCourseById(id);
-        return res; 
+        return res;
     },
     async addMemberToCourse(courseId, memberId){
         if(memberId == null || courseId == null)
             throw new Error("you should provide both memberId and courseId to search for!")
         if(typeof memberId !== 'string' || typeof courseId !== 'string')
             throw new Error("the input id is not a string!");
-        
+
         let leftId = ObjectId(courseId);
         let rightId = ObjectId(memberId);
-        
+
 
         let curCourse = await this.getCourseById(courseId);
         if(curCourse == null)
             throw new Error("no memberId with that id!");
-        //验证memberId是否存在
+        //verify if the member is exist
         const memberCollection = await courses();
         await memberCollection.findOne({_id: rightId});
 
@@ -145,31 +163,58 @@ let exportedMethods ={
             {_id: leftId},
             {$set: {memberId : memberId}}
         );
-        
+
         if (!updateInfo.matchedCount && !updateInfo.modifiedCount)
             throw new Error('Add member to course failed!');
         return await this.getCourseById(courseId);
+    },
+    async removeCourse(id){
+        if(id == null)
+            throw new Error("You must provide an id to search for!")
+        if(typeof id !== 'string')
+            throw new Error("the input id is not a string!");
+        if(id.trim().length === 0)
+            throw new Error("the input value is not a valid string!");
+
+        let x = ObjectId(id);
+
+        const courseCollection = await courses();
+
+        await this.getCourseById(id);
+
+        const deleteInfo = await courseCollection.removeOne({_id: x});
+        if(deleteInfo.deleteCount === 0)
+            throw new Error(`Could not delete course with id of ${id}`);
+
+        return true;
+    },
+    async addTAccIdToCourse(courseId, trainerActId){
+        if(courseId == null || trainerActId == null)
+            throw new Error("you should provide both trainerActId and courseId to search for!")
+        if(typeof courseId !== 'string' || typeof trainerActId !== 'string')
+            throw new Error("the input id is not a string!");
+
+        let leftId = ObjectId(courseId);
+        let rightId = ObjectId(trainerActId);
+
+
+        let curCourse= await this.getCourseById(courseId);
+        if(curCourse == null)
+            throw new Error("no course with that id!");
+
+        //verify  trainerActId
+        const trainerCollection = await trainers();
+        await trainerCollection.findOne({_id: rightId});
+
+        const courseCollection = await courses();
+        const updateInfo = await courseCollection.updateOne(
+            {_id: leftId},
+            {$set: {trainerActId: trainerActId}}
+        );
+        if (!updateInfo.matchedCount && !updateInfo.modifiedCount)
+            throw new Error('add traierr account to course failed');
+        return await this.getCourseById(courseId);
     }
-    // async removeCourse(id){
-    //     if(id == null)
-    //         throw new Error("You must provide an id to search for!")
-    //     if(typeof id !== 'string')
-    //         throw new Error("the input id is not a string!");
-    //     if(id.trim().length === 0)
-    //         throw new Error("the input value is not a valid string!");
-
-    //     let x = ObjectId(id);
-        
-    //     const courseCollection = await courses();
-
-    //     await this.getCourseById(id);
-
-    //     const deleteInfo = await courseCollection.removeOne({_id: x});
-    //     if(deleteInfo.deleteCount === 0)
-    //         throw new Error(`Could not delete course with id of ${id}`);
-        
-    //     return true;
-    // }
     
 };
 module.exports = exportedMethods;

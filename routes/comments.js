@@ -21,6 +21,7 @@ router.post('/', catchAsync (async(req, res) => {
     const trainer = await trainerData.getTrainerById(req.params.id);
     const trainerId = trainer._id;
     const comment = await commentData.addComment(newComment.comment, trainerId, ratNumber);
+
     res.redirect(`/fitclub/trainers/${trainerId}`);
 }));
 module.exports = router;
