@@ -3,11 +3,11 @@
     var myForm = $('#enroll-form');
     var myDay = $('#Day');
     var myTime = $('#Time');
-    var error = $('#error');
+    //var error = $('#error');
 
     myForm.submit(function (event) {
         event.preventDefault();
-        error.hide();
+        $('#errorDiv').hide();
 
         let path = $(location).attr('href').toString();
         console.log(path);
@@ -39,9 +39,15 @@
             dataType: 'json'
         }).then((data) =>{
 
-
             console.log(data);
 
+            if(data.error){
+                console.log("here");
+                $('#errorDiv').show();
+            }else{
+
+
+            }
 
         });
 

@@ -5,6 +5,7 @@ const data = require('../data');
 const trainerData = data.trainers;
 const memberData = data.members;
 const courseData = data.courses;
+const img = 'https://source.unsplash.com/collection/483251';
 
 // login username should be case in-sensitive
 
@@ -138,10 +139,107 @@ router.get('/enrollCourse/:trainerId/:courseName/:day/:time', async (req, res) =
     console.log(time);
     console.log(trainerId);
     console.log(courseName);
+    console.log(req.session.user);
 
-    let data = {info: 'get it'};
+    let memberId = req.session.user.id;
 
-    res.json(data);
+    let numDay = 0;
+
+    if(day == 'Monday'){
+        numDay = 1;
+    }else if(day == 'Tuesday'){
+        numDay = 2;
+    }else if(day == 'Wednesday'){
+        numDay = 3;
+    }else if(day == 'Thursday'){
+        numDay = 4;
+    }else
+        numDay = 5;
+
+    const trainerObj = await trainerData.getTrainerById(trainerId);
+    const memberObj = await memberData.getMemberById(memberId);
+    // console.log(trainerObj);
+
+    // check if time conflicts
+    let conflict = false;
+    let array = trainerObj["course"];
+    for(let i = 0; i < array.length; i++){
+        let cId = array[i];
+        const cEnrolled = await courseData.getCourseById(cId);
+
+        if(numDay == cEnrolled["day"] && parseInt(time) == cEnrolled["start_time"]){
+            conflict = true;
+            break;
+        }
+    }
+
+    array = memberObj["coursesEnrolled"];
+    for(let i = 0; i < array.length; i++){
+        let cId = array[i];
+        const cEnrolled = await courseData.getCourseById(cId);
+
+        if(numDay == cEnrolled["day"] && parseInt(time) == cEnrolled["start_time"]){
+            conflict = true;
+            break;
+        }
+    }
+
+
+    if(conflict){
+        let data = {info: 'get it', error: true};
+        res.json(data);
+    }else{
+
+
+        //courseData.addCourse: create course object and inserted into course collection
+        //courseData.addTAccIdToCourse: 把 以 courseId 为 id 的那个course的 trainerActId 设置为trainerActId
+
+        const course = await courseData.addCourse(courseName, "This course is good for increasing muscle!", img, 290, parseInt(time), numDay, trainerId);
+
+
+
+        // console.log("this: " + course._id);
+        // console.log("this: " + trainerObj.trainerAcId);
+        await courseData.addTAccIdToCourse(course._id, trainerObj.trainerAcId);
+
+        // trainerData.addCourseToTrainer: 把 courseId 加到 以trainerId为id的那个trainer的course array 里
+        await trainerData.addCourseToTrainer(trainerId, course._id);
+
+
+
+        // console.log("member_1 select course_1 with trainer_1");
+
+        // 把以这个memberId的为Id的 member的 course array 加上这门课的id
+        await memberData.addCourseToMember(memberId, course._id);
+
+        // 把这门课的memberId 变为 这个member的Id
+        await courseData.addMemberToCourse(course._id, memberId);
+
+        // 把这个 trainer的members array 加上这个memberid
+        await trainerData.addMemberToTrainer(trainerId, memberId);
+
+        // 把这个 member的trainers array 加上这个trainerid
+        await memberData.addTrainerToMember(memberId, trainerId);
+
+
+        // id is the member id
+        // { id: '5fd28c6fb49ffb350a541482',
+        //     username: 'GoodGirl',
+        //     isTrainer: false }
+
+
+
+
+        let data = {info: 'get it'};
+
+        res.json(data);
+
+
+    }
+
+
+
+
 });
 
 

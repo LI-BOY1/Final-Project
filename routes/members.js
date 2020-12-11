@@ -92,7 +92,7 @@ router.post('/register', catchAsync(async(req, res) => {
         }else{
 
             // this is a trainer register
-            const trainer = await trainerData.addTrainer(first_name, last_name, "am trainer", phone, email, address, username, password, 'image link');
+            const trainer = await trainerData.addTrainer(first_name, last_name, "am trainer", phone, email, address, username, hashedPassword, 'image link');
             const trainerAcc_1 = await memberData.addMember(first_name, last_name, phone, email, address, username, hashedPassword);
             await memberData.markMemberAsTrainer(trainerAcc_1._id);
             await memberData.addTRegisterIdToTrianer(trainerAcc_1._id, trainer._id);
@@ -149,6 +149,7 @@ router.post('/login', catchAsync(async(req, res) => {
             username: targetUser.username,
             isTrainer: targetUser.isTrainer
         };
+
         req.flash('success', 'Welcome back!');
         // const redirectUrl = req.session.returnTo || '/';
         // console.log(`redirectUrl in login: ${redirectUrl}`);
