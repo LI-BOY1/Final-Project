@@ -13,9 +13,17 @@ router.get('/memberInfo/:id', async (req, res) => {
 
 router.post('/memberInfo/:id', async (req, res) => {
     let updateMember = {
-        first_name: req.body.FirstName
+        first_name: req.body.FirstName,
+        last_name: req.body.LastName,
+        age: req.body.Age,
+        phone: req.body.Phone,
+        email: req.body.Email,
+        address: req.body.Address,
+        zipcode:  req.body.Zipcode
+
     }
     const member = await memberData.update(req.params.id, updateMember)
+    res.render('members/speMember', {member: member})
 })
 
 module.exports = router;

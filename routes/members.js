@@ -6,10 +6,6 @@ const trainerData = data.trainers;
 const courseData = data.courses;
 const commentData = data.comments;
 
-router.get("/", async (req, res) => {
-    const memberList = await memberData.getAllMembers();
-    res.render('members/member', {member: memberList});
-})
 
 
 router.get('/:id', async (req, res) => {

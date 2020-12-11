@@ -101,20 +101,20 @@ let exportedMethods ={
     },
 
     async update(id, updateMember){
-        if(id == null || updateTrainer == null)
+        if(id == null || updateMember == null)
             throw new Error("You must provid all fields!");
         if(typeof id !== 'string')
             throw new Error("the input id is not a string!");
         if(id.trim().length === 0)
             throw new Error("the input id is not a valid string!")
 
-        if(typeof updateTrainer !== 'object' || Array.isArray(updateTrainer))
+        if(typeof updateMember !== 'object' || Array.isArray(updateMember))
             throw new Error("the input updateMember is not a basic object!");
         
         let x = ObjectId(id);
 
         await this.getMemberById(id);
-
+        
         let updateMemberInfo = {};
 
         if(updateMember.first_name)
@@ -138,10 +138,12 @@ let exportedMethods ={
 
         
         const memberCollection = await members();
+        console.log(updateMemberInfo)
         const updatedInfo = await memberCollection.updateOne(
             {_id: x},
             {$set: updateMemberInfo}
         );
+        
         if (!updatedInfo.matchedCount && !updatedInfo.modifiedCount) 
             throw new Error('member update failed');
         let res = await this.getMemberById(id);
