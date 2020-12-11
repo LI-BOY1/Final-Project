@@ -4,7 +4,6 @@ const methodOverride = require('method-override');
 const session = require('express-session');
 const flash = require('connect-flash');
 const static = express.static(__dirname + '/public');
-
 const configRoutes = require('./routes');
 const exphbs = require('express-handlebars');
 
@@ -33,16 +32,28 @@ const rewriteUnsupportedBrowserMethods = (req, res, next) => {
 };
 
 
+
+const hbs = require('handlebars');
+
 app.use('/public', static);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(rewriteUnsupportedBrowserMethods);
 app.use(methodOverride('_method'));
 
+hbs.registerHelper("equal",function(v1,v2,options){
+  if(v1 == v2){
+    return options.fn(this);
+  }else{
+    return options.inverse(this);
+ }
+});
+
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');
 
 const sessionConfig = {
+  name:'FitClub',
   secret: 'thisshouldbeabettersecret!',
   resave: false,
   saveUninitialized: true,
@@ -57,6 +68,12 @@ app.use(flash());
 
 //flash middleware
 app.use((req, res, next) => {
+  // console.log(req.session.user);
+  res.locals.currentUser = req.session.user;
+  // if(res.locals.currentUser){
+  //   console.log(res.locals.currentUser);
+  //   console.log(res.locals.currentUser.id);
+  // }
   res.locals.success = req.flash('success');
   res.locals.error = req.flash('error');
   next();

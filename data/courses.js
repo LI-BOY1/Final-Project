@@ -49,7 +49,8 @@ let exportedMethods ={
             start_time: start_time,
             day: day,
             trainerId: trainerId,
-            memberId: ""
+            memberId: "",
+            trainerActId: ""
         };
         const courseCollection = await courses();
         const insertInfo = await courseCollection.insertOne(newCourse);
@@ -169,6 +170,33 @@ let exportedMethods ={
             throw new Error(`Could not delete course with id of ${id}`);
         
         return true;
+    },
+    async addTAccIdToCourse(courseId, trainerActId){
+        if(courseId == null || trainerActId == null)
+            throw new Error("you should provide both trainerActId and courseId to search for!")
+        if(typeof courseId !== 'string' || typeof trainerActId !== 'string')
+            throw new Error("the input id is not a string!");
+        
+        let leftId = ObjectId(courseId);
+        let rightId = ObjectId(trainerActId);
+        
+
+        let curCourse= await this.getCourseById(courseId);
+        if(curCourse == null)
+            throw new Error("no course with that id!");
+
+        //verify  trainerActId
+        const trainerCollection = await trainers();
+        await trainerCollection.findOne({_id: rightId});
+
+        const courseCollection = await courses();
+        const updateInfo = await courseCollection.updateOne(
+            {_id: leftId},
+            {$set: {trainerActId: trainerActId}}
+        );
+        if (!updateInfo.matchedCount && !updateInfo.modifiedCount)
+            throw new Error('add traierr account to course failed');
+        return await this.getCourseById(courseId);
     }
     
 };

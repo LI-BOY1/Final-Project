@@ -4,13 +4,14 @@ const router = express.Router({mergeParams: true});
 const data = require('../data');
 const catchAsync = require('../utils/catchAsync');
 const ExpressError = require('../utils/ExpressError');
+const { isLoggedIn, isCommentAuthor } = require('../authentication');
 const trainerData = data.trainers;
 const memberData = data.members;
 const courseData = data.courses;
 const commentData = data.comments;
 
-router.post('/', catchAsync (async(req, res) => {
-
+router.post('/', isLoggedIn, catchAsync (async(req, res) => {
+    const { id, username } = req.session.user;
     let newComment = req.body;
     if(!newComment) 
         throw new ExpressError('Invalid comment!', 400);
@@ -28,7 +29,7 @@ router.post('/', catchAsync (async(req, res) => {
 
     const trainer = await trainerData.getTrainerById(req.params.id);
     const trainerId = trainer._id;
-    const comment = await commentData.addComment(newComment.comment, trainerId, ratNumber);
+    const comment = await commentData.addComment(id, username, newComment.comment, trainerId, ratNumber);
     //still need add member to comment, need complete it after completing login system
 
     //add flash
@@ -36,7 +37,7 @@ router.post('/', catchAsync (async(req, res) => {
     res.redirect(`/fitclub/trainers/${trainerId}`);
 }));
 
-router.delete('/:commentId', async(req, res) => {
+router.delete('/:commentId', isLoggedIn, isCommentAuthor, async(req, res) => {
     const { id, commentId } = req.params;
     await trainerData.getTrainerById(id);
     trainerData.removeCommentFromTrainer(id, commentId);
