@@ -45,7 +45,6 @@ const constructorMethod = (app) => {
             try{
                 const topTrainer = await trainerData.getTopTrainer();
                 const latestReview = await commentData.getAllComments();
-                console.log(latestReview)
 
                 res.render("home", { verified: false,trainer:topTrainer,com1:latestReview[0],com2:latestReview[1],com3:latestReview[2],currentUser:xss(req.session.authent)});
 
@@ -132,8 +131,7 @@ const constructorMethod = (app) => {
 router.get("/logout", (req,res) => {
     if(xss(req.session.authent)){
         req.session.destroy();
-        console.log("logout")
-        res.render("logout",{verified: false});
+        res.redirect("/");
     } else {
         res.redirect("/");
     }
@@ -155,7 +153,32 @@ router.get("/profile", async(req,res) => {
         res.redirect("/login");
     }
 });
+router.get("/search",async (req,res)=>{
+        const courseCollection = await courseData.getAllCourses();
+        const topTrainer = await trainerData.getTopTrainer();
+        const courses = [];
+        for(let i = 0; i < courseCollection.length; i++){
+            let cn = courseCollection[i].trainerId;
+            let foundCourse = false;
 
+            foundCourse = cn == topTrainer._id ;
+
+            if(foundCourse){
+                courses.push(courseCollection[i]);
+            }
+        }
+        if(courses.length == 0){
+            res.status(404).render("result", {
+                trainers: "No course with that name",currentUser:xss(req.session.authent)
+            });
+        }
+        else{
+            res.status(200).render("result", {
+                course: courses,currentUser:xss(req.session.authent)
+            });
+        }
+
+});
 
 router.post("/search", async (req, res) => {
 
