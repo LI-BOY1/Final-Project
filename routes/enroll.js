@@ -227,17 +227,11 @@ router.get('/enrollCourse/:trainerId/:courseName/:day/:time', async (req, res) =
         //     username: 'GoodGirl',
         //     isTrainer: false }
 
-
-
-
         let data = {info: 'get it'};
 
         res.json(data);
 
-
     }
-
-
 
 
 });
