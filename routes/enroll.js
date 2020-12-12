@@ -5,22 +5,26 @@ const data = require('../data');
 const trainerData = data.trainers;
 const memberData = data.members;
 const courseData = data.courses;
+const staticData = require('../data/staticData');
 const img = 'https://source.unsplash.com/collection/483251';
 
 // login username should be case in-sensitive
 
 router.get('/', async(req, res) =>{
     //const trainerList = await trainerData.getAllTrainers();
-    const courseList = await courseData.getAllCourses();
+    //const courseList = await courseData.getAllCourses();
     //const member = await memberData.getMemberById(req.params.id);
 
+
+    const courseList = staticData.courseList;
     let courseNameList = new Set();
 
     for(let i = 0; i < courseList.length; i++){
 
-        let obj = courseList[i];
-        let courseName = obj["coursename"];
+        // let obj = courseList[i];
+        // let courseName = obj["coursename"];
 
+        let courseName = courseList[i];
         if(courseName.includes("_")){
             let pos = courseName.indexOf("_");
             courseName = courseName.substring(0, pos);
@@ -194,9 +198,9 @@ router.get('/enrollCourse/:trainerId/:courseName/:day/:time', async (req, res) =
         //courseData.addCourse: create course object and inserted into course collection
         //courseData.addTAccIdToCourse: 把 以 courseId 为 id 的那个course的 trainerActId 设置为trainerActId
 
-        const course = await courseData.addCourse(courseName, "This course is good for increasing muscle!", img, 290, parseInt(time), numDay, trainerId);
-
-
+        const obj = staticData["courseInfo"];
+        const courseInfo = obj[courseName];
+        const course = await courseData.addCourse(courseName, courseInfo["description"], img, courseInfo["price"], parseInt(time), numDay, trainerId);
 
         // console.log("this: " + course._id);
         // console.log("this: " + trainerObj.trainerAcId);

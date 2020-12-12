@@ -52,7 +52,7 @@ router.post('/trainers', async(req, res) =>{
         error = true;
     }
 
-    res.render('home', {searchList: array, trainer: starTrainers, trainerSearchResult: result, hasErrorTrainer: error});
+    res.render('home', {searchList: array, trainer: starTrainers, trainerSearchResult: result, hasErrorTrainer: error, startTrainerZero: starTrainers.length != 0});
 
 
 });
@@ -80,11 +80,12 @@ router.post('/courses', async(req, res) =>{
 
     // you search some course not provided
     if(!found) {
-        res.render('home', {searchList: [], trainer: starTrainers, courseSeachResult: false, hasErrorCourse: true});
+        res.render('home', {searchList: [], trainer: starTrainers, courseSeachResult: false, hasErrorCourse: true, startTrainerZero: starTrainers.length != 0});
         return;
     }
 
     const courseList = await courseData.getAllCourses();
+    // console.log("!!!!!!!!!!!!");
 
     let trainerSet = new Set();
     let array = [];
@@ -121,27 +122,33 @@ router.post('/courses', async(req, res) =>{
     // console.log(array);
 
 
-    // 说明没有 trainer在上这门课
+    // 说明没有 trainer在上这门课, 把所有trainer 扔回前端
     if(array.length == 0){
         let trainerList = await trainerData.getAllTrainers();
         array = trainerList;
-    }
 
-    // 如果没有trainer上这门课，把所有trainer 扔回前端
-    if(array.length != 0){
-        res.render('home', {searchList: array, trainer: starTrainers, courseSeachResult: true, hasErrorCourse: false, isAllTrainers: true});
+        let result = true;
+        let error = false;
+        if(array.length == 0) {
+            // 如果没人上这门课并且没有 一个 trainer 存在，
+            result = false;
+            error = true;
+            res.render('home', {searchList: array, trainer: starTrainers, courseSeachResult: result, hasErrorCourse: error, startTrainerZero: starTrainers.length != 0});
+        }else{
+            // 如果没人上这门课，返回所有的trainer
+            //console.log(starTrainers.length);
+            res.render('home', {searchList: array, trainer: starTrainers, courseSeachResult: result, hasErrorCourse: error,isAllTrainers: true, startTrainerZero: starTrainers.length != 0});
+        }
+
         return;
+
     }
 
+    // 如果有 trainer 上这门课
+    console.log("!!!!!!!!!!!!");
+    //res.render('home', {searchList: array, trainer: starTrainers, courseSeachResult: true, hasErrorCourse: false, isAllTrainers: true, startTrainerZero: starTrainers.length != 0});
+    res.render('home', {searchList: array, trainer: starTrainers, courseSeachResult: true, hasErrorCourse: false, startTrainerZero: starTrainers.length != 0})
 
-    let result = true;
-    let error = false;
-    if(array.length == 0) {
-        result = false;
-        error = true;
-    }
-
-    res.render('home', {searchList: array, trainer: starTrainers, courseSeachResult: result, hasErrorCourse: error});
 
 });
 

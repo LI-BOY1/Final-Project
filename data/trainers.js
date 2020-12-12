@@ -64,7 +64,7 @@ let exportedMethods = {
             // zipcode:zipcode.trim(),
             username:username.trim(),
             password:password.trim(),
-            rating:4,
+            rating:0,
             img: img,
             course:[],
             comment:[],
@@ -337,9 +337,18 @@ let exportedMethods = {
         const allTrainers = await this.getAllTrainers();
         // if(allTrainers.length === 0)
         //     throw new Error("No Trainers!");
+
+        if(allTrainers.length === 0)
+            return [];
+
+
         const sortedTrainers = allTrainers.sort((a, b) =>{return b.rating - a.rating});
         let topThreeTrainers = [];
-        for(let i = 0; i < 3; i ++){
+
+        let len = Math.min(3, sortedTrainers.length);
+        console.log(len);
+
+        for(let i = 0; i < len; i ++){
             topThreeTrainers[i] = sortedTrainers[i];
         }
         // if(topThreeTrainers === null || topThreeTrainers.length < 3)

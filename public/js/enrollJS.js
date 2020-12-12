@@ -7,7 +7,8 @@
 
     myForm.submit(function (event) {
         event.preventDefault();
-        $('#errorDiv').hide();
+        $('#showList').empty();
+        $('#showList').hide();
 
         let path = $(location).attr('href').toString();
         console.log(path);
@@ -39,16 +40,21 @@
             dataType: 'json'
         }).then((data) =>{
 
+            $('#showList').empty();
             console.log(data);
 
+            let li = null;
+
+
             if(data.error){
-                console.log("here");
-                $('#errorDiv').show();
+                li = `<li><div class="alert alert-danger" role="alert"> you have time conflicts!</div></li>`;
+
             }else{
-
-
+                li = `<li><div class="alert alert-success" role="alert"> you have enrolled!</div></li>`;
             }
 
+            $('#showList').show();
+            $('#showList').append(li);
         });
 
     });
