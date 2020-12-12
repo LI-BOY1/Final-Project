@@ -3,6 +3,7 @@ const router = express.Router();
 const data = require('../data');
 const trainerData = data.trainers;
 const courseData = data.courses;
+const staticData = require('../data/staticData');
 
 // login username should be case in-sensitive
 
@@ -65,6 +66,24 @@ router.post('/courses', async(req, res) =>{
 
     let cc = req.body.searchCourse;
     let target = cc.toLowerCase();
+    let allCourseName = staticData.courseList;
+    let found = false;
+    const starTrainers = await trainerData.getTopThreeTrainers();
+
+    for(let i = 0; i < allCourseName.length; i++){
+
+        if(target == allCourseName[i]){
+            found = true;
+            break;
+        }
+    }
+
+    // you search some course not provided
+    if(!found) {
+        res.render('home', {searchList: [], trainer: starTrainers, courseSeachResult: false, hasErrorCourse: true});
+        return;
+    }
+
     const courseList = await courseData.getAllCourses();
 
     let trainerSet = new Set();
@@ -99,11 +118,21 @@ router.post('/courses', async(req, res) =>{
     //res.render('enroll/enrollPageCourses', {trainers: array});
 
 
-    console.log(array);
+    // console.log(array);
 
 
-    const starTrainers = await trainerData.getTopThreeTrainers();
-    //res.render('home', {trainer: starTrainers});
+    // 说明没有 trainer在上这门课
+    if(array.length == 0){
+        let trainerList = await trainerData.getAllTrainers();
+        array = trainerList;
+    }
+
+    // 如果没有trainer上这门课，把所有trainer 扔回前端
+    if(array.length != 0){
+        res.render('home', {searchList: array, trainer: starTrainers, courseSeachResult: true, hasErrorCourse: false, isAllTrainers: true});
+        return;
+    }
+
 
     let result = true;
     let error = false;

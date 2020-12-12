@@ -83,8 +83,8 @@ let exportedMethods = {
     async getAllTrainers(){
         const trainerCollection = await trainers();
         const trainerList = await trainerCollection.find({}).toArray();
-        if(trainerList.length === 0)
-            throw new Error('error! No trainer in system!');
+        // if(trainerList.length === 0)
+        //     throw new Error('error! No trainer in system!');
         for(let i = 0; i < trainerList.length; i ++){
             trainerList[i]._id = trainerList[i]._id.toString();
         }
@@ -335,15 +335,15 @@ let exportedMethods = {
     },
     async getTopThreeTrainers(){
         const allTrainers = await this.getAllTrainers();
-        if(allTrainers.length === 0)
-            throw new Error("No Trainers!");
+        // if(allTrainers.length === 0)
+        //     throw new Error("No Trainers!");
         const sortedTrainers = allTrainers.sort((a, b) =>{return b.rating - a.rating});
         let topThreeTrainers = [];
         for(let i = 0; i < 3; i ++){
             topThreeTrainers[i] = sortedTrainers[i];
         }
-        if(topThreeTrainers === null || topThreeTrainers.length < 3)
-            throw new Error("No 3 trainers ");
+        // if(topThreeTrainers === null || topThreeTrainers.length < 3)
+        //     throw new Error("No 3 trainers ");
         return topThreeTrainers;
     }
 };
