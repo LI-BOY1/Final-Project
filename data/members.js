@@ -92,43 +92,63 @@ let exportedMethods ={
     },
 
     async update(id, updateMember){
-        if(id == null || updateTrainer == null)
+        if(id == null || updateMember == null)
             throw new Error("You must provid all fields!");
         if(typeof id !== 'string')
             throw new Error("the input id is not a string!");
         if(id.trim().length === 0)
             throw new Error("the input id is not a valid string!")
 
-        if(typeof updateTrainer !== 'object' || Array.isArray(updateTrainer))
+        if(typeof updateMember !== 'object' || Array.isArray(updateMember))
             throw new Error("the input updateMember is not a basic object!");
         
         let x = ObjectId(id);
 
         await this.getMemberById(id);
-
+        
         let updateMemberInfo = {};
+
+        // if(updateMember.first_name)
+        //     updateMemberInfo.first_name = updateMember.first_name;
+        // if(updateMember.last_name)
+        //     updateMemberInfo.last_name = updateMember.last_name;
+        // if(updateMember.phone)
+        //     updateMemberInfo.phone = updateMember.phone;
+        // if(updateMember.email)
+        //     updateMemberInfo.email = updateMember.email;
+        // if(updateMember.address)
+        //     updateMemberInfo.address = updateMember.address;
+        // if(updateMember.username)
+        //     updateMemberInfo.username = updateMember.username;
+        // if(updateMember.password)
+        //     updateMemberInfo.password = updateMember.password;
+
 
         if(updateMember.first_name)
             updateMemberInfo.first_name = updateMember.first_name;
         if(updateMember.last_name)
             updateMemberInfo.last_name = updateMember.last_name;
+        if(updateMember.age)
+            updateMemberInfo.age = updateMember.age;
         if(updateMember.phone)
             updateMemberInfo.phone = updateMember.phone;
         if(updateMember.email)
             updateMemberInfo.email = updateMember.email;
         if(updateMember.address)
             updateMemberInfo.address = updateMember.address;
-        if(updateMember.username)
-            updateMemberInfo.username = updateMember.username;             
+        if(updateMember.zipcode)
+            updateMemberInfo.zipcode = updateMember.zipcode;
         if(updateMember.password)
             updateMemberInfo.password = updateMember.password;
 
-        
+
         const memberCollection = await members();
+        console.log(updateMemberInfo)
         const updatedInfo = await memberCollection.updateOne(
             {_id: x},
             {$set: updateMemberInfo}
         );
+        
         if (!updatedInfo.matchedCount && !updatedInfo.modifiedCount) 
             throw new Error('member update failed');
         let res = await this.getMemberById(id);
@@ -181,6 +201,7 @@ let exportedMethods ={
             throw new Error('Add trainer to member failed!');
         return await this.getMemberById(memberId);
     },
+
     async addCourseToMember(memberId, courseId){
         if(memberId == null || courseId == null)
             throw new Error("you should provide both memberId and courseId to search for!")
@@ -208,6 +229,7 @@ let exportedMethods ={
             throw new Error('Add course to trainer failed!');
         return await this.getMemberById(memberId);
     },
+
     async addCommentToMember(memberId, commentId){
         if(memberId == null || commentId == null)
             throw new Error("you should provide both memberId and commentId to search for!")
