@@ -1,4 +1,3 @@
-
 //to check the form is valid
 (function () {
     'use strict'
