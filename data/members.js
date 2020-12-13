@@ -128,22 +128,20 @@ let exportedMethods ={
             updateMemberInfo.first_name = updateMember.first_name;
         if(updateMember.last_name)
             updateMemberInfo.last_name = updateMember.last_name;
-        if(updateMember.age)
-            updateMemberInfo.age = updateMember.age;
+        
         if(updateMember.phone)
             updateMemberInfo.phone = updateMember.phone;
         if(updateMember.email)
             updateMemberInfo.email = updateMember.email;
         if(updateMember.address)
             updateMemberInfo.address = updateMember.address;
-        if(updateMember.zipcode)
-            updateMemberInfo.zipcode = updateMember.zipcode;
+        
         if(updateMember.password)
             updateMemberInfo.password = updateMember.password;
 
 
         const memberCollection = await members();
-        console.log(updateMemberInfo)
+        
         const updatedInfo = await memberCollection.updateOne(
             {_id: x},
             {$set: updateMemberInfo}

@@ -1,46 +1,46 @@
-<form id="editMemberform" method="POST">
-    <h5 class="edit title">Edit Infomation</h5>
-    <p>ID: {{memberId}}</p>
-    <div>
-        <label for="FirstName">FirstName</label>
-        <input id="FirstName" name="FirstName" />
-    </div>
-    <br>
-    <div>
-        <label for="LastName">LastName</label>
-        <input id="LastName" name="LastName" />
-    </div>
-    <br>
-    <div>
-        <label for="Age">Age</label>
-        <input id="Age" name="Age" />
-    </div>
-    <br>
-    <div>
-        <label for="Phone">Phone </label>
-        <input id="Phone" name="Phone" />
-    </div>
-    <br>
-    <div>
-        <label for="Email">Email </label>
-        <input id="username" name="username" />
-    </div>
-    <br>
-    <div>
-        <label for="Address">Address </label>
-        <input id="Address" name="Address" />
-    </div>
-    <br>
-    <div>
-        <label for="Zipcode">Zipcode </label>
-        <input id="Zipcode" name="Zipcode" />
-    </div>
-    <br>
+<div class="row">
+    <div class="col-6 offset-3">
+        <div class="card mb-3">
 
-    <div>
-        <button type="submit">submit</button>
+            <div class="card-body">
+                <h5 class="card-title">Edit Infomation</h5>
+            </div>
+            <div class="card-body">
+                <form id="editMemberform" method="POST">
+                    <ul>
+                        <li>
+                            <label for="FirstName">FirstName</label>
+                            <input id="FirstName" name="FirstName" />
+                        </li>
+                        <br>
+                        <li>
+                            <label for="LastName">LastName</label>
+                            <input id="LastName" name="LastName" />
+                        </li>
+                        <br>
+                        <li>
+                            <label for="Phone">Phone </label>
+                            <input id="Phone" name="Phone" />
+                        </li>
+                        <br>
+                        <li>
+                            <label for="Email">Email </label>
+                            <input id="Email" name="Email" />
+                        </li>
+                        <br>
+                        <li>
+                            <label for="Address">Address </label>
+                            <input id="Address" name="Address" />
+                        </li>
+                    </ul>
+
+                    <div>
+                        <button type="submit">submit</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
     </div>
-
-
-
-</form>
+</div>

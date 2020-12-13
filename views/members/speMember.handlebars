@@ -8,18 +8,16 @@
                 <li class="list-group-item">UserName: {{member.username}} </li>
                 <li class="list-group-item">FirstName: {{member.first_name}} </li>
                 <li class="list-group-item">LastName: {{member.last_name}} </li>
-                <li class="list-group-item text-muted">Age: {{member.age}}</li>
                 <li class="list-group-item">Phone: {{member.phone}}</li>
                 <li class="list-group-item">Email: {{member.email}}</li>
                 <li class="list-group-item">Address: {{member.address}} </li>
-                <li class="list-group-item">Zipcode: {{member.zipcode}} </li>
                 <li class="list-group-item">Course: {{member.coursesEnrolled}} </li>
 
             </ul>
 
             <div class="card-body">
-                <a href="/edit/memberInfo/{{member._id}}" class="card-link">Edit</a>
-                <a href="/members/courses/{{member._id}}" class="card-link"> View My Course</a>
+                <a href="/edit/memberInfo" class="card-link">Edit Info</a>
+                <a href="/members/courses" class="card-link"> View My Course</a>
             </div>
         </div>
     </div>
