@@ -1,6 +1,6 @@
 const dbConnection = require('../config/mongoConnection');
 const data = require('../data/');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const courses = data.courses;
 const comments = data.comments;
 const members = data.members;
