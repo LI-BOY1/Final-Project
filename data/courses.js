@@ -197,7 +197,31 @@ let exportedMethods ={
         if (!updateInfo.matchedCount && !updateInfo.modifiedCount)
             throw new Error('add traierr account to course failed');
         return await this.getCourseById(courseId);
+    },
+
+    async deleteCourseById(courseId){
+
+        const courseCollection = await courses();
+
+        let objectId = ObjectId(courseId);
+
+        const m = await courseCollection.findOne({_id: objectId });
+        if(m === null)
+            throw new Error(`no course associated with id ${courseId}, so can't be removed`);
+
+
+        const res = await courseCollection.deleteOne({ _id: objectId });
+
+        if (res.deletedCount === 0) {
+            throw `Could not delete course with id of ${courseId}`;
+        }
+
+        return " course has been successfully deleted";
     }
+
+
+
+
     
 };
 module.exports = exportedMethods;
