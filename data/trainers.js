@@ -354,6 +354,46 @@ let exportedMethods = {
         // if(topThreeTrainers === null || topThreeTrainers.length < 3)
         //     throw new Error("No 3 trainers ");
         return topThreeTrainers;
+    },
+
+
+    async deleteCourseFromTrainer(trainerId, courseId){
+
+        //let trainer = await this.getTrainerById(trainerId);
+
+        const trainerCollection = await trainers();
+        let id = ObjectId(trainerId);
+        const updatedInfo = await trainerCollection.updateOne(
+            {_id: id},
+            { $pull: {"course": courseId} }
+        );
+
+        if (!updatedInfo.matchedCount && !updatedInfo.modifiedCount)
+            throw new Error('fail to delete the courseId from trainer\'s course array');
+
+        return;
+    },
+
+
+    async deleteMember(trainerId, memberId){
+
+        let trainer = await this.getTrainerById(trainerId);
+        const trainerCollection = await trainers();
+        let id = ObjectId(trainerId);
+
+        const updatedInfo = await trainerCollection.updateOne(
+            {_id: id},
+            { $pull: {"members": memberId} }
+        );
+
+        if (!updatedInfo.matchedCount && !updatedInfo.modifiedCount)
+            throw new Error('fail to delete the memberId from trainer\'s members array');
+
+        return;
+
     }
+
+
+
 };
 module.exports = exportedMethods;

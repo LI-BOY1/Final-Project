@@ -17,12 +17,42 @@ router.get('/profile', async (req, res) => {
     }
 });
 
+router.get('/courses', async (req, res) => {
+    try {
+        const member = await memberData.getMemberById(req.session.user.id);
+
+        let courseInfo = [];
+        for(let n in member.coursesEnrolled ){
+            course = await courseData.getCourseById(member.coursesEnrolled[n]);
+            console.log(course);
+            courseInfo.push(course);
+        }
+        res.render('members/courses', {memberCourse: courseInfo})
+    }catch(e){
+
+    }
+});
+
+
+router.get('/coursesShow/:id', async (req, res) => {
+    const course = await courseData.getCourseById(req.params.id);
+    const trainer = await trainerData.getTrainerById(course.trainerId);
+    const firstName = trainer.first_name;
+    const lastName = trainer.last_name;
+    const trainer_name = firstName+" "+lastName;
+
+    res.render('members/memberCourseShow', {course: course, trainer_name: trainer_name})
+
+});
+
+
 router.get('/schedule', async (req, res) => {
 
     let memberId = req.session.user.id;
     const member = await memberData.getMemberById(memberId);
 
     let result = await createObj(member);
+    result["member"] = member;
 
     res.render('members/schedule', result);
 
@@ -31,9 +61,11 @@ router.get('/schedule', async (req, res) => {
 
 
 // 利用 星期几和时间来锁定一门课
-router.post('/delete', async(req, res) => {
+router.post('/delete/:cancelTime/:cancelDay', async(req, res) => {
 
-    let {cancelDay, cancelTime} = req.body;
+    let cancelDay = req.params.cancelDay;
+    let cancelTime = req.params.cancelTime;
+
     let memberId = req.session.user.id;
     let member = await memberData.getMemberById(memberId);
     let list = member["coursesEnrolled"];
@@ -65,45 +97,49 @@ router.post('/delete', async(req, res) => {
 
 
     console.log(trainerFreq);
+    console.log(day + "   " + time);
 
-    // 说明没有找到要删除的目标课程
-    if(!targetCourse){
 
-        let result = await createObj(member);
-        result["cancelError"] = true;
-        res.render('members/schedule', result);
-        return;
+    // find the course we need to delete !!
+    let trainerId = targetCourse["trainerId"];
+    let trainer  = await trainerData.getTrainerById(trainerId);
+    let courseId = targetCourse["_id"];
 
-    }else{
+    //delete course from course db
+    try {
+        await courseData.deleteCourseById(courseId);
+    }catch (e) {
+        throw e;
+    }
 
-        // find the course we need to delete !!
-        let trainerId = targetCourse["trainerId"];
-        let trainer  = await trainerData.getTrainerById(trainerId);
-        let courseId = targetCourse["_id"];
+    // delete course id from trainer course array
+    try{
+        await trainerData.deleteCourseFromTrainer(trainerId, courseId);
+    }catch (e){
+        throw e;
+    }
 
-        //delete course from course db
-        try {
-            await courseData.deleteCourseById(courseId);
-        }catch (e) {
-            throw e;
-        }
+    // delete course id from member coursesEnrolled array
+    await memberData.deleteCourseFromMember(memberId, courseId);
 
-        // delete course id from trainer course array
-        await trainerData.deleteCourse(trainerId, courseId);
+    // 如果member只上了这个trainer的一门课，那么互相删除id
 
-        // delete course id from member coursesEnrolled array
-        await memberData.deleteCourse(memberId, courseId)
-
-        // 如果member只上了这个trainer的一门课，那么互相删除id
-
-        if(trainerFreq[trainerId] == 1){
+    if(trainerFreq[trainerId] == 1){
+        try{
             await trainerData.deleteMember(trainerId, memberId);
             await memberData.deleteTrainer(memberId, trainerId);
+        }catch (e){
+            throw e;
         }
+    }
+
+    member = await memberData.getMemberById(memberId);
+    let result = await createObj(member);
+    result["member"] = member;
+    res.render('members/schedule', result);
 
 
-        res.render('members/speMember', {member: member, cancelSuccess: true});
-        return;
+
 
 
         // //在 course db 里面添加这门课
@@ -131,7 +167,7 @@ router.post('/delete', async(req, res) => {
 
 
 
-    }
+
 
 });
 

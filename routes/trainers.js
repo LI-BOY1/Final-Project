@@ -17,6 +17,17 @@ router.get('/', catchAsync (async(req, res) => {
 router.get('/:id', catchAsync (async (req, res)=>{
     const oneTrainer = await trainerData.getTrainerById(req.params.id);
     const trainerComList = oneTrainer.comment;
+
+    //console.log("here");
+    //console.log(trainerComList.length);
+
+    if(trainerComList.length == 0){
+        //console.log("!!!!!!!!!");
+        res.render('trainers/show', {trainer: oneTrainer, comment: []});
+        return;
+    }
+
+
     let commentForThatTrainer = [];
     for(let i = 0; i < trainerComList.length; i ++){
         const temp =  await commentData.getCommentById(trainerComList[i]);

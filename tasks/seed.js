@@ -60,6 +60,8 @@ async function main(){
     await addcourse(member_2._id, trainer_1._id, trainerAcc_1._id, 5, 10);
 
 
+    // create course with member2 and trainer 2
+    await addcourse(member_2._id, trainer_2._id, trainerAcc_2._id, 4, 9);
 
 
 

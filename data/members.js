@@ -359,6 +359,48 @@ let exportedMethods ={
         if (!updateInfo.matchedCount && !updateInfo.modifiedCount)
             throw new Error('add traienr account to trainer failed');
         return await this.getMemberById(memberId);
+    },
+
+
+    async deleteCourseFromMember(memberId, courseId){
+
+        const memberCollection = await members();
+        let id = ObjectId(memberId);
+
+        const updatedInfo = await memberCollection.updateOne(
+            {_id: id},
+            { $pull: {"coursesEnrolled": courseId} }
+        );
+
+        if (!updatedInfo.matchedCount && !updatedInfo.modifiedCount)
+            throw new Error('fail to delete the courseId from member\'s coursesEnrolled array');
+
+        return;
+
+    },
+
+
+    async deleteTrainer(memberId, trainerId){
+
+        let member = await this.getMemberById(memberId);
+        const memberCollection = await members();
+        let id = ObjectId(memberId);
+
+        const updatedInfo = await memberCollection.updateOne(
+            {_id: id},
+            { $pull: {"trainers": trainerId} }
+        );
+
+        if (!updatedInfo.matchedCount && !updatedInfo.modifiedCount)
+            throw new Error('fail to delete the trainerId from member\'s trainers array');
+
+        return;
     }
+
+
+
+
+
+
 };
 module.exports = exportedMethods;
