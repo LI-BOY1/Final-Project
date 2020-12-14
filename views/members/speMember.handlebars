@@ -2,7 +2,7 @@
     <div class="col-6">
         <div class="card" style="width: 18rem;">
             <div class="card-body">
-                <h5 class="card-title">{{member.first_name}} {{member.last_name}}</h5>
+                <h1 class="card-title">{{member.first_name}} {{member.last_name}}</h1>
             </div>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">UserName: {{member.username}} </li>
@@ -11,13 +11,20 @@
                 <li class="list-group-item">Phone: {{member.phone}}</li>
                 <li class="list-group-item">Email: {{member.email}}</li>
                 <li class="list-group-item">Address: {{member.address}} </li>
-                <li class="list-group-item">Course: {{member.coursesEnrolled}} </li>
+                <li class="list-group-item">Course:
+                    <ul>
+                        {{#each memberCourse}}
+                        <li>
+                            <a href="/members/coursesShow/{{_id}}">{{coursename}}</a>
+                        </li>
+                        {{/each}}
+                    </ul>
+                </li>
 
             </ul>
 
             <div class="card-body">
                 <a href="/edit/memberInfo" class="card-link">Edit Info</a>
-                <a href="/members/courses" class="card-link"> View My Course</a>
                 <a href="/members/schedule" class="card-link"> My schedule</a>
             </div>
         </div>

@@ -6,7 +6,7 @@
                 <h5 class="card-title">{{course.coursename}}</h5>
                 <p class="card-text">{{course.courseinfo}}</p>
             </div>
-            
+
             <ul class="list-group list-group-flush">
                 <li class="list-group-item text-muted">Start-Time: {{course.start_time}}:00</li>
                 <li class="list-group-item">${{course.price}}/hour</li>
@@ -14,7 +14,8 @@
             </ul>
             <div class="card-body">
                 <p>Trainer: <a href="/fitclub/trainers/{{course.trainerId}}" class="card-link">{{trainer_name}}</a></p>
-                 <a href="/members/schedule" class="card-link btn btn-success">Back schedule</a>
+                <a href="/members/schedule" class="card-link btn btn-success">Back schedule</a>
+                <a href="/members" class="card-link btn btn-success">Back myInfo</a>
             </div>
         </div>
 

@@ -7,30 +7,18 @@ const courseData = data.courses;
 const commentData = data.comments;
 
 
-
 router.get('/', async (req, res) => {
     
     try {
         const member = await memberData.getMemberById(req.session.user.id)
-        res.render('members/speMember', {member: member})
-    } catch (e) {
-        res.status(404).json({ error: `members can not be found with that id` });
-    }
-})
-
-router.get('/courses', async (req, res) => {
-    try { 
-        const member = await memberData.getMemberById(req.session.user.id)
-        
         let courseInfo = []
         for(let n in member.coursesEnrolled ){
             course = await courseData.getCourseById(member.coursesEnrolled[n])
-            console.log(course)
             courseInfo.push(course)
         }
-        res.render('members/courses', {memberCourse: courseInfo})
-    }catch(e){
-
+        res.render('members/speMember', {member: member, memberCourse: courseInfo})
+    } catch (e) {
+        res.status(404).json({ error: `members can not be found with that id` });
     }
 })
 
