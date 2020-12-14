@@ -61,7 +61,6 @@ let exportedMethods = {
             info:info.trim(),
             email:email.trim(),
             address:address.trim(),
-            // zipcode:zipcode.trim(),
             username:username.trim(),
             password:password.trim(),
             rating:4,
