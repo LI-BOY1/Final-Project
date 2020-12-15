@@ -27,18 +27,6 @@ router.get('/trainers/:id/:courseId', catchAsync (async (req, res) => {
     res.render('trainers/courseShow', {course: singleCourse, trainer: targetTrainer});
 }));
 
-router.delete('/:id/:courseId', isLoggedIn, isCourseTrianer,catchAsync (async(req, res) => {
-    const { id, courseId } = req.params;
-    const deleteCourse = await courseData.getCourseById(courseId);
-    // const courseTrainerId = deleteCourse.trainerId;
-    await trainerData.removeCourseFromTrainer(id, courseId);
-    // const courseMemberId = deleteCourse.memberId;
-    // await memberData.removeCourseFromMember(courseMemberId, courseId);
-    await courseData.removeCourse(courseId);
 
-    //add flash
-    req.flash('success', 'Successfully deleted course!');
-    res.redirect(`/fitclub/courses/trainers/${id}`);
-}));
 
 module.exports = router;

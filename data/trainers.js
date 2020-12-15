@@ -391,6 +391,26 @@ let exportedMethods = {
 
         return;
 
+    },
+
+
+    async getTrainerByActId(trainerActId){
+
+        if(trainerActId == null)
+            throw new Error("you must provide an id to search for!");
+        if(typeof trainerActId !== 'string')
+            throw new Error("the input value is not a string.");
+        if(trainerActId.trim().length === 0)
+            throw new Error("the input string is not a valid string!");
+
+
+        const trainerCollection = await trainers();
+        const trainer = await trainerCollection.findOne({ trainerAcId: trainerActId });
+        if (!trainer)
+            throw new Error('No trainer with that id!');
+        trainer._id = trainer._id.toString();
+        return trainer;
+
     }
 
 

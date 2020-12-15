@@ -142,33 +142,6 @@ router.post('/delete/:cancelTime/:cancelDay', async(req, res) => {
 
 
 
-        // //在 course db 里面添加这门课
-        // const course = await courseData.addCourse(courseName, "This course is good for increasing muscle!", img, 290, parseInt(time), numDay, trainerId);
-        // await courseData.addTAccIdToCourse(course._id, trainerObj.trainerAcId);
-        // await courseData.addMemberToCourse(course._id, memberId);
-        //
-        //
-        // // 在 trainer db 里的 course array 加上这门课的id
-        // await trainerData.addCourseToTrainer(trainerId, course._id);
-        //
-        //
-        // // 在 member db 里的 coursesEnrolled array 加上这门课的id
-        // await memberData.addCourseToMember(memberId, course._id);
-        //
-        //
-        // // 把这个 trainer的members array 加上这个memberid
-        // await trainerData.addMemberToTrainer(trainerId, memberId);
-        //
-        // // 把这个 member的trainers array 加上这个trainerid
-        // await memberData.addTrainerToMember(memberId, trainerId);
-
-
-
-
-
-
-
-
 });
 
 

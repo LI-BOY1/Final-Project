@@ -167,10 +167,17 @@ router.post('/login', catchAsync(async(req, res) => {
         };
 
         req.flash('success', 'Welcome back!');
-        // const redirectUrl = req.session.returnTo || '/';
-        // console.log(`redirectUrl in login: ${redirectUrl}`);
-        // delete req.session.returnTo;
-        res.redirect('/');
+
+        if(req.session.user.isTrainer){
+
+            let trainer = await trainerData.getTrainerByActId(req.session.user.id);
+            let trainerId = trainer._id;
+            res.redirect(`/fitclub/trainers/${trainerId}`);
+        }else{
+            res.redirect('/members/profile');
+        }
+
+
     }else{
         req.flash('error', 'Your password or username is not true!');
         res.redirect('/login');
