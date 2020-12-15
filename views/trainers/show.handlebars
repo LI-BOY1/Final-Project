@@ -21,37 +21,43 @@
         </div>
     </div>
     <div class="col-6">
-        <h2>Leave a Comment</h2>
-        <form action="/fitclub/trainers/{{trainer._id}}/comments" class="mb-3 validated-form" method="POST" novalidate>
-            {{!-- <div class="mb-3">
-                <label class="form-label" for="rating">Rating</label>
-                <input class="form-range" type="range" min="1" max="10" name="rating" id="rating">
-            </div> --}}
-            <div class="mb-3">
-                <fieldset class="starability-basic">
-                    <input type="radio" id="no-rate" class="input-no-rate" name="rating" value="1" checked
-                        aria-label="No rating." />
-                    <input type="radio" id="first-rate1" name="rating" value="1" />
-                    <label for="first-rate1" title="Terrible">1 star</label>
-                    <input type="radio" id="first-rate2" name="rating" value="2" />
-                    <label for="first-rate2" title="Not good">2 stars</label>
-                    <input type="radio" id="first-rate3" name="rating" value="3" />
-                    <label for="first-rate3" title="Average">3 stars</label>
-                    <input type="radio" id="first-rate4" name="rating" value="4" />
-                    <label for="first-rate4" title="Very good">4 stars</label>
-                    <input type="radio" id="first-rate5" name="rating" value="5" />
-                    <label for="first-rate5" title="Amazing">5 stars</label>
-                </fieldset>
-            </div>
-            <div class="mb-3">
-                <label class="form-label" for="commentbody">Comment: </label>
-                <textarea class="form-control" name="comment" id="commentbody" cols="30" rows="3" required></textarea>
-                <div class="valid-feedback">
-                    Looks good!
+
+        {{#if isMember}}
+            <h2>Leave a Comment</h2>
+
+            <form action="/fitclub/trainers/{{trainer._id}}/comments" class="mb-3 validated-form" method="POST" novalidate>
+                {{!-- <div class="mb-3">
+                    <label class="form-label" for="rating">Rating</label>
+                    <input class="form-range" type="range" min="1" max="10" name="rating" id="rating">
+                </div> --}}
+                <div class="mb-3">
+                    <fieldset class="starability-basic">
+                        <input type="radio" id="no-rate" class="input-no-rate" name="rating" value="1" checked
+                            aria-label="No rating." />
+                        <input type="radio" id="first-rate1" name="rating" value="1" />
+                        <label for="first-rate1" title="Terrible">1 star</label>
+                        <input type="radio" id="first-rate2" name="rating" value="2" />
+                        <label for="first-rate2" title="Not good">2 stars</label>
+                        <input type="radio" id="first-rate3" name="rating" value="3" />
+                        <label for="first-rate3" title="Average">3 stars</label>
+                        <input type="radio" id="first-rate4" name="rating" value="4" />
+                        <label for="first-rate4" title="Very good">4 stars</label>
+                        <input type="radio" id="first-rate5" name="rating" value="5" />
+                        <label for="first-rate5" title="Amazing">5 stars</label>
+                    </fieldset>
                 </div>
-            </div>
-            <button class="btn btn-success">Submit</button>
-        </form>
+                <div class="mb-3">
+                    <label class="form-label" for="commentbody">Comment: </label>
+                    <textarea class="form-control" name="comment" id="commentbody" cols="30" rows="3" required></textarea>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                </div>
+                <button class="btn btn-success">Submit</button>
+            </form>
+
+        {{/if}}
+
         {{#each comment}}
         <div class="card mb-3">
             <div class="card-body entry">
@@ -60,13 +66,13 @@
                     Rated: {{rating}} stars
                 </p>
                 <p class="card-text">Comment: {{comment}}</p>
-                {{#if ../currentUser}}
-                {{#equal ../currentUser.id memberId}} 
-                <form action="/fitclub/trainers/{{../trainer._id}}/comments/{{_id}}?_method=DELETE" method="POST">
-                    <button class="btn btn-sm btn-danger">Delete</button>
-                </form>
-                {{/equal}}
-                {{/if}} 
+                <!--{{#if ../currentUser}}-->
+                <!--{{#equal ../currentUser.id memberId}} -->
+                <!--<form action="/fitclub/trainers/{{../trainer._id}}/comments/{{_id}}?_method=DELETE" method="POST">-->
+                    <!--<button class="btn btn-sm btn-danger">Delete</button>-->
+                <!--</form>-->
+                <!--{{/equal}}-->
+                <!--{{/if}} -->
             </div>
         </div>
         {{/each}}

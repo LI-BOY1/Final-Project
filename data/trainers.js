@@ -65,6 +65,8 @@ let exportedMethods = {
             username:username.trim(),
             password:password.trim(),
             rating:0,
+            numOfComents:0,
+            totalScore:0,
             img: img,
             course:[],
             comment:[],
@@ -280,7 +282,7 @@ let exportedMethods = {
             throw new Error('remove member from trainer failed');
         return await this.getTrainerById(trainerId);
     },
-    async addCommentToTrainer(trainerId, commentId){
+    async addCommentToTrainer(trainerId, commentId, rating){
         if(trainerId == null || commentId == null)
             throw new Error("you should provide both trainerId and commentId to search for!")
         if(typeof trainerId !== 'string' || typeof commentId !== 'string')
@@ -298,9 +300,14 @@ let exportedMethods = {
         await commentCollection.findOne({_id: rightId});
 
         const trainerCollection = await trainers();
+
+        let newNumOfComments = curTrainer.numOfComents + 1;
+        let newScore = curTrainer.totalScore + rating;
+        let newRating = Math.round( newScore/newNumOfComments );
+
         const updateInfo = await trainerCollection.updateOne(
-            {_id: leftId},
-            {$addToSet: {comment : commentId}}
+            { _id: leftId},
+            { $addToSet: {comment : commentId}, $set: {numOfComents: newNumOfComments, totalScore: newScore, rating: newRating} },
         );
         
         if (!updateInfo.matchedCount && !updateInfo.modifiedCount)

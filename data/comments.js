@@ -48,7 +48,7 @@ let exportedMethods = {
         
         await members.addCommentToMember(memberId, newCommentId);
         // add comment to trainer
-        await trainers.addCommentToTrainer(trainerId, newCommentId);
+        await trainers.addCommentToTrainer(trainerId, newCommentId, rating);
 
         const createComment = await this.getCommentById(newCommentId);
         return createComment;

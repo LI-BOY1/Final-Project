@@ -70,19 +70,25 @@ router.post('/', isLoggedIn, catchAsync (async(req, res) => {
     //add flash
     req.flash('success', 'Successfully made a new comment!');
     res.redirect(`/fitclub/trainers/${trainerId}`);
+
+
 }));
 
-router.delete('/:commentId', isLoggedIn, isCommentAuthor, async(req, res) => {
-    const { id, commentId } = req.params;
-    await trainerData.getTrainerById(id);
-    trainerData.removeCommentFromTrainer(id, commentId);
-    await commentData.getCommentById(commentId);
-    //it seems that we do not need to add comment to member????????
-    // const commentMemberId = comment.memberId;
-    // await memberData.removeCommentFromMember(commentMemberId, commentId);
-    commentData.deleteComment(commentId);
-    //add flash
-    req.flash('success', 'Successfully deleted comment!');
-    res.redirect(`/fitclub/trainers/${id}`);
-});
+// router.delete('/:commentId', isLoggedIn, isCommentAuthor, async(req, res) => {
+//     const { id, commentId } = req.params;
+//     await trainerData.getTrainerById(id);
+//     trainerData.removeCommentFromTrainer(id, commentId);
+//     await commentData.getCommentById(commentId);
+//     //it seems that we do not need to add comment to member????????
+//     // const commentMemberId = comment.memberId;
+//     // await memberData.removeCommentFromMember(commentMemberId, commentId);
+//     commentData.deleteComment(commentId);
+//     //add flash
+//     req.flash('success', 'Successfully deleted comment!');
+//     res.redirect(`/fitclub/trainers/${id}`);
+// });
+
+
+
+
 module.exports = router;

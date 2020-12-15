@@ -18,10 +18,15 @@ router.get('/:id', catchAsync (async (req, res)=>{
     const oneTrainer = await trainerData.getTrainerById(req.params.id);
     const trainerComList = oneTrainer.comment;
 
+    let isMember = true;
+    if(!req.session.user || req.session.user.isTrainer)
+        isMember = false;
+    else
+        isMember = true;
 
     if(trainerComList.length == 0){
         //console.log("!!!!!!!!!");
-        res.render('trainers/show', {trainer: oneTrainer, comment: []});
+        res.render('trainers/show', {trainer: oneTrainer, comment: [], isMember: isMember});
         return;
     }
 
@@ -31,7 +36,10 @@ router.get('/:id', catchAsync (async (req, res)=>{
         commentForThatTrainer[i] = temp;
     }
 
-    res.render('trainers/show', {trainer: oneTrainer, comment: commentForThatTrainer});
+    // console.log(isMember);
+
+    res.render('trainers/show', {trainer: oneTrainer, comment: commentForThatTrainer, isMember: isMember});
+
 }));
 
 router.get('/courseschedule/:id', catchAsync (async (req, res) => {
