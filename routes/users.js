@@ -9,6 +9,7 @@ const courseData = data.courses;
 const commentData = data.comments;
 const img = 'https://source.unsplash.com/collection/483251';
 const info = 'I am trainer';
+const xss = require('xss');
 
 // login and register should be case sensitive
 
@@ -24,7 +25,14 @@ router.get('/register', catchAsync(async(req, res) => {
 
 
 router.post('/register', catchAsync(async(req, res) => {
-    let {username, email, first_name, last_name, address, phone, password} = req.body;
+
+    let username = xss(req.body.username);
+    let email = xss(req.body.email);
+    let first_name = xss(req.body.first_name);
+    let last_name = xss(req.body.last_name);
+    let address = xss(req.body.address);
+    let phone = xss(req.body.phone);
+    let password = xss(req.body.password);
 
     if(!username || username.trim().length === 0){
         req.flash('error', 'Please input your username!');
@@ -93,7 +101,7 @@ router.post('/register', catchAsync(async(req, res) => {
         }
         const hashedPassword = await bcrypt.hash(password, 12);
 
-        if(req.body.role == 'member'){
+        if(xss(req.body.role) == 'member'){
 
             const member = await memberData.addMember(first_name, last_name, phone, email, address, username, hashedPassword);
             req.session.user = {
@@ -128,7 +136,9 @@ router.post('/register', catchAsync(async(req, res) => {
 
 
 router.post('/login', catchAsync(async(req, res) => {
-    let {username, password} = req.body;
+
+    let username = xss(req.body.username);
+    let password = xss(req.body.password);
 
     if(!username || username.trim().length === 0){
         req.flash('error', 'Please input your username!');
@@ -150,7 +160,7 @@ router.post('/login', catchAsync(async(req, res) => {
     for(let i = 0; i < members.length; i ++){
         if(members[i].username === username){
 
-            if( (req.body.role === 'member' && members[i].isTrainer === false) || ( req.body.role === 'trainer' && members[i].isTrainer === true ) ){
+            if( (xss(req.body.role) === 'member' && members[i].isTrainer === false) || ( xss(req.body.role) === 'trainer' && members[i].isTrainer === true ) ){
 
                 targetUser = members[i];
                 match = await bcrypt.compare(password, targetUser.password);

@@ -51,6 +51,7 @@
 
             }else{
                 li = `<li><div class="alert alert-success" role="alert"> you have enrolled!</div></li>`;
+                window.location.href = "http://localhost:3000/members/schedule";
             }
 
             $('#showList').show();

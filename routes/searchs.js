@@ -4,6 +4,7 @@ const data = require('../data');
 const trainerData = data.trainers;
 const courseData = data.courses;
 const staticData = require('../data/staticData');
+const xss = require('xss');
 
 // login username should be case in-sensitive
 
@@ -14,7 +15,7 @@ router.post('/trainers', async(req, res) =>{
     // { searchTrainer: 'sd' }
     //
 
-    let tt = req.body.searchTrainer;
+    let tt = xss(req.body.searchTrainer);
     let target = tt.toLowerCase().trim();
     const trainerList = await trainerData.getAllTrainers();
     let array = [];
@@ -64,7 +65,7 @@ router.post('/courses', async(req, res) =>{
     // console.log(req.body);
     // { searchCourse: 'course' }
 
-    let cc = req.body.searchCourse;
+    let cc = xss(req.body.searchCourse);
     let target = cc.toLowerCase();
     let allCourseName = staticData.courseList;
     let found = false;

@@ -5,6 +5,7 @@ const memberData = data.members;
 const trainerData = data.trainers;
 const courseData = data.courses;
 const commentData = data.comments;
+const xss = require('xss');
 
 router.get('/memberInfo/:id', async (req, res) => {
     
@@ -13,7 +14,7 @@ router.get('/memberInfo/:id', async (req, res) => {
 
 router.post('/memberInfo/:id', async (req, res) => {
     let updateMember = {
-        first_name: req.body.FirstName
+        first_name: xss(req.body.FirstName)
     }
     const member = await memberData.update(req.params.id, updateMember)
     

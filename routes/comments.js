@@ -9,6 +9,7 @@ const trainerData = data.trainers;
 const memberData = data.members;
 const courseData = data.courses;
 const commentData = data.comments;
+const xss = require('xss');
 
 router.post('/', isLoggedIn, catchAsync (async(req, res) => {
 
@@ -47,24 +48,31 @@ router.post('/', isLoggedIn, catchAsync (async(req, res) => {
 
 
     let newComment = req.body;
+
+    //console.log(req.body);
+
+    let a = xss(newComment.rating);
+    let b = xss(newComment.comment);
+
+
     if(!newComment) 
         throw new ExpressError('Invalid comment!', 400);
-    if(!newComment.comment)
+    if(!b)
         throw new ExpressError("Not provide a comment info!", 400);
-    if(!newComment.rating)
+    if(!a)
         throw new ExpressError("Not provide a rating!", 400);
-    let ratNumber = parseInt(newComment.rating);
+    let ratNumber = parseInt(a);
 
     //verify rating 
     if(!ratNumber)
         throw new Error("the input rating is not valid!");
-    if(ratNumber !== Number(newComment.rating))
+    if(ratNumber !== Number(a))
         throw new Error("rating should be postive whole number!");
 
 
 
     // create new comment, add it to Comment collection, and add its id to member and trainer with id of id and trainerId
-    const comment = await commentData.addComment(memberId, username, newComment.comment, trainerId, ratNumber);
+    const comment = await commentData.addComment(memberId, username, b, trainerId, ratNumber);
     //still need add member to comment, need complete it after completing login system
 
     //add flash
