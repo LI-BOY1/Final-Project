@@ -14,6 +14,18 @@ router.get('/', catchAsync (async(req, res) => {
     res.render('trainers/index', {trainer: trainerList});
 }));
 
+
+router.get('/profile', async(req, res) =>{
+
+    const trainerActId = req.session.user.id;
+    const trainer = await trainerData.getTrainerByActId(trainerActId);
+    const trainerId = trainer._id;
+
+    res.redirect(`/fitclub/trainers/${trainerId}`);
+
+});
+
+
 router.get('/:id', catchAsync (async (req, res)=>{
     const oneTrainer = await trainerData.getTrainerById(req.params.id);
     const trainerComList = oneTrainer.comment;

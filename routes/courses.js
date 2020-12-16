@@ -23,8 +23,14 @@ router.get('/trainers/:id', catchAsync (async (req, res) => {
 router.get('/trainers/:id/:courseId', catchAsync (async (req, res) => {
     const singleCourse = await courseData.getCourseById(req.params.courseId);
     const targetTrainer = await trainerData.getTrainerById(req.params.id);
-    // console.log(singleCourse.trainerActId);
-    res.render('trainers/courseShow', {course: singleCourse, trainer: targetTrainer});
+
+    let showCancel = false;
+    if(req.session.user && req.session.user.isTrainer)
+        showCancel = true;
+    else
+        showCancel = false;
+
+    res.render('trainers/courseShow', {course: singleCourse, trainer: targetTrainer, showCancel: showCancel});
 }));
 
 

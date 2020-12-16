@@ -14,9 +14,12 @@
             </ul>
             <div class="card-body">
                 <a class="card-link btn btn-info" href="/fitclub/courses/trainers/{{trainer._id}}">All Course</a>
-                <form action="/fitclub/trainers/delete/{{trainer._id}}/{{course.start_time}}/{{course.day}}" method="POST">
-                    <button type="submit" class="btn btn-primary">Cancel</button>
-                </form>
+
+                {{#if showCancel}}
+                    <form action="/fitclub/trainers/delete/{{trainer._id}}/{{course.start_time}}/{{course.day}}" method="POST">
+                        <button type="submit" class="btn btn-primary">Cancel</button>
+                    </form>
+                {{/if}}
 
             </div>
             <div class="card-footer text-muted">

@@ -20,16 +20,29 @@
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
           <a class="nav-link" href="/">Home</a>
-          <a class="nav-link" href="/fitclub/trainers">All Trainers</a>
+            {{#unless currentUser}}
+                <a class="nav-link" href="/fitclub/trainers">All Trainers</a>
+            {{/unless}}
         </div>
+
         <div class="navbar-nav ml-auto">
-          {{#unless currentUser}}
-          <a href="/login" class="nav-link">Login</a>
-          <a href="/register" class="nav-link">Register</a>
-          {{/unless}}
-          {{#if currentUser}}
-          <a href="/logout" class="nav-link">Logout</a>
-          {{/if}}
+            {{#unless currentUser}}
+                <a href="/login" class="nav-link">Login</a>
+                <a href="/register" class="nav-link">Register</a>
+            {{/unless}}
+
+            {{#if currentUser}}
+
+                {{#if currentUser.isTrainer}}
+                    <a href="/fitclub/trainers/profile" class="nav-link">Profile</a>
+                {{/if}}
+
+                {{#unless currentUser.isTrainer}}
+                    <a href="/members/profile" class="nav-link">Profile</a>
+                {{/unless}}
+
+                <a href="/logout" class="nav-link">Logout</a>
+            {{/if}}
         </div>
       </div>
     </div>
