@@ -165,6 +165,23 @@ async function createObj(trainer) {
         }
     }
 
+    monC.sort((a, b) =>{
+        return a.start_time - b.start_time;
+    });
+    tueC.sort((a, b) =>{
+        return a.start_time - b.start_time;
+    });
+    wenC.sort((a, b) =>{
+        return a.start_time - b.start_time;
+    });
+    thuC.sort((a, b) =>{
+        return a.start_time - b.start_time;
+    });
+    friC.sort((a, b) =>{
+        return a.start_time - b.start_time;
+    });
+
+
     res["title"] = `${trainer.first_name} ${trainer.last_name}'s Course Schedule`;
     res["MondayCourse"] = monC;
     res["TuesdayCourse"] = tueC;
