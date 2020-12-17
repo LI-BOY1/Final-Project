@@ -4,6 +4,7 @@ const router = express.Router();
 const data = require('../data');
 const ExpressError = require('../utils/ExpressError');
 const catchAsync = require('../utils/catchAsync');
+const { isLoggedIn, isCourseTrianer} = require('../authentication');
 const trainerData = data.trainers;
 const memberData = data.members;
 const courseData = data.courses;
@@ -19,9 +20,19 @@ router.get('/trainers/:id', catchAsync (async (req, res) => {
     } 
     res.render('trainers/courseIndex', {course: courseInfo, trainer: trainer});
 }));
-router.get('/:id/:courseId', catchAsync (async (req, res) => {
+router.get('/trainers/:id/:courseId', catchAsync (async (req, res) => {
     const singleCourse = await courseData.getCourseById(req.params.courseId);
     const targetTrainer = await trainerData.getTrainerById(req.params.id);
-    res.render('trainers/courseShow', {course: singleCourse, trainer: targetTrainer});
+
+    let showCancel = false;
+    if(req.session.user && req.session.user.isTrainer)
+        showCancel = true;
+    else
+        showCancel = false;
+
+    res.render('trainers/courseShow', {course: singleCourse, trainer: targetTrainer, showCancel: showCancel});
 }));
+
+
+
 module.exports = router;

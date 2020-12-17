@@ -5,26 +5,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="index.js"></script>
+    <script src="users.js"></script>
 
     <title>Fitness Club Login</title>
-    <link rel="stylesheet" href="././public/css/layout.css">
 
 </head>
 
 <body>
 
 
-
-            {{#each trainer}}
-<!--            <ul>-->
-<!--                <li>-->
-<!--                    {{this.first_name }} {{this.last_name}}-->
-<!--                </li>-->
-<!--            </ul>-->
-
             <div class="row">
+                {{#each trainer}}
                 <div class="col-6">
+                     
                     <div class="card mb-3">
                         <img src=" {{this.img}}" class="card-img-top" alt="...">
                         <div class="card-body">
@@ -35,24 +28,25 @@
                             <li class="list-group-item text-muted">{{this.address}}</li>
                             <li class="list-group-item">{{this.email}}</li>
                             <li class="list-group-item">{{this.phone}}</li>
-                            <li class="list-group-item">{{this.age}} years old</li>
                         </ul>
                         <div class="card-body">
-                            <a class="card-link btn btn-info" href="/fitclub/trainers">All Trainers</a>
-                            <a class="card-link btn btn-info" href="/fitclub/courses/trainers/{{this._id}}">All Courses</a>
+                            <a href="/fitclub/trainers/{{_id}}" class="btn btn-primary">View</a>
                         </div>
                         <div class="card-footer text-muted">
                             2 days ago
                         </div>
+                         
                     </div>
+                  
                 </div>
-            {{/each}}
+            
 
 
 
 
-
+{{/each}}
 
 </div>
+ 
 </body>
 </html>

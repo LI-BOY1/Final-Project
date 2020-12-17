@@ -6,26 +6,26 @@
                 <h5 class="card-title">{{course.coursename}}</h5>
                 <p class="card-text">{{course.courseinfo}}</p>
             </div>
+
             <ul class="list-group list-group-flush">
                 <li class="list-group-item text-muted">Start-Time: {{course.start_time}}:00</li>
                 <li class="list-group-item">${{course.price}}/hour</li>
                 <li class="list-group-item">Weekday: {{course.day}}</li>
-                <li class="list-group-item">Trainer-Name: {{trainer.first_name}} {{trainer.last_name}}</li>
             </ul>
             <div class="card-body">
-                <a class="card-link btn btn-info mb-3" href="/fitclub/courses/trainers/{{trainer._id}}">All Course</a>
-
-
-                {{#if showCancel}}
-                    <form action="/fitclub/trainers/delete/{{trainer._id}}/{{course.start_time}}/{{course.day}}" method="POST">
-                        <button type="submit" class="btn btn-primary">Cancel</button>
-                    </form>
-                {{/if}}
-
+                <p>Trainer: <a href="/fitclub/trainers/{{course.trainerId}}" class="card-link">{{trainer_name}}</a></p>
+                <a href="/members/schedule" class="card-link btn btn-success">Back to schedule</a>
             </div>
-            <div class="card-footer text-muted">
-                2 days ago
+
+            <div class="card-body">
+                <form action="/members/delete/{{course.start_time}}/{{course.day}}" method="POST">
+                    <button type="submit" class="btn btn-primary">Cancel</button>
+                </form>
             </div>
+
         </div>
+
     </div>
 </div>
+
+

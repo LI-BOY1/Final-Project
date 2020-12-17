@@ -1,0 +1,95 @@
+<link rel="stylesheet" href="/public/css/home.css">
+<link rel="stylesheet" href="/public/css/stars.css">
+<div class="row mb-5">
+    <div class="col-6 offset-3">
+        <form action="/search/trainers" method="POST" class="validated-form" novalidate>
+            <div class="mt-5 mb-3">
+                <label class="form-label home-search" for="searchTrainer">Search for trainer</label>
+                <input class="form-control" type="text" id="searchTrainer" name="searchTrainer" placeholder="Enter Trainer Name" autofocus required>
+                <!--<div class="valid-feedback">-->
+                    <!--Looks good!-->
+                <!--</div>-->
+            </div>
+            <div class="mb-3">
+                <button type="submit" class="btn btn-success">Search</button>
+            </div>
+        </form>
+
+        {{#if trainerSearchResult}}
+
+            {{#each searchList}}
+                <nav class="navbar navbar-light bg-light">
+                    <a class="navbar-brand" href="/fitclub/trainers/{{_id}}"><li>{{first_name }} {{last_name}}</li></a>
+                </nav>
+            {{/each}}
+
+        {{/if}}
+
+        {{#if hasErrorTrainer}}
+            <div class="p-3 mb-2 bg-danger text-white">no result</div>
+        {{/if}}
+
+    </div>
+</div>
+
+<div class="row mb-5">
+    <div class="col-6 offset-3">
+        <form action="/search/courses" method="POST" class="validated-form" novalidate>
+            <div class="mt-5 mb-3">
+                <label class="form-label home-search" for="searchCourse">Search for course</label>
+                <input class="form-control" type="text" id="searchCourse" name="searchCourse" placeholder="Enter Course Name" required>
+                <!--<div class="valid-feedback">-->
+                    <!--Looks good!-->
+                <!--</div>-->
+            </div>
+            <div class="mb-3">
+                <button type="submit" class="btn btn-success">Search</button>
+            </div>
+        </form>
+
+        {{#if courseSeachResult}}
+
+            {{#each searchList}}
+                <nav class="navbar navbar-light bg-light">
+                    <a class="navbar-brand" href="/fitclub/trainers/{{_id}}"><li>{{first_name }} {{last_name}}</li></a>
+                </nav>
+            {{/each}}
+        {{/if}}
+
+        {{#if hasErrorCourse}}
+            <div class="p-3 mb-2 bg-danger text-white">no result</div>
+        {{/if}}
+
+
+        {{#if isAllTrainers}}
+            <div class="p-3 mb-2 bg-danger text-white">no trainers is currently teaching this course, give you all trainers</div>
+        {{/if}}
+
+    </div>
+
+</div>
+
+
+<div class="row offset-2">
+    <h1 class="top-trainer mt-5 mb-5">Top Trainers</h1>
+
+
+    {{#if startTrainerZero}}
+        {{#each trainer}}
+        <div class="card ml-3 card-content">
+            <img src="{{img}}" class="card-img-top mt-3" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">{{first_name}} {{last_name}}</h5>
+                <h5 class="card-title">Rating: {{rating}}</h5>
+                        <p class="starability-result" data-rating="{{rating}}">
+                            {{!-- Rated: {{rating}} stars --}}
+                        </p>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+                    content.</p>
+                <a href="/fitclub/trainers/{{_id}}" class="btn btn-primary">View</a>
+            </div>
+        </div>
+        {{/each}}
+    {{/if}}
+
+</div>
