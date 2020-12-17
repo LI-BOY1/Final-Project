@@ -37,7 +37,7 @@ router.get('/:id', catchAsync (async (req, res)=>{
         isMember = true;
 
     if(trainerComList.length == 0){
-        //console.log("!!!!!!!!!");
+
         res.render('trainers/show', {trainer: oneTrainer, comment: [], isMember: isMember});
         return;
     }
@@ -48,7 +48,6 @@ router.get('/:id', catchAsync (async (req, res)=>{
         commentForThatTrainer[i] = temp;
     }
 
-    // console.log(isMember);
 
     res.render('trainers/show', {trainer: oneTrainer, comment: commentForThatTrainer, isMember: isMember});
 
@@ -63,7 +62,7 @@ router.get('/courseschedule/:id', catchAsync (async (req, res) => {
 }));
 
 
-// 利用 星期几和时间来锁定一门课
+
 router.post('/delete/:id/:cancelTime/:cancelDay', async(req, res) => {
 
     let cancelDay = req.params.cancelDay;
@@ -96,9 +95,6 @@ router.post('/delete/:id/:cancelTime/:cancelDay', async(req, res) => {
             targetCourse = course;
         }
     }
-
-    // console.log(memberFreq);
-    // console.log(day + "   " + time);
 
 
     // find the course we need to delete !!

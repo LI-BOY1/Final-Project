@@ -17,10 +17,7 @@ let exportedMethods = {
             throw new Error("the input last name is not a string!");
         if(last_name.trim().length === 0)
             throw new Error("the input last name is not a valid string!");
-        // if(typeof age !== 'number')
-        //     throw new Error("the input age is not a number!");
-        // if(age < 18 || age > 100)
-        //     throw new Error("the input age should be in the range of 18-100");
+
         if(typeof info !== 'string')
             throw new Error("the input info is not a string!");
         if(info.trim().length === 0)
@@ -37,10 +34,7 @@ let exportedMethods = {
             throw new Error("the input address is not a string!");
         if(address.trim().length === 0)
             throw new Error("the input address is not a valid string!");
-        // if(typeof zipcode !== 'string')
-        //     throw new Error("the input zipcode is not a string!");
-        // if(zipcode.trim().length === 0)
-        //     throw new Error("the input zipcode is not a valid string!");
+
         if(typeof username !== 'string')
             throw new Error("the input username is not a string!");
         if(username.trim().length === 0)
@@ -61,7 +55,6 @@ let exportedMethods = {
             info:info.trim(),
             email:email.trim(),
             address:address.trim(),
-            // zipcode:zipcode.trim(),
             username:username.trim(),
             password:password.trim(),
             rating:0,
@@ -85,8 +78,7 @@ let exportedMethods = {
     async getAllTrainers(){
         const trainerCollection = await trainers();
         const trainerList = await trainerCollection.find({}).toArray();
-        // if(trainerList.length === 0)
-        //     throw new Error('error! No trainer in system!');
+
         for(let i = 0; i < trainerList.length; i ++){
             trainerList[i]._id = trainerList[i]._id.toString();
         }
@@ -129,16 +121,14 @@ let exportedMethods = {
             updateTrainerInfo.first_name = updateTrainer.first_name;
         if(updateTrainer.last_name)
             updateTrainerInfo.last_name = updateTrainer.last_name;
-        // if(updateTrainer.age)
-        //     updateTrainerInfo.age = updateTrainer.age;
+
         if(updateTrainer.phone)
             updateTrainerInfo.phone = updateTrainer.phone;
         if(updateTrainer.email)
             updateTrainerInfo.email = updateTrainer.email;
         if(updateTrainer.address)
             updateTrainerInfo.address = updateTrainer.address;
-        // if(updateTrainer.zipcode)
-        //     updateTrainerInfo.zipcode = updateTrainer.zipcode;
+
         if(updateTrainer.username)
             updateTrainerInfo.username = updateTrainer.username;
         if(updateTrainer.password)
@@ -154,26 +144,7 @@ let exportedMethods = {
         let res = await this.getTrainerById(id);
         return res;
     },
-    // async removeTrainer(id){
-    //     if(id == null)
-    //         throw new Error("You must provide an id to search for!")
-    //     if(typeof id !== 'string')
-    //         throw new Error("the input id is not a string!");
-    //     if(id.trim().length === 0)
-    //         throw new Error("the input value is not a valid string!");
 
-    //     let x = ObjectId(id);
-        
-    //     const trainerCollection = await trainers();
-
-    //     await this.getTrainerById(id);
-
-    //     const deleteInfo = await trainerCollection.removeOne({_id: x});
-    //     if(deleteInfo.deleteCount === 0)
-    //         throw new Error(`Could not delete trainer with id of ${id}`);
-        
-    //     return true;
-    // },
     async addMemberToTrainer(trainerId, memberId){
         if(trainerId == null || memberId == null)
             throw new Error("you should provide both trainerId and memberId to search for!")
@@ -342,8 +313,7 @@ let exportedMethods = {
     },
     async getTopThreeTrainers(){
         const allTrainers = await this.getAllTrainers();
-        // if(allTrainers.length === 0)
-        //     throw new Error("No Trainers!");
+
 
         if(allTrainers.length === 0)
             return [];
@@ -353,20 +323,17 @@ let exportedMethods = {
         let topThreeTrainers = [];
 
         let len = Math.min(3, sortedTrainers.length);
-        console.log(len);
 
         for(let i = 0; i < len; i ++){
             topThreeTrainers[i] = sortedTrainers[i];
         }
-        // if(topThreeTrainers === null || topThreeTrainers.length < 3)
-        //     throw new Error("No 3 trainers ");
+
         return topThreeTrainers;
     },
 
 
     async deleteCourseFromTrainer(trainerId, courseId){
 
-        //let trainer = await this.getTrainerById(trainerId);
 
         const trainerCollection = await trainers();
         let id = ObjectId(trainerId);

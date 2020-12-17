@@ -19,8 +19,7 @@ async function main(){
 
     const member_1 = await members.addMember("jiali", "chen", "201-7837438", "12345@gmail.com","123 Hoboken Ave, Jersey City, NJ",  "goodgirl", hashedPassword);
     const member_2 = await members.addMember("boyang", "li", "201-7837348", "chenjl3@stevens.edu","113 Congress Ave, Hoboken, NJ",  "boyang", hashedPassword);
-    //
-    // const member_3 = await members.addMember("John", "Smith", "901-7837348", "smjohn@stevens.edu","512 Congress Ave, Union City, NJ",  "GoWest", hashedPassword);
+
 
     //trainer_1 set both account
     const trainer_1 = await trainers.addTrainer("Joe", "Watson", info,"201-7832388", "yexiny@stevens.edu", "66 Hoboken Ave, Jersey City, NJ",  "joe", hashedPassword, img);

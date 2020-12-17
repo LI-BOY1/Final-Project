@@ -65,8 +65,7 @@ let exportedMethods ={
     async getAllCourses(){
         const courseCollection = await courses();
         const courseList = await courseCollection.find({}).toArray();
-        // if(courseList.length === 0)
-        //     throw new Error("no courses in system!");
+
         for(let i = 0; i < courseList.length; i ++){
             courseList[i]._id = courseList[i]._id.toString();
         }

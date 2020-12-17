@@ -13,7 +13,7 @@ router.get('/profile', isLoggedIn, catchAsync(async (req, res) => {
     try {
         let memberId = req.session.user.id;
         const member = await memberData.getMemberById(memberId);
-        //res.render('members/speMember', {member: member});
+
         let courseInfo = [];
         for(let n in member.coursesEnrolled ){
             course = await courseData.getCourseById(member.coursesEnrolled[n])
@@ -28,21 +28,7 @@ router.get('/profile', isLoggedIn, catchAsync(async (req, res) => {
     }
 }));
 
-// router.get('/courses', async (req, res) => {
-//     try {
-//         const member = await memberData.getMemberById(req.session.user.id);
-//
-//         let courseInfo = [];
-//         for(let n in member.coursesEnrolled ){
-//             course = await courseData.getCourseById(member.coursesEnrolled[n]);
-//             console.log(course);
-//             courseInfo.push(course);
-//         }
-//         res.render('members/courses', {memberCourse: courseInfo})
-//     }catch(e){
-//
-//     }
-// });
+
 
 
 router.get('/coursesShow/:id', isLoggedIn, catchAsync(async (req, res) => {
@@ -84,7 +70,7 @@ router.post('/delete/:cancelTime/:cancelDay', isLoggedIn, catchAsync(async(req, 
     let time = parseInt(cancelTime);
     let targetCourse = null;
 
-    // 对于这个member，要知道他上过的所有course有哪些trainer，并且上了各自trainer的几门课
+
     let trainerFreq = {};
 
     for(let i = 0; i < list.length; i++){
@@ -106,8 +92,6 @@ router.post('/delete/:cancelTime/:cancelDay', isLoggedIn, catchAsync(async(req, 
     }
 
 
-    console.log(trainerFreq);
-    console.log(day + "   " + time);
 
 
     // find the course we need to delete !!
@@ -132,7 +116,6 @@ router.post('/delete/:cancelTime/:cancelDay', isLoggedIn, catchAsync(async(req, 
     // delete course id from member coursesEnrolled array
     await memberData.deleteCourseFromMember(memberId, courseId);
 
-    // 如果member只上了这个trainer的一门课，那么互相删除id
 
     if(trainerFreq[trainerId] == 1){
         try{

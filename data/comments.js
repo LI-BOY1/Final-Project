@@ -27,7 +27,7 @@ let exportedMethods = {
 
         
         let x = ObjectId(memberId);
-        // let y = ObjectId(courseId);
+
         let z = ObjectId(trainerId);
 
         let newComment = {

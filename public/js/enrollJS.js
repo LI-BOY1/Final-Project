@@ -3,7 +3,7 @@
     var myForm = $('#enroll-form');
     var myDay = $('#Day');
     var myTime = $('#Time');
-    //var error = $('#error');
+
 
     myForm.submit(function (event) {
         event.preventDefault();
@@ -11,7 +11,7 @@
         $('#showList').hide();
 
         let path = $(location).attr('href').toString();
-        console.log(path);
+
 
         let day = myDay.val();
         let time = myTime.val();
@@ -23,13 +23,9 @@
         path = path.substr(0, path.lastIndexOf("/"));
         let trainerId = path.substr(path.lastIndexOf("/")+1);
 
-        console.log(day);
-        console.log(time);
-        console.log(trainerId);
-        console.log(courseName);
 
         let requestRoute = 'http://localhost:3000/enroll/enrollCourse/' + trainerId + '/' + courseName + '/' + day + '/' + time;
-        console.log(requestRoute);
+
 
         $.ajax({
             url: requestRoute,

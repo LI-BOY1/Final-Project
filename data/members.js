@@ -135,26 +135,7 @@ let exportedMethods ={
         let res = await this.getMemberById(id);
         return res;
     },
-    // async removeMember(id){
-    //     if(id == null)
-    //         throw new Error("You must provide an id to search for!")
-    //     if(typeof id !== 'string')
-    //         throw new Error("the input id is not a string!");
-    //     if(id.trim().length === 0)
-    //         throw new Error("the input value is not a valid string!");
 
-    //     let x = ObjectId(id);
-        
-    //     const memberCollection = await members();
-
-    //     await this.getMemberById(id);
-
-    //     const deleteInfo = await memberCollection.removeOne({_id: x});
-    //     if(deleteInfo.deleteCount === 0)
-    //         throw new Error(`Could not delete member with id of ${id}`);
-        
-    //     return true;
-    // },
     async addTrainerToMember(memberId, trainerId){
         if(trainerId == null || memberId == null)
             throw new Error("you should provide both trainerId and memberId to search for!")
@@ -168,7 +149,7 @@ let exportedMethods ={
         let curMember = await this.getMemberById(memberId);
         if(curMember == null)
             throw new Error("no memberId with that id!");
-        //yan zheng trainer
+        //verify trainer
         const trainerCollection = await trainers();
         await trainerCollection.findOne({_id: rightId});
 
@@ -341,7 +322,7 @@ let exportedMethods ={
         if(typeof trainerId !== 'string' || typeof memberId !== 'string')
             throw new Error("the input id is not a string!");
         
-        // let leftId = ObjectId(memberId);
+
         let rightId = ObjectId(trainerId);
         
 
