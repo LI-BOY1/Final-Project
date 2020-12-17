@@ -43,13 +43,12 @@ router.post('/', isLoggedIn, catchAsync (async(req, res) => {
         }
     }
 
-    if(!found)
-        throw new ExpressError('member isn\'t taking the trainer\'s course, so can\'t leave comment on that trainer');
-
+    if(!found){
+        req.flash("error", "member isn't taking the trainer's course, so can't leave comment on that trainer");
+        return res.redirect(`/fitclub/trainers/${trainerId}`);
+    }
 
     let newComment = req.body;
-
-    //console.log(req.body);
 
     let a = xss(newComment.rating);
     let b = xss(newComment.comment);

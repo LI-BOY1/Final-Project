@@ -28,7 +28,7 @@ const constructorMethod = (app) => {
     app.use('/fitclub/trainers', trainerRoutes);
     app.use('/fitclub/courses', courseRoutes);
     app.use('/members', memberRoutes);
-    app.use('/edit', editMemberRoutes);
+    //app.use('/edit', editMemberRoutes);
     app.use('/search', searchRoutes);
     app.use('/enroll', enrollRoutes);
     app.use('/fitclub/trainers/:id/comments', commentRoutes);

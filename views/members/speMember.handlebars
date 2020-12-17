@@ -1,7 +1,8 @@
 <div class="row">
-    <div class="col-6">
+    <div class="col-6 offset-5">
         <div class="card" style="width: 18rem;">
             <div class="card-body">
+                <img src=" {{member.img}}" class="card-img-top" alt="...">
                 <h5 class="card-title">{{member.first_name}} {{member.last_name}}</h5>
             </div>
             <ul class="list-group list-group-flush">
@@ -13,13 +14,21 @@
                 <li class="list-group-item">Email: {{member.email}}</li>
                 <li class="list-group-item">Address: {{member.address}} </li>
                 <!--<li class="list-group-item">Zipcode: {{member.zipcode}} </li>-->
-                <!--<li class="list-group-item">Course: {{member.coursesEnrolled}} </li>-->
+                <li class="list-group-item">Course:
+                    <ul>
+                        {{#each memberCourse}}
+                            <li>
+                                <a href="/members/coursesShow/{{_id}}">{{coursename}}</a>
+                            </li>
+                        {{/each}}
+                    </ul>
+                </li>
 
             </ul>
 
             <div class="card-body">
-                <a href="/enroll" class="card-link">Enroll</a>
-                <a href="/members/schedule">schedule</a>
+                <a href="/enroll" class="card-link btn btn-success">Enroll</a>
+                <a href="/members/schedule" class="card-link btn btn-primary">schedule</a>
             </div>
         </div>
     </div>

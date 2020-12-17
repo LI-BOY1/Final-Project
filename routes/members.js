@@ -5,36 +5,47 @@ const memberData = data.members;
 const trainerData = data.trainers;
 const courseData = data.courses;
 const commentData = data.comments;
+const { isLoggedIn } = require('../authentication');
+const catchAsync = require('../utils/catchAsync');
 
 
-router.get('/profile', async (req, res) => {
+router.get('/profile', isLoggedIn, catchAsync(async (req, res) => {
     try {
         let memberId = req.session.user.id;
         const member = await memberData.getMemberById(memberId);
-        res.render('members/speMember', {member: member})
+        //res.render('members/speMember', {member: member});
+        let courseInfo = [];
+        for(let n in member.coursesEnrolled ){
+            course = await courseData.getCourseById(member.coursesEnrolled[n])
+            courseInfo.push(course)
+        }
+        res.render('members/speMember', {member: member, memberCourse: courseInfo})
+        
+
+
     } catch (e) {
         res.status(404).json({ error: `members can not be found with that id` });
     }
-});
+}));
 
-router.get('/courses', async (req, res) => {
-    try {
-        const member = await memberData.getMemberById(req.session.user.id);
+// router.get('/courses', async (req, res) => {
+//     try {
+//         const member = await memberData.getMemberById(req.session.user.id);
+//
+//         let courseInfo = [];
+//         for(let n in member.coursesEnrolled ){
+//             course = await courseData.getCourseById(member.coursesEnrolled[n]);
+//             console.log(course);
+//             courseInfo.push(course);
+//         }
+//         res.render('members/courses', {memberCourse: courseInfo})
+//     }catch(e){
+//
+//     }
+// });
 
-        let courseInfo = [];
-        for(let n in member.coursesEnrolled ){
-            course = await courseData.getCourseById(member.coursesEnrolled[n]);
-            console.log(course);
-            courseInfo.push(course);
-        }
-        res.render('members/courses', {memberCourse: courseInfo})
-    }catch(e){
 
-    }
-});
-
-
-router.get('/coursesShow/:id', async (req, res) => {
+router.get('/coursesShow/:id', isLoggedIn, catchAsync(async (req, res) => {
     const course = await courseData.getCourseById(req.params.id);
     const trainer = await trainerData.getTrainerById(course.trainerId);
     const firstName = trainer.first_name;
@@ -43,10 +54,10 @@ router.get('/coursesShow/:id', async (req, res) => {
 
     res.render('members/memberCourseShow', {course: course, trainer_name: trainer_name})
 
-});
+}));
 
 
-router.get('/schedule', async (req, res) => {
+router.get('/schedule', isLoggedIn, catchAsync(async (req, res) => {
 
     let memberId = req.session.user.id;
     const member = await memberData.getMemberById(memberId);
@@ -56,12 +67,11 @@ router.get('/schedule', async (req, res) => {
 
     res.render('members/schedule', result);
 
-
-});
+}));
 
 
 // 利用 星期几和时间来锁定一门课
-router.post('/delete/:cancelTime/:cancelDay', async(req, res) => {
+router.post('/delete/:cancelTime/:cancelDay', isLoggedIn, catchAsync(async(req, res) => {
 
     let cancelDay = req.params.cancelDay;
     let cancelTime = req.params.cancelTime;
@@ -142,7 +152,7 @@ router.post('/delete/:cancelTime/:cancelDay', async(req, res) => {
 
 
 
-});
+}));
 
 
 async function createObj(member) {

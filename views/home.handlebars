@@ -19,7 +19,7 @@
 
             {{#each searchList}}
                 <nav class="navbar navbar-light bg-light">
-                    <a class="navbar-brand" href="/fitclub/trainers/{{_id}}"><li>{{first_name }} {{last_name}}</li></a>
+                    <a class="navbar-brand" href="/fitclub/trainers/{{_id}}">{{first_name }} {{last_name}}</a>
                 </nav>
             {{/each}}
 
@@ -51,7 +51,7 @@
 
             {{#each searchList}}
                 <nav class="navbar navbar-light bg-light">
-                    <a class="navbar-brand" href="/fitclub/trainers/{{_id}}"><li>{{first_name }} {{last_name}}</li></a>
+                    <a class="navbar-brand" href="/fitclub/trainers/{{_id}}">{{first_name }} {{last_name}}</a>
                 </nav>
             {{/each}}
         {{/if}}
@@ -84,8 +84,7 @@
                         <p class="starability-result" data-rating="{{rating}}">
                             {{!-- Rated: {{rating}} stars --}}
                         </p>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
-                    content.</p>
+                <p class="card-text">{{info}}</p>
                 <a href="/fitclub/trainers/{{_id}}" class="btn btn-primary">View</a>
             </div>
         </div>
