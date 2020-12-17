@@ -4,7 +4,7 @@
         <div class="card mb-3">
             <img src=" {{trainer.img}}" class="card-img-top" alt="trainer image">
             <div class="card-body">
-                <h5 class="card-title">{{trainer.first_name}} {{trainer.last_name}}</h5>
+                <h1 class="card-title">{{trainer.first_name}} {{trainer.last_name}}</h1>
                 <p class="card-text">{{trainer.info}}</p>
             </div>
             <ul class="list-group list-group-flush">
@@ -61,7 +61,7 @@
         {{#each comment}}
         <div class="card mb-3">
             <div class="card-body entry">
-                <h5 class="card-title">Comment by: {{username}}</h5>
+                <h2 class="card-title">Comment by: {{username}}</h2>
                 <p class="starability-result" data-rating="{{rating}}">
                     Rated: {{rating}} stars
                 </p>
