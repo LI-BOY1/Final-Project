@@ -51,7 +51,8 @@ let exportedMethods = {
             comment: [],
             coursesEnrolled: [],
             trainers: [],
-            isTrainer: false
+            isTrainer: false,
+            img: 'https://source.unsplash.com/collection/483251'
         };
 
         const memberCollection = await members();
